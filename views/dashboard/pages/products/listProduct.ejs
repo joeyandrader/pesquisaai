@@ -76,6 +76,7 @@
                   <i class="bi bi-eye-fill"></i>
                 </a>
                 <form method="POST" action="/user/products/delete/<%= products.id %>" style="display: inline-block;">
+                  <input type="hidden" name="id" value="<%= products.id %>">
                   <button type="submit" class="btn btn-danger">
                     <i class="bi bi-trash-fill"></i>
                   </button>
