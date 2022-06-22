@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 async function main() {
-    await mongoose.connect('mongodb+srv://hulkg3x:1596325852@cluster0.ucjqx.mongodb.net/?retryWrites=true&w=majority')
+    await mongoose.connect('mongodb+srv://hulkg3x:1596325852@cluster0.ucjqx.mongodb.net/mktdb')
     console.log("Conectou ao banco DB (Mongoose!)")
 }
 
