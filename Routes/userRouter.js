@@ -14,6 +14,7 @@ router.get('/products', isUser, UserController.listProduct);
 router.get('/products/editproduct/:id', isUser, UserController.editProduct);
 router.post('/products/editproduct/save', isUser, imageUpload.single('image'), UserController.saveEditProduct);
 router.post('/new/product/save', isUser, imageUpload.single('image'), UserController.saveNewProduct);
+router.post('/products/delete/:id', isUser, UserController.deleteProduct);
 
 //Services
 router.get('/new/service', isUser, UserController.newService);

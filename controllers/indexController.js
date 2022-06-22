@@ -256,6 +256,10 @@ class IndexController {
         }
     }
 
+    static async confirmAccount(req, res) {
+        res.send('Confirmar conta');
+    }
+
     static async login(req, res) {
 
         if (req.user) {

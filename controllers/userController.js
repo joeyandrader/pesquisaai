@@ -1,6 +1,6 @@
 const res = require('express/lib/response');
 const passport = require('passport');
-
+const { generateCodeJwt } = require('../helpers/ConfirmAccount');
 //Models
 const Product = require('../models/ProductModel');
 const Category = require('../models/CategoryModel');
@@ -11,6 +11,9 @@ const CategoryTicket = require('../models/CategoryTicketModel');
 
 class UserController {
     static async index(req, res) {
+
+        generateCodeJwt(req.user);
+
 
         const getProductViews = await Product.find({ $and: [{ userId: req.user.id, approvedStatus: 'approved' }] }).populate('categoryId').sort({ views: 'DESC' });
 
@@ -47,7 +50,13 @@ class UserController {
             res.render('dashboard/pages/products/registerProduct', {
                 category: category,
                 error_msg: req.flash('error_msg'),
-                success_msg: req.flash('success_msg')
+                success_msg: req.flash('success_msg'),
+                name: req.flash('name'),
+                description: req.flash('description'),
+                productOrigin: req.flash('productOrigin'),
+                brand: req.flash('brand'),
+                productStatus: req.flash('productStatus'),
+                activeProduct: req.flash('activeProduct')
             });
         })
     }
@@ -56,25 +65,16 @@ class UserController {
         const { name, description, productOrigin, brand, category, productStatus, activeProduct } = req.body
         const userId = req.user.id;
 
+        req.flash('name', name)
+        req.flash('description', description)
+        req.flash('productOrigin', productOrigin)
+        req.flash('brand', brand)
+        req.flash('productStatus', productStatus)
+        req.flash('activeProduct', activeProduct)
+
+
         if (!name) {
             req.flash('error_msg', 'O nome do produto precisa ser preenchido!');
-            res.redirect("/user/new/product");
-            return
-        }
-
-        if (!req.file) {
-            req.flash('error_msg', 'A foto do produto é obrigatorio');
-            res.redirect("/user/new/product");
-            return
-        }
-
-        if (!description) {
-            req.flash('error_msg', 'A descrição precisa ser preenchido!');
-            res.redirect("/user/new/product");
-            return
-        }
-        if (!productOrigin) {
-            req.flash('error_msg', 'A origem do produto precisa ser preenchido!');
             res.redirect("/user/new/product");
             return
         }
@@ -83,8 +83,23 @@ class UserController {
             res.redirect("/user/new/product");
             return
         }
+        if (!productOrigin) {
+            req.flash('error_msg', 'A origem do produto precisa ser preenchido!');
+            res.redirect("/user/new/product");
+            return
+        }
         if (category === "") {
             req.flash('error_msg', 'O categoria do produto precisa ser preenchido!');
+            res.redirect("/user/new/product");
+            return
+        }
+        if (!description) {
+            req.flash('error_msg', 'A descrição precisa ser preenchido!');
+            res.redirect("/user/new/product");
+            return
+        }
+        if (!req.file) {
+            req.flash('error_msg', 'A foto do produto é obrigatorio');
             res.redirect("/user/new/product");
             return
         }
@@ -226,8 +241,19 @@ class UserController {
             res.redirect('/user/myproducts');
         }
 
+    }
 
-
+    static async deleteProduct(req, res) {
+        const { id } = req.body
+        try {
+            await Product.findByIdAndDelete(id);
+            req.flash('success_msg', 'Produto deletado com sucesso!')
+            res.redirect('/user/products')
+        } catch (error) {
+            req.flash('error_msg', 'Erro ao deletar o produto!')
+            console.log(`O usuario ${req.user.cnpj} tentou deletar o produto id: ${id} e deu erro: ${error}`);
+            res.redirect('/user/products')
+        }
     }
 
     static async newService(req, res) {

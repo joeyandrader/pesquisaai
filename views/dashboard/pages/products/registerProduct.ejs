@@ -20,13 +20,13 @@
           <div class="row mb-3">
             <div class="col-md-6">
               <div class="form-floating mb-3 mb-md-0">
-                <input class="form-control" id="name" name="name" type="text" placeholder="Nome do produto" />
+                <input class="form-control" id="name" name="name" type="text" placeholder="Nome do produto" value="<%= name %>" />
                 <label for="name">Nome</label>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-floating">
-                <input class="form-control" id="brand" type="text" name="brand" placeholder="Marca do produto" />
+                <input class="form-control" id="brand" type="text" name="brand" placeholder="Marca do produto" value="<%= brand %>" />
                 <label for="brand">Marca</label>
               </div>
             </div>
@@ -34,7 +34,7 @@
           <div class="row mb-3">
             <div class="col-md-6">
               <div class="form-floating mb-3 mb-md-0">
-                <input class="form-control" id="productOrigin" name="productOrigin" type="text" placeholder="Origem do produto" />
+                <input class="form-control" id="productOrigin" name="productOrigin" type="text" placeholder="Origem do produto" value="<%= productOrigin %>" />
                 <label for="productOrigin">Origem</label>
               </div>
             </div>
@@ -49,7 +49,7 @@
           </div>
           <div class="row mb-3">
             <div class="col-md-12">
-              <textarea class="form-control" name="description" id="description" cols="30" rows="10" placeholder="Descrição do produto"></textarea>
+              <textarea class="form-control" name="description" id="description" cols="30" rows="10" placeholder="Descrição do produto"><%= description %></textarea>
             </div>
           </div>
           <div class="row mb-3">
