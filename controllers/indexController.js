@@ -217,6 +217,7 @@ class IndexController {
 
         if (password.length < 6) {
             req.flash("error_msg", "A senha é muito curta!")
+            res.redirect('/register')
             return
         }
 
