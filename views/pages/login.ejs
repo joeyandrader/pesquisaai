@@ -1,0 +1,27 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+<div class="container">
+  <div class="login-container">
+    <div class="login">
+      <p>Ainda não tem conta? <a href="/register">Registre-se</a></p>
+      <% if(error.length > 0) {%>
+      <div class="alert alert-danger"><%= error %></div>
+      <% } %>
+      <form method="POST" action="/login/authenticate">
+        <div>
+          <label for="email" class="form-label">E-mail</label>
+          <input type="text" class="form-control shadow-none" id="email" name="email" placeholder="email">
+        </div>
+        <div>
+          <label for="password" class="form-label">Senha</label>
+          <input type="password" class="form-control shadow-none" name="password" id="password" placeholder="Sua senha">
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">Entrar</button>
+        </div>
+      </form>
+      <p>Esqueceu sua senha? <a href="#">Recuperar senha</a></p>
+    </div>
+  </div>
+</div>
+<%- include('../partials/footer') %>

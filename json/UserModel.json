@@ -1,0 +1,37 @@
+{
+   "_id": {
+      "$oid": "USER_ID"
+   },
+   "name": "NOME",
+   "surname": "SOBRENOME",
+   "fantasyName": "NOME FANTASIA",
+   "stateRegistration": "COD",
+   "socialReason": "NOME SOCIAL",
+   "email": "EMAIL",
+   "password": "SENHA HASH",
+   "cnpj": "CNPJ",
+   "cpf": "CPF",
+   "address": "ENDEREÇO",
+   "district": "BAIRRO",
+   "addressNumber": "NUMERO",
+   "uf": "UF",
+   "cep": "CEP",
+   "city": "CIDADE",
+   "complement": "NUMERO",
+   "celNumber": "CELULAR",
+   "phoneNumber": "TELEFONE",
+   "confirmTerms": "TRUE or FALSE",
+   "createdAt": {
+      "$date": {
+         "$numberLong": "DATE"
+      }
+   },
+   "updatedAt": {
+      "$date": {
+         "$numberLong": "DATE"
+      }
+   },
+   "__v": 0,
+   "image": "IMT",
+   "accountType": "TIPO DE CONTA 0 ou 1"
+}

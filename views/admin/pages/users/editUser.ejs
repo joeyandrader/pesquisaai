@@ -1,0 +1,131 @@
+<%- include('../../partials/header') %>
+<div id="wrapper">
+  <%- include('../../partials/sidebar') %>
+  <%- include('../../partials/navbar') %>
+
+  <div class="clearfix"></div>
+
+  <div class="content-wrapper">
+    <div class="container-fluid">
+
+      <div class="row mt-3">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-title">Editar usuario <strong>"<%= user.name %>"</strong></div>
+              <hr>
+              <form>
+                <h5>Dados pessoais</h5>
+                <div class="form-group">
+                  <label for="input-1">Nome</label>
+                  <input type="text" class="form-control" id="input-1" value="<%= user.name %>" placeholder="Enter Your Name">
+                </div>
+                <div class="form-group">
+                  <label for="input-2">Sobrenome</label>
+                  <input type="text" class="form-control" id="input-2" value="<%= user.surname %>" placeholder="Enter Your Email Address">
+                </div>
+                <div class="form-group">
+                  <label for="input-3">Email</label>
+                  <input type="text" class="form-control" id="input-3" value="<%= user.email %>" placeholder="Enter Your Mobile Number">
+                </div>
+                <div class="row">
+                  <div class="form-group col-sm-6">
+                    <label for="input-4">CPF</label>
+                    <input type="text" class="form-control" value="<%= user.cpf %>" id="input-4" placeholder="Enter Password" disabled>
+                  </div>
+                  <div class="form-group col-sm-6">
+                    <label for="input-4">Website comercial</label>
+                    <input type="text" class="form-control" id="input-4" value="<%= user.webSite %>" placeholder="website">
+                  </div>
+                </div>
+                <h5>Dados empresarial</h5>
+                <div class="row">
+                  <div class="form-group col-sm-6">
+                    <label for="input-4">CNPJ</label>
+                    <input type="text" class="form-control" value="<%= user.cnpj %>" id="input-4" placeholder="Enter Password" disabled>
+                  </div>
+                  <div class="form-group col-sm-6">
+                    <label for="input-4">Inscrição estadual</label>
+                    <input type="text" class="form-control" id="input-4" value="<%= user.stateRegistration %>" placeholder="website">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="input-4">Nome fantasia</label>
+                  <input type="text" class="form-control" id="input-4" value="<%= user.fantasyName %>" placeholder="website">
+                </div>
+                <div class="form-group">
+                  <label for="input-4">Razão social</label>
+                  <input type="text" class="form-control" id="input-4" value="<%= user.socialReason %>" placeholder="website">
+                </div>
+                <h5>Endereço e contatos</h5>
+                <div class="row">
+                  <div class="form-group col-sm-6">
+                    <label for="input-4">Cep</label>
+                    <input type="text" class="form-control" value="<%= user.cep %>" id="input-4" placeholder="Enter Password">
+                  </div>
+                  <div class="form-group col-sm-6">
+                    <label for="input-4">Cidade</label>
+                    <input type="text" class="form-control" id="input-4" value="<%= user.county %>" placeholder="website">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-sm-9">
+                    <label for="input-4">Endereço</label>
+                    <input type="text" class="form-control" value="<%= user.address %>" id="input-4" placeholder="Enter Password">
+                  </div>
+                  <div class="form-group col-sm-3">
+                    <label for="input-4">UF</label>
+                    <input type="text" class="form-control" id="input-4" value="<%= user.uf %>" placeholder="website">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-sm-9">
+                    <label for="input-4">Bairro</label>
+                    <input type="text" class="form-control" value="<%= user.district %>" id="input-4" placeholder="Enter Password">
+                  </div>
+                  <div class="form-group col-sm-3">
+                    <label for="input-4">Numero</label>
+                    <input type="text" class="form-control" id="input-4" value="<%= user.addressNumber %>" placeholder="website">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="input-4">Complemento</label>
+                  <input type="text" class="form-control" id="input-4" value="<%= user.complement %>" placeholder="website">
+                </div>
+                <div class="row">
+                  <div class="form-group col-sm-6">
+                    <label for="input-4">Numero de celular</label>
+                    <input type="text" class="form-control" value="<%= user.celNumber %>" id="input-4" placeholder="Enter Password">
+                  </div>
+                  <div class="form-group col-sm-6">
+                    <label for="input-4">Numero de telefone</label>
+                    <input type="text" class="form-control" id="input-4" value="<%= user.phoneNumber %>" placeholder="website">
+                  </div>
+                </div>
+                <h5>Status de aprovação</h5>
+                <div class="form-group">
+                  <label for="input-4">Status</label>
+                  <select class="form-control" name="approvedStatus" id="approvedStatus">
+                    <option value="approved">Aprovar</option>
+                    <option value="pending" selected>Pendente</option>
+                    <option value="refused">Recusar</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-light px-5"><i class="icon-lock"></i> Savlar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!--End Row-->
+
+        <!--start overlay-->
+        <div class="overlay toggle-menu"></div>
+        <!--end overlay-->
+
+      </div>
+      <!-- End container-fluid-->
+    </div>
+    <%- include('../../partials/footer') %>

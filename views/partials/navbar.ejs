@@ -1,0 +1,64 @@
+<div id="fixed-navbar">
+  <div class="collapse" id="openSearch">
+    <div class="search-top">
+      <div class="search-form">
+        <form action="/products/page/0" method="GET">
+          <select name="typeSearch" id="typeSearch">
+            <option value="products" selected>Produtos</option>
+            <option value="services">Serviços</option>
+          </select>
+          <input type="search" name="search" placeholder="Pesquisa Aí">
+          <button type="submit"><i class="bi bi-search"></i></button>
+        </form>
+      </div>
+      <a data-bs-toggle="collapse" href="#openSearch" role="button" aria-expanded="false" aria-controls="openSearch" class="btn-close"></a>
+    </div>
+  </div>
+  <nav class="navbar navbar-expand-lg">
+    <h1><a href="/"><img class="img-fluid" src="/img/logo.png" alt="logo pesquisa ai"></a></h1>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="bi bi-list"></i>
+    </button>
+    <div class="collapse navbar-collapse w-100 order-1 order-md-0 dual-collapse2" id="navbarSupportedContent">
+      <ul class="navbar-nav mb-2 mb-lg-0 mx-auto order-0">
+        <li><a class="nav-link" href="/">Início</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Categorias</a>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <% category.forEach(category => { %>
+            <li><a class="dropdown-item" href="/search/category/<%= category.id %>/page/0"><%= category.name %></a></li>
+            <% }) %>
+          </ul>
+        </li>
+        <li><a class="nav-link" href="/about">Sobre</a></li>
+        <li><a class="nav-link" href="/contact">Contato</a></li>
+      </ul>
+      <div class="signIn">
+        <% if(user) {%>
+        <div class="dropdown navbar-nav mb-2 mb-lg-0 mx-auto order-0 userDrop">
+          <a class="nav-link" data-bs-toggle="collapse" href="#openSearch" role="button" aria-expanded="false" aria-controls="openSearch"><i class="bi bi-search"></i></a>
+          <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            <%= user.name %>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuLink">
+            <li><span>CNPJ: <%= user.cnpj %></span></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="/user">Dashboard</a></li>
+            <% if(user.accountType === 1) {%>
+            <li><a class="dropdown-item" href="/admin">Dashboard Admin</a></li>
+            <% } %>
+            <li><a class="dropdown-item" href="/user/settigns">Configurações</a></li>
+            <li><a class="dropdown-item" href="/user/logout">Sair</a></li>
+          </ul>
+        </div>
+        <%} else { %>
+        <a class="nav-link" data-bs-toggle="collapse" href="#openSearch" role="button" aria-expanded="false" aria-controls="openSearch"><i class="bi bi-search"></i></a>
+        <a class="nav-link" href="/login"><i class="bi bi-person-fill"></i> Sign In / Sign Up</a>
+        <% } %>
+      </div>
+    </div>
+
+  </nav>
+</div>

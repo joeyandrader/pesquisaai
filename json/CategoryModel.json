@@ -1,0 +1,19 @@
+{
+    "_id": {
+        "$oid": "CATEGORY_ID"
+    },
+    "name": "NAME",
+    "slugify": "NAME-SLUG",
+    "createdAt": {
+        "$date": {
+            "$numberLong": "DATA"
+        }
+    },
+    "updatedAt": {
+        "$date": {
+            "$numberLong": "DATA"
+        }
+    },
+    "__v": 0,
+    "image": "IMAGE"
+}

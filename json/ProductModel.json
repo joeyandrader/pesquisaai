@@ -1,0 +1,34 @@
+{
+    "_id": {
+        "$oid": "PRODUCT_ID"
+    },
+    "name": "NOME",
+    "description": "DESCRIÇÃO",
+    "productOrigin": "ORIGEM",
+    "brand": "MARCA",
+    "image": "IMAGEN",
+    "productStatus": "STATUS_NOVO_USADO",
+    "approvedStatus": "STATUS_PENDENTE_RECUSADO_APROVADO",
+    "userId": [
+        {
+            "$oid": "USER_ID"
+        }
+    ],
+    "categoryId": [
+        {
+            "$oid": "CATEGORY_ID"
+        }
+    ],
+    "createdAt": {
+        "$date": {
+            "$numberLong": "DATA"
+        }
+    },
+    "updatedAt": {
+        "$date": {
+            "$numberLong": "DATA"
+        }
+    },
+    "__v": 2,
+    "notActive": "STATUS_PUBLICO_PRIVADO"
+}

@@ -1,0 +1,31 @@
+{
+    "_id": {
+        "$oid": "SERVICE_ID"
+    },
+    "name": "NOME",
+    "description": "DESCRIÃO",
+    "notActive": "STATUS_PUBLICO_PRIVADO",
+    "approvedStatus": "STATUS_PENDENTE_RECUSADO_APROVADO",
+    "userId": [
+        {
+            "$oid": "USER_ID"
+        }
+    ],
+    "categoryId": [
+        {
+            "$oid": "CATEGORY_ID"
+        }
+    ],
+    "createdAt": {
+        "$date": {
+            "$numberLong": "DATA"
+        }
+    },
+    "updatedAt": {
+        "$date": {
+            "$numberLong": "DATA"
+        }
+    },
+    "__v": 0,
+    "image": "IMAGE"
+}

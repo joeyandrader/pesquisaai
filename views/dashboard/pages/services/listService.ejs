@@ -1,0 +1,87 @@
+<%- include('../../partials/header') %>
+<%- include('../../partials/navbar') %>
+
+<div id="layoutSidenav">
+  <%- include('../../partials/sidebar') %>
+  <div id="layoutSidenav_content">
+    <main>
+      <div class="container-fluid px-4">
+        <div class="title-products mt-4">
+          <h1>Gerenciar serviços</h1>
+          <a class="btn btn-primary" href="/user/new/service"><i class="bi bi-plus-circle"></i> Novo Serviço</a>
+        </div>
+        <ol class="breadcrumb mb-4">
+          <li class="breadcrumb-item">Lista de todos os seus serviços</li>
+        </ol>
+        <% if(error_msg.length > 0) { %>
+        <div class="alert alert-danger"><%= error_msg %></div>
+        <% } %>
+        <% if(success_msg.length > 0) { %>
+        <div class="alert alert-danger"><%= success_msg %></div>
+        <% } %>
+
+        <table id="datatablesSimple">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nome</th>
+              <th>Estado</th>
+              <th>Visibilidade</th>
+              <th>Aprovação</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th>#</th>
+              <th>Nome</th>
+              <th>Estado</th>
+              <th>Visibilidade</th>
+              <th>Aprovação</th>
+              <th>Ações</th>
+            </tr>
+          </tfoot>
+          <tbody>
+            <% service.forEach(service => { %>
+            <tr>
+              <td class="align-middle"><img class="img-fluid" src="/img/imgUpload/<%= service.image %>" width="40px"></td>
+              <td class="align-middle"><%= service.name %></td>
+              <td><%= service.servicetatus %></td>
+              <td>
+                <% if(service.notActive) { %>
+                <span class="status alert-danger"><i class="bi bi-eye-slash-fill"></i> Privado</span>
+                <% } else { %>
+                <span class="status alert-primary"><i class="bi bi-eye-fill"></i> Publico</span>
+                <% } %>
+              </td>
+              <td>
+                <% if(service.approvedStatus == 'pending') { %>
+                <span class="status alert-warning"><i class="bi bi-exclamation-circle-fill"></i> Pendente</span>
+                <%} else if(service.approvedStatus == "refused") {%>
+                <span class="status alert-danger"><i class="bi bi-x-circle-fill"></i> Recusado</span>
+                <% } else { %>
+                <span class="status alert-success"><i class="bi bi-check-circle-fill"></i> Aprovado</span>
+                <% } %>
+              </td>
+              <td class="text-center">
+                <button class="btn btn-warning">
+                  <i class="bi bi-pencil-fill"></i>
+                </button>
+                <a class="btn btn-info" href="/service/details/<%= service.id %>" target="_blank">
+                  <i class="bi bi-eye-fill"></i>
+                </a>
+                <form style="display: inline-block;">
+                  <button type="submit" class="btn btn-danger">
+                    <i class="bi bi-trash-fill"></i>
+                  </button>
+                </form>
+
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <%- include('../../partials/footer') %>

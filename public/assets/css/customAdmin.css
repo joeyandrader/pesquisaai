@@ -1,0 +1,49 @@
+.table img {
+    max-width: 40px;
+    min-width: 40px;
+    max-height: 40px;
+    min-height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+.card-action .dropdown-menu a:hover {
+    background-color: #333;
+    color: white;
+}
+
+.card-body .table .card-action {
+    position: absolute;
+    right: 50%;
+}
+
+.card-body .table tr td {
+    position: relative;
+}
+
+.dataTable-top .dataTable-search .dataTable-input {
+    background: transparent;
+    border-radius: 4px;
+    outline: none;
+    color: #eee;
+    border: 1px solid #eee;
+}
+
+.dataTable-top .dataTable-dropdown .dataTable-selector {
+    width: 100px;
+    background: transparent;
+    margin: 0 10px;
+    outline: none;
+    border-radius: 5px;
+    color: #eee;
+}
+
+.dataTable-top .dataTable-dropdown .dataTable-selector option {
+    background: transparent;
+    color: #333;
+}
+
+.alert {
+    padding: 10px;
+}

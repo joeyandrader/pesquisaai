@@ -1,0 +1,923 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+$primaryColor: #13293D;
+$secondaryColor : #006494;
+$textColor: #E8F1F2;
+$hoverColor: #247ba0;
+$btnColor: #1b98e0;
+
+$colorBackground: #eeeeee;
+
+/* config gerais */
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+body,
+html {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+/* Search aba */
+#search {
+    display: none;
+}
+
+.search-top {
+    width: 100%;
+    background-color: $primaryColor;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.search-form {
+    width: 80%;
+}
+
+.search-form form {
+    display: flex;
+    margin: 10px;
+}
+
+.search-form form select {
+    padding: 5px 50px;
+    border: 0;
+    border-radius: 25px 0 0 25px;
+    background: url(https://cdn-icons-png.flaticon.com/512/25/25623.png) no-repeat center right #FFF;
+    background-size: 15px;
+    appearance: none;
+    outline: none;
+    color: $primaryColor;
+}
+
+.search-form input[type=search] {
+    width: 100%;
+    padding: 10px;
+    border: 0;
+    outline: none;
+    text-indent: 20px;
+    font-weight: bold;
+}
+
+.search-form button {
+    border-radius: 0 25px 25px 0;
+    padding: 15px 50px;
+    border: 0;
+    background-color: $colorBackground;
+    font-size: 1.2em;
+    transition: 0.2s;
+}
+
+.search-form button i {
+    color: $secondaryColor;
+}
+
+.search-form button:hover {
+    background-color: $hoverColor;
+}
+
+.search-form button:hover i {
+    color: $textColor;
+}
+
+.search-top .btn-close {
+    display: inline-block;
+    background-color: $secondaryColor;
+    padding: 15px;
+}
+
+.search-top .btn-close i {
+    color: $textColor;
+}
+
+/* navbar */
+
+.navbar {
+    background-color: $primaryColor;
+    height: auto;
+}
+
+.navbar-toggler i {
+    font-size: 40px;
+    color: $textColor  !important;
+}
+
+.navbar .navbar-nav li {
+    margin: 0 20px;
+}
+
+.navbar .navbar-nav li ul li {
+    margin: 0;
+}
+
+.navbar-expand-lg {
+    justify-content: space-around;
+}
+
+.navbar h1 {
+    margin: 0;
+    margin-left: 50px;
+    padding: 0;
+    color: $textColor;
+}
+
+.navbar .nav-link {
+    color: $textColor;
+}
+
+.navbar h1 a {
+    text-decoration: none;
+    color: $btnColor;
+}
+
+.navbar ul li a {
+    padding: 10px;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: $textColor;
+}
+
+.navbar ul li a:hover {
+    color: $hoverColor;
+}
+
+.navbar .signIn {
+    margin-right: 50px;
+}
+
+.navbar .signIn a {
+    display: inline-block;
+    color: $textColor;
+    margin: 0 10px;
+    font-size: 18px;
+}
+
+.navbar .signIn a:hover {
+    color: $hoverColor;
+}
+
+.navbar ul li {
+    display: inline-block;
+}
+
+.navbar .signIn li ul {
+    padding: 0;
+}
+
+.navbar .userDrop ul {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
+.navbar .userDrop ul li {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.navbar .userDrop ul li span {
+    padding: 10px;
+    background-color: $secondaryColor;
+    text-align: center;
+    font-size: 12px;
+    display: block;
+    color: $textColor;
+}
+
+.navbar .userDrop ul li a {
+    margin: 0 !important;
+    padding: 10px !important;
+}
+
+.navbar .signIn li ul li a {
+    margin: 0 !important;
+}
+
+.navbar .userSignIn .btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+}
+
+.navbar .userSignIn span {
+    color: $textColor;
+    position: absolute;
+    bottom: -20px;
+    margin: 0;
+    padding: 0;
+    font-size: 10px;
+    width: 100%;
+}
+
+.dropdown-menu {
+    border-radius: 0;
+    box-shadow: 0 0 10px $primaryColor;
+}
+
+.dropdown-menu ul {
+    width: 100%;
+    padding: 20px;
+}
+
+.navbar .dropdown-menu li {
+    display: block !important;
+}
+
+.navbar .dropdown-menu li a {
+    color: $primaryColor  !important;
+}
+
+.navbar .dropdown-menu li a:hover {
+    background-color: $hoverColor;
+    color: $textColor  !important;
+}
+
+.mobile-menu {
+    display: none;
+}
+
+/* header banner */
+
+.header-banner {
+    width: 100%;
+    height: calc(100vh - 100px);
+
+    background-image: url('/img/header_top_cabofrio.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    align-items: center;
+}
+
+.header-banner .banner-content {
+    padding: 0 50px;
+    margin-left: 40px;
+}
+
+.header-banner .banner-content h2 {
+    font-size: 3em;
+    color: $textColor;
+}
+
+.header-banner .banner-content p {
+    font-size: 1.5em;
+    color: $textColor;
+    width: 600px;
+    letter-spacing: 1px;
+}
+
+.header-banner .banner-content a {
+    padding: 15px 40px;
+    background-color: $btnColor;
+    border-color: $btnColor;
+}
+
+.header-banner .banner-content a:hover {
+    background-color: $hoverColor;
+    border-color: $hoverColor;
+}
+
+/* section container */
+.section-container {
+    width: 100%;
+    height: auto;
+}
+
+.section-container-title {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.section-container-p {
+    text-align: center;
+}
+
+/* welcome tab area */
+.welcome-tab {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: $colorBackground;
+}
+
+.welcome-content {
+    padding: 20px;
+    width: 500px;
+}
+
+.welcome-content h2 {
+    font-size: 3em;
+    text-align: left;
+    color: $secondaryColor;
+}
+
+.welcome-content p {
+    font-size: 1.1em;
+    color: $primaryColor;
+}
+
+.welcome-content a {
+    font-size: 1.5em;
+}
+
+.welcome-tab img {
+    max-width: 40%;
+    max-height: 40%;
+}
+
+/* supplier tab */
+.suplier-tab {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: $secondaryColor;
+}
+
+.supplier-content {
+    padding: 20px;
+    width: 500px;
+}
+
+.suplier-tab img {
+    max-width: 40%;
+    max-height: 40%;
+}
+
+.suplier-tab h2 {
+    font-size: 2em;
+    font-weight: bold;
+    text-align: left;
+    padding: 10px 0;
+    color: $textColor;
+}
+
+.suplier-tab p {
+    font-size: 1.2em;
+    color: $textColor;
+}
+
+.suplier-tab a {
+    font-size: 1.5em;
+    background-color: $btnColor;
+    color: $textColor;
+}
+
+.suplier-tab a:hover {
+    background-color: transparent;
+    color: $textColor;
+    border-color: $btnColor;
+}
+
+/* services area */
+.service-tab {
+    width: 100%;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+    display: flex;
+}
+
+.service-tab .service-tab {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    width: 100%;
+    padding: 10px;
+    margin: auto;
+}
+
+.service-content,
+.product-content {
+    width: 100%;
+    padding: 20px;
+    display: block;
+    margin: 20px 0;
+}
+
+.product-content h2,
+.service-content h2 {
+    margin: 20px 0;
+    margin-left: 70px;
+}
+
+.product-content #details,
+.service-content #details {
+    margin: 20px 70px;
+}
+
+
+.cards .card-body {
+    padding: 10px;
+    margin: 0 10px;
+}
+
+.card .card-body h2 {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.card img {
+    object-fit: cover;
+    min-height: 300px;
+    max-height: 300px;
+}
+
+.card .card-body a {
+    display: block;
+    background-color: #006494;
+    color: $textColor;
+    font-size: 20px;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+.card .card-body a:hover {
+    background-color: $hoverColor;
+}
+
+
+/* login system */
+
+.login-container {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    margin: 100px 0;
+}
+
+.login {
+    width: 500px;
+    margin: auto;
+    background-color: $colorBackground;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.login form {
+    margin: 20px 0;
+}
+
+.login form label {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: $secondaryColor;
+}
+
+.login form input[type=text],
+.login form input[type=password] {
+    padding: 15px;
+    margin: 10px 0;
+    outline-color: $primaryColor;
+    color: $primaryColor  !important;
+    font-weight: bold;
+}
+
+.login form button {
+    margin: 10px 0;
+    width: 100%;
+    padding: 15px 0;
+    background-color: $primaryColor;
+    border-color: $primaryColor;
+}
+
+.login form button:hover {
+    background-color: $hoverColor;
+    border-color: $hoverColor;
+}
+
+/* register */
+.register-container {
+    padding: 20px;
+    width: 800px;
+    margin: 50px auto;
+    background-color: $colorBackground;
+}
+
+.register form p {
+    font-weight: bold;
+}
+
+.register form input[type=text],
+.register form input[type=email],
+.register form input[type=password] {
+    padding: 15px;
+    margin: 10px 0;
+}
+
+.register .form-check {
+    margin: 10px 0;
+}
+
+.register form button {
+    margin: 10px 0;
+    width: 100%;
+    padding: 15px 0;
+    background-color: $primaryColor;
+    border-color: $primaryColor;
+}
+
+.register form button:hover {
+    background-color: $hoverColor;
+    border-color: $hoverColor;
+}
+
+.form-row {
+    display: flex;
+    gap: 10px;
+}
+
+
+/* shop area */
+.area-container {
+    width: 100%;
+}
+
+.sidenav {
+    width: 300px;
+    height: 700px;
+    border-radius: 20px;
+    background-color: $colorBackground;
+}
+
+
+.pagination {
+    padding: 20px;
+    display: block;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+}
+
+.pagination a {
+    display: inline-block;
+    background-color: $btnColor;
+    color: $textColor;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 5px;
+    border-radius: 4px;
+    transition: 0.2s;
+    padding: 10px 20px;
+}
+
+.paginationActive {
+    background-color: $colorBackground  !important;
+    color: $primaryColor  !important;
+
+    pointer-events: none;
+}
+
+.pagination a:hover {
+    background-color: $hoverColor;
+}
+
+/* page details */
+.btn-area {
+    width: 100%;
+    text-align: right;
+    margin: 20px 0;
+}
+
+.btn-area .btn-primary {
+    background-color: $btnColor  !important;
+    border-color: $btnColor;
+}
+
+
+.btn-area .btn-primary:hover {
+    background-color: $hoverColor  !important;
+}
+
+
+/* about area */
+
+.about-container {
+    width: 100%;
+    height: auto;
+}
+
+.about-body {
+    width: 100%;
+    height: auto;
+    background-image: url('https://images.unsplash.com/photo-1518481612222-68bbe828ecd1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.bg-blur {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, .5);
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.about-content {
+    width: 800px;
+    text-align: center;
+}
+
+.about-content h2 {
+    text-align: center;
+    color: #333;
+    font-size: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 5px;
+}
+
+.about-content .bi {
+    font-size: 150px;
+    color: $primaryColor;
+}
+
+.about-content p {
+    font-weight: bold;
+    width: 100%;
+    text-align: left;
+    letter-spacing: 1px;
+    font-size: 18px;
+}
+
+.about-section {
+    padding: 20px;
+}
+
+.about-section .card {
+    border-radius: 0;
+    background-color: $textColor;
+    border-color: $textColor;
+}
+
+.card-body .title {
+    width: 100%;
+    text-align: right;
+}
+
+.card-body .title h2 {
+    font-size: 40px;
+    text-transform: uppercase;
+}
+
+.card-body .title h5 {
+    font-size: 25px;
+    text-transform: uppercase;
+}
+
+.card-body p {
+    text-align: right;
+    font-size: 18px;
+}
+
+.history {
+    width: 100%;
+    padding: 10px;
+    background-color: $colorBackground;
+}
+
+.history h1 {
+    font-size: 30px;
+}
+
+.history p {
+    font-size: 18px;
+}
+
+
+/* contact area */
+
+.contact {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    background-color: $colorBackground;
+}
+
+.contact h1 {
+    text-align: center;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+
+/* new card area */
+
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media (max-width: 800px) {
+    .column {
+        flex: 46%;
+        max-width: 46%;
+    }
+}
+
+.card {
+    opacity: 0.8;
+    filter: alpha(opacity=60);
+}
+
+.card-title {
+    font-weight: bold;
+    text-align: center;
+}
+
+.card-text {
+    text-align: justify;
+}
+
+.modal-header {
+    background-image: linear-gradient(#7FDBFF, white);
+}
+
+
+
+.card {
+    padding: 0;
+}
+
+.sep {
+    height: 25px;
+}
+
+.card-button {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin: 0;
+    background: $colorBackground;
+}
+
+.bg-list-item {
+    background-color: $colorBackground;
+    color: $primaryColor  !important;
+}
+
+.card-button button {
+    display: block;
+}
+
+/* footer */
+.footer-container {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    background-color: $primaryColor;
+    box-sizing: border-box;
+}
+
+.footer-container .footer-text {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 20px;
+    padding: 20px;
+    color: $textColor;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.footer-container .footer-text small {
+    font-size: 14px;
+}
+
+.footer-container .footer-text a {
+    text-decoration: none;
+    color: $secondaryColor;
+}
+
+.footer-container .footer-text a:hover {
+    color: $hoverColor;
+}
+
+.footer-content {
+    background-color: $primaryColor;
+    width: 100%;
+    height: auto;
+    padding: 50px;
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid #1a1a1a;
+    box-shadow: 0 0 5px $primaryColor;
+}
+
+.footer-content .footer-social a {
+    display: inline-block;
+    font-size: 2.5em;
+    margin: 0 15px;
+    color: $textColor;
+    transition: transform .7s ease-in-out;
+}
+
+
+.footer-address {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.footer-social {
+    display: flex;
+    align-items: center;
+}
+
+.footer-content .footer-social a:hover {
+    color: $hoverColor;
+    transform: rotate(360deg);
+}
+
+.footer-social .bi-facebook:hover {
+    color: #0165E1;
+}
+
+.footer-social .bi-linkedin:hover {
+    color: #0e76a8;
+}
+
+.footer-social .bi-twitter:hover {
+    color: #00acee;
+}
+
+.footer-social .bi-youtube:hover {
+    color: #ff0000;
+}
+
+.footer-content .footer-menu a {
+    display: inline-block;
+    margin: 5px 0;
+    font-size: 1.3em;
+    padding: 5px;
+    color: $textColor;
+    text-decoration: none;
+    text-align: left;
+}
+
+.footer-content .footer-menu a::after {
+    display: block;
+    content: '';
+    border-bottom: 2px solid $secondaryColor;
+    transform: scale(0);
+    transition: transform 250ms ease-in-out;
+}
+
+a.fromLeft::after {
+    transform-origin: 100% 50%;
+}
+
+.footer-content .footer-menu a.fromLeft:hover::after {
+    transform: scaleX(1);
+    transform-origin: 0% 50%;
+}
+
+.footer-content .footer-menu a:hover {
+    color: $hoverColor;
+
+}
+
+.footer-content .footer-address {
+    color: $textColor;
+}
+
+.bi-whatsapp {
+    color: green;
+}
+
+.bi-telephone-forward {
+    color: $secondaryColor;
+}
+
+.footer-address h2 {
+    font-size: 25px;
+}
+
+.footer-address p {
+
+    font-size: 18px;
+}

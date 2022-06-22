@@ -1,0 +1,124 @@
+<%- include('partials/header') %>
+<%- include('partials/navbar') %>
+
+<div id="layoutSidenav">
+  <%- include('partials/sidebar') %>
+  <div id="layoutSidenav_content">
+    <main>
+      <div class="container-fluid px-4">
+        <h1 class="mt-4">Dashboard</h1>
+        <div class="container-product">
+          <div class="row">
+            <div class="col-xl-6 col-md-6">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="card bg-primary text-white mb-4">
+                    <div class="card-body">
+                      <h4>Total de Produtos</h4>
+                      <h1><%= countProduct %></h1>
+                    </div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                      <a class="small text-white stretched-link" href="/user/myproducts">Ver detalhes</a>
+                      <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="card bg-primary text-white mb-4">
+                    <div class="card-body">
+                      <h4>Total de Serviços</h4>
+                      <h1><%= pendingCount %></h1>
+                    </div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                      <a class="small text-white stretched-link" href="#">Ver detalhes</a>
+                      <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="card mb-4">
+                    <div class="card-header">
+                      <i class="fas fa-table me-1"></i>
+                      <strong>Produtos mais vistos</strong>
+                    </div>
+                    <div class="card-body">
+                      <table id="datatablesSimple">
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Nome</th>
+                            <th>Marca</th>
+                            <th>Views</th>
+                          </tr>
+                        </thead>
+                        <tfoot>
+                          <tr>
+                            <th>#</th>
+                            <th>Nome</th>
+                            <th>Categoria</th>
+                            <th>Views</th>
+                          </tr>
+                        </tfoot>
+                        <tbody>
+                          <% getProductViews.forEach(item => { %>
+                          <% if(item.views > 0) {%>
+                          <tr>
+                            <td class="align-middle"><img src="/img/imgUpload/<%= item.image %>" width="40px"></td>
+                            <td class="align-middle"><%= item.name %></td>
+                            <td class="align-middle"><%= item.categoryId[0].name %></td>
+                            <td class="align-middle"><%= item.views %></td>
+                          </tr>
+                          <% } %>
+                          <% }) %>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-6 col-md-6">
+              <div class="card">
+                <div class="card-header">
+                  <span>Produtos</span>
+                </div>
+                <div class="card-body">
+                  <div class="chart-container-2">
+                    <canvas id="myChart"></canvas>
+                  </div>
+                </div>
+                <div class="table-responsive">
+                  <table class="table align-items-center">
+                    <tbody>
+                      <tr>
+                        <td><i class="fa-solid fa-people-carry-box"></i> Produtos</td>
+                        <td id="countProduct"><%= countProduct %></td>
+                      </tr>
+                      <tr>
+                        <td><i class="fa-solid fa-circle-check"></i> Aprovados</td>
+                        <td id="countProductApproved"><%= approvedCount %></td>
+                      </tr>
+                      <tr>
+                        <td><i class="fa-solid fa-circle-exclamation"></i> Pendentes</td>
+                        <td id="countProductPending"><%= pendingCount %></td>
+                      </tr>
+                      <tr>
+                        <td><i class="fa-solid fa-circle-xmark"></i> Recusados</td>
+                        <td id="countProductRefused"><%= refusedCount %></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+      </div>
+    </main>
+
+    <%- include('partials/footer') %>

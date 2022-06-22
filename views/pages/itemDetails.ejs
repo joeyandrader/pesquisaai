@@ -1,0 +1,98 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+
+<section class="bg-light">
+  <div class="container pb-5">
+    <div class="row">
+      <div class="col-lg-5 mt-5">
+        <div class="card mb-3">
+          <img class="card-img img-fluid" src="/img/imgUpload/<%= itemDetail.image %>" alt="<%= itemDetail.name %>" id="product-detail">
+        </div>
+
+      </div>
+      <!-- col end -->
+      <div class="col-lg-7 mt-5">
+        <div class="card">
+          <div class="card-body">
+            <h1 class="h2"> <i class="bi bi-box"></i> <%= itemDetail.name %></h1>
+            <hr>
+            <input type="hidden" id="address" value="<%= itemDetail.userId[0].address %> <%= itemDetail.userId[0].addressNumber %>">
+            <input type="hidden" id="addressCity" value="<%= itemDetail.userId[0].county %>">
+            <input type="hidden" id="addressDistrict" value="<%= itemDetail.userId[0].district %>">
+            <ul class="list-inline">
+              <li class="list-inline-item">
+                <h6>Marca:</h6>
+              </li>
+              <li class="list-inline-item">
+                <p class="text-muted"><strong><%= itemDetail.brand %></strong></p>
+              </li>
+            </ul>
+
+            <h6>Descrição:</h6>
+            <p><%- itemDetail.description %></p>
+            <ul class="list-inline">
+              <li class="list-inline-item">
+                <h6>Cores disponiveis : </h6>
+                <div class="cores">
+                  <div class="cor red"></div>
+                  <div class="cor blue"></div>
+                  <div class="cor yellow"></div>
+                </div>
+              </li>
+            </ul>
+            <h6>Localização</h6>
+            <div style="width: 100%; height: 300px" id="mapContainer"></div>
+            <div class="btn-area">
+              <a href="#" class="btn btn-success">Visitar site</a>
+              <a href="#" class="btn btn-primary">Contato da loja</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Close Content -->
+
+<section class="py-5">
+  <div class="container">
+    <div class="row text-left p-2 pb-3">
+      <h4>Related Products</h4>
+    </div>
+
+    <!--Start Carousel Wrapper-->
+    <div id="carousel-related-product">
+
+      <% relatedProduct.forEach(relatedProduct => { %>
+
+      <% if(relatedProduct.id !== itemDetail.id) {%>
+      <div class="p-2 pb-3">
+        <div class="product-wap card rounded-0">
+          <div class="card rounded-0">
+            <img class="card-img rounded-0 img-fluid card-img-top" src="/img/imgUpload/<%= relatedProduct.image %>">
+            <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+              <ul class="list-unstyled">
+                <li><a class="btn btn-success text-white" href="shop-single.html"><i class="far fa-heart"></i></a></li>
+                <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="far fa-eye"></i></a></li>
+                <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="fas fa-cart-plus"></i></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-body">
+            <a href="shop-single.html" class="h3 text-decoration-none"><%= relatedProduct.name %></a>
+          </div>
+          <a href="#" class="btn btn-success">Ver produto</a>
+        </div>
+      </div>
+      <% } else { %>
+
+      <% } %>
+      <% }) %>
+    </div>
+
+  </div>
+</section>
+
+<script src="/js/maps.js"></script>
+
+<%- include('../partials/footer') %>

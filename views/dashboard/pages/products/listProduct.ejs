@@ -1,0 +1,93 @@
+<%- include('../../partials/header') %>
+<%- include('../../partials/navbar') %>
+
+<div id="layoutSidenav">
+  <%- include('../../partials/sidebar') %>
+  <div id="layoutSidenav_content">
+    <main>
+      <div class="container-fluid px-4">
+        <div class="title-products mt-4">
+          <h1>Gerenciar produtos</h1>
+          <a class="btn btn-primary" href="/user/new/product"><i class="bi bi-plus-circle"></i> Novo Produto</a>
+        </div>
+        <ol class="breadcrumb mb-4">
+          <li class="breadcrumb-item">Lista de todos os produtos</li>
+        </ol>
+        <% if(error_msg.length > 0) { %>
+        <div class="alert alert-danger"><%= error_msg %></div>
+        <% } %>
+        <% if(success_msg.length > 0) { %>
+        <div class="alert alert-danger"><%= success_msg %></div>
+        <% } %>
+
+        <table id="datatablesSimple">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nome</th>
+              <th>Estado</th>
+              <th>Visibilidade</th>
+              <th>Aprovação</th>
+              <th>Criado em</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th>#</th>
+              <th>Nome</th>
+              <th>Estado</th>
+              <th>Visibilidade</th>
+              <th>Aprovação</th>
+              <th>Criado em</th>
+              <th>Ações</th>
+            </tr>
+          </tfoot>
+          <tbody>
+            <% product.forEach(products => { %>
+            <tr class="align-middle">
+              <td class="align-middle"><img src="/img/imgUpload/<%= products.image %>" width="40px"></td>
+              <td class="align-middle"><strong><%= products.name %></strong></td>
+              <td class="align-middle"><%= products.productStatus %></td>
+              <td class="align-middle">
+                <% if(products.notActive) { %>
+                <span class="status alert-danger"><i class="bi bi-eye-slash-fill"></i> Privado</span>
+                <% } else { %>
+                <span class="status alert-primary"><i class="bi bi-eye-fill"></i> Publico</span>
+                <% } %>
+              </td>
+              <td class="align-middle">
+                <% if(products.approvedStatus == 'pending') { %>
+                <span class="status alert-warning"><i class="bi bi-exclamation-circle-fill"></i> Pendente</span>
+                <%} else if(products.approvedStatus == "refused") {%>
+                <span class="status alert-danger"><i class="bi bi-x-circle-fill"></i> Recusado</span>
+                <% } else { %>
+                <span class="status alert-success"><i class="bi bi-check-circle-fill"></i> Aprovado</span>
+                <% } %>
+              </td>
+              <td class="align-middle">
+                <%= formatDate(products.createdAt) %>
+              </td>
+              <td class="text-center align-middle edit-area">
+                <a class="btn btn-warning" href="/user/products/editproduct/<%= products.id %>">
+                  <i class="bi bi-pencil-fill"></i>
+                </a>
+                <a class="btn btn-info" href="/products/details/<%= products.id %>" target="_blank">
+                  <i class="bi bi-eye-fill"></i>
+                </a>
+                <form method="POST" action="/user/products/delete/<%= products.id %>" style="display: inline-block;">
+                  <button type="submit" class="btn btn-danger">
+                    <i class="bi bi-trash-fill"></i>
+                  </button>
+                </form>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+
+
+      </div>
+    </main>
+
+    <%- include('../../partials/footer') %>

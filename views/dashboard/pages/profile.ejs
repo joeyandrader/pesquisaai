@@ -1,0 +1,184 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+
+<div id="layoutSidenav">
+  <%- include('../partials/sidebar') %>
+  <div id="layoutSidenav_content">
+    <main>
+      <div class="container-fluid px-4">
+        <h1 class="mt-4">Perfil</h1>
+        <ol class="breadcrumb mb-4">
+          <li class="breadcrumb-item">Pagina de edição de perfil</li>
+        </ol>
+        <% if(error_msg.length > 0) { %>
+        <div class="alert alert-danger"><%= error_msg %></div>
+        <% } %>
+        <% if(success_msg.length > 0) { %>
+        <div class="alert alert-success"><%= success_msg %></div>
+        <% } %>
+
+        <div class="container container-profile">
+          <div class="row">
+            <div class="col-md-5">
+              <div class="profileinfo">
+                <div class="container">
+                  <div class="card">
+                    <div class="profileimg">
+                      <img src="/img/imgUpload/<%= user.image %>" id="previewImage" alt="Imagem de perfil de <%= user.name %>">
+                    </div>
+                    <div class="card-body">
+                      <h5 class="card-title"><%= user.name %> <%= user.surname %></h5>
+                      <p class="card-text"><strong>Email: </strong><%= user.email %></5>
+                      <p class="card-text"><strong>CNPJ: </strong><%= user.cnpj %></p>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-7">
+              <form class="row g-3 m-3 m-auto forms" method="POST" action="/user/profile/save" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="<%= user.id %>">
+                <div class="row mb-3">
+                  <p><i class="bi bi-person-lines-fill"></i> <strong>Dados pessoais</strong></p>
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3 mb-md-0">
+                        <input class="form-control" id="name" name="name" type="text" value="<%= user.name %>" placeholder="Nome do serviço" />
+                        <label for="name">Nome</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3 mb-md-0">
+                        <input class="form-control" id="surname" name="surname" type="text" value="<%= user.surname %>" placeholder="Nome do serviço" />
+                        <label for="surname">Sobrenome</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3 mb-md-0">
+                        <input class="form-control" id="email" name="email" type="text" value="<%= user.email %>" placeholder="Nome do serviço" disabled />
+                        <label for="email">E-mail</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3 mb-md-0">
+                        <input class="form-control" id="cpf" name="cpf" type="text" value="<%= user.cpf %>" placeholder="Nome do serviço" disabled />
+                        <label for="cpf">CPF</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-12">
+                      <label for="image" class="form-label">Imagem de Perfil</label>
+                      <input type="file" name="image" id="image" class="form-control">
+                      <small>Envolve imagem de perfil da empresa ou responsavel!</small>
+                    </div>
+                  </div>
+                  <p><i class="bi bi-building"></i> <strong>Dados da empresa</strong></p>
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3 mb-md-0">
+                        <input class="form-control" id="cpnj" name="cpnj" type="text" value="<%= user.cnpj %>" placeholder="Nome do serviço" disabled />
+                        <label for="cpnj">CNPJ</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3 mb-md-0">
+                        <input class="form-control" id="stateRegistration" name="stateRegistration" type="text" value="<%= user.stateRegistration %>" placeholder="Nome do serviço" />
+                        <label for="stateRegistration">Inscrição estadual</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-12">
+                      <div class="form-floating mb-3 mb-md-0">
+                        <input class="form-control" id="socialReason" name="socialReason" type="text" value="<%= user.socialReason %>" placeholder="Nome do serviço" />
+                        <label for="socialReason">Razão social</label>
+                      </div>
+                    </div>
+                    <div class="col-md-12 gy-3">
+                      <div class="form-floating mb-3 mb-md-0">
+                        <input class="form-control" id="fantasyName" name="fantasyName" type="text" value="<%= user.fantasyName %>" placeholder="Nome do serviço" />
+                        <label for="fantasyName">Nome Fantasia</label>
+                      </div>
+                    </div>
+                  </div>
+                  <p><i class="bi bi-pin-map-fill"></i> <strong>Endereços e contatos</strong></p>
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3 mb-md-0">
+                        <input class="form-control" id="cep" name="cep" type="text" value="<%= user.cep %>" placeholder="Nome do serviço" />
+                        <label for="cep">CEP</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3 mb-md-0">
+                        <input class="form-control" id="county" name="county" type="text" value="<%= user.county %>" placeholder="Nome do serviço" />
+                        <label for="county">Cidade</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-12">
+                      <div class="form-floating mb-3 mb-md-0">
+                        <input class="form-control" id="address" name="address" type="text" value="<%= user.address %>" placeholder="Nome do serviço" />
+                        <label for="address">Endereço</label>
+                      </div>
+                    </div>
+                    <div class="col-md-12 gy-3">
+                      <div class="form-floating mb-3 mb-md-0">
+                        <input class="form-control" id="district" name="district" type="text" value="<%= user.district %>" placeholder="Nome do serviço" />
+                        <label for="district">Bairro</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3 mb-md-0">
+                        <input class="form-control" id="complement" name="complement" type="text" value="<%= user.complement %>" placeholder="Nome do serviço" />
+                        <label for="complement">Complemento</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3 mb-md-0">
+                        <input class="form-control" id="addressNumber" name="addressNumber" type="text" value="<%= user.addressNumber %>" placeholder="Nome do serviço" />
+                        <label for="addressNumber">Numero</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3 mb-md-0">
+                        <input class="form-control" id="celNumber" name="celNumber" type="text" value="<%= user.celNumber %>" placeholder="Nome do serviço" />
+                        <label for="celNumber">Numero de Celular</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3 mb-md-0">
+                        <input class="form-control" id="phoneNumber" name="phoneNumber" type="text" value="<%= user.phoneNumber %>" placeholder="Nome do serviço" />
+                        <label for="phoneNumber">Numero de Telefone</label>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="btn btn-primary w-50 p-2 m-auto">Salvar</button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+
+    <script>
+      tinymce.init({
+        selector: 'textarea',
+        plugins: 'advlist autolink lists link image charmap preview anchor pagebreak',
+        toolbar_mode: 'floating',
+      });
+    </script>
+    <%- include('../partials/footer') %>

@@ -1,0 +1,38 @@
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+  <!-- Navbar Brand-->
+  <a class="navbar-brand ps-3 navbar-title" href="/user">Pesquisa Aí</a>
+  <!-- Sidebar Toggle-->
+  <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+  <!-- Navbar Search-->
+  <div class="d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+    <button class="btn btn-primary shadow-none" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fa-solid fa-bell"></i>
+    </button>
+
+    
+  </div>
+  <!-- Navbar-->
+  <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+
+
+
+    <li class="nav-item dropdown profile-menu">
+      <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+        <img src="/img/imgUpload/<%= user.image %>" class="profile-img" alt="Imagem de perfil de <%= user.name %>" />
+        <span class="d-none d-md-inline-block"><%= user.name %> <%= user.surname %></span></a>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+        <li><a class="dropdown-item" href="/user/profile"><i class="bi bi-person-fill"></i> Perfil</a></li>
+        <li><a class="dropdown-item" href="#!"><i class="bi bi-key-fill"></i> Alterar Senha</a></li>
+
+        <% if(user.accountType === 1) {%>
+        <li><a class="dropdown-item" href="/admin"><i class="bi bi-shield-lock-fill"></i> Administrador</a></li>
+        <% } %>
+
+        <li>
+          <hr class="dropdown-divider" />
+        </li>
+        <li><a class="dropdown-item" href="/user/logout"><i class="bi bi-box-arrow-left"></i> Sair</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>

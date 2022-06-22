@@ -1,0 +1,84 @@
+<%- include('../../partials/header') %>
+<%- include('../../partials/navbar') %>
+
+<div id="layoutSidenav">
+  <%- include('../../partials/sidebar') %>
+  <div id="layoutSidenav_content">
+    <main>
+      <div class="container-fluid px-4">
+        <div class="title-products mt-4">
+          <h1>Tickets</h1>
+          <a class="btn btn-primary" href="/user/ticket/new"><i class="bi bi-plus-circle"></i> Novo Ticket</a>
+        </div>
+        <ol class="breadcrumb mb-4">
+          <li class="breadcrumb-item">Meus Tickets</li>
+        </ol>
+
+        <table id="datatablesSimple">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Titulo</th>
+              <th>Categoria</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th>#</th>
+              <th>Titulo</th>
+              <th>Categoria</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </tfoot>
+          <tbody>
+            <% getAllTicket.forEach(item => { %>
+            <tr>
+              <td><a href="#"><%= item.ticketId %></a></td>
+              <td><a href="#"><%= item.title %></a></td>
+              <td><%= item.categoryId[0].name %></td>
+              <td>
+                <% if(item.status === 'open') {%>
+                <span class="status alert-success">Aberto</span>
+                <% } else if(item.status === 'answered') { %>
+                <span class="status alert-dark">Respondido</span>
+                <% } else if(item.status === 'close') { %>
+                <span class="status alert-info">Fechado</span>
+                <% } %>
+              </td>
+              <td>
+                <% if(item.status === 'open') {%>
+                <a class="btn btn-primary" href="#">
+                  <i class="bi bi-eye-fill"></i>
+                </a>
+                <a class="btn btn-danger" href="#" target="_blank">
+                  Fechar ticket
+                </a>
+                <% } else if(item.status === 'close') {%>
+                <a class="btn btn-primary" href="#" target="_blank">
+                  <i class="bi bi-eye-fill"></i>
+                </a>
+                <a class="btn btn-warning" href="#">
+                  Reabrir Ticket
+                </a>
+                <% } else if(item.status === 'answered') {%>
+                <a class="btn btn-primary" href="#">
+                  <i class="bi bi-eye-fill"></i>
+                </a>
+                <a class="btn btn-danger" href="#" target="_blank">
+                  Fechar ticket
+                </a>
+                <% } %>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+
+
+      </div>
+    </main>
+
+    <%- include('../../partials/footer') %>

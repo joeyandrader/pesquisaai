@@ -1,0 +1,91 @@
+<%- include('../../partials/header') %>
+<%- include('../../partials/navbar') %>
+
+<div id="layoutSidenav">
+  <%- include('../../partials/sidebar') %>
+  <div id="layoutSidenav_content">
+    <main>
+      <div class="container-fluid px-4">
+        <h1 class="mt-4">Produto</h1>
+        <ol class="breadcrumb mb-4">
+          <li class="breadcrumb-item">Novo produto</li>
+        </ol>
+        <% if(error_msg.length > 0) { %>
+        <div class="alert alert-danger"><%= error_msg %></div>
+        <% } %>
+        <% if(success_msg.length > 0) { %>
+        <div class="alert alert-success"><%= success_msg %></div>
+        <% } %>
+        <form class="row g-3 m-3 m-auto forms" method="POST" action="/user/new/product/save" enctype="multipart/form-data">
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <div class="form-floating mb-3 mb-md-0">
+                <input class="form-control" id="name" name="name" type="text" placeholder="Nome do produto" />
+                <label for="name">Nome</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-floating">
+                <input class="form-control" id="brand" type="text" name="brand" placeholder="Marca do produto" />
+                <label for="brand">Marca</label>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <div class="form-floating mb-3 mb-md-0">
+                <input class="form-control" id="productOrigin" name="productOrigin" type="text" placeholder="Origem do produto" />
+                <label for="productOrigin">Origem</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <select id="category" name="category" class="form-select shadow-none">
+                <option value="" selected>Selecione uma categoria</option>
+                <% category.forEach((ct) => { %>
+                <option value="<%= ct.id %>"><%= ct.name %></option>
+                <% }) %>
+              </select>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-12">
+              <textarea class="form-control" name="description" id="description" cols="30" rows="10" placeholder="Descrição do produto"></textarea>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-8">
+              <label for="image" class="form-label">Imagem de capa do produto</label>
+              <input type="file" name="image" id="image" class="form-control">
+            </div>
+            <div class="col-md-4">
+              <label for="productStatus" class="form-label">Estado do produto</label>
+              <select id="productStatus" name="productStatus" class="form-select shadow-none">
+                <option value="" selected>Selecione o estado do produto</option>
+                <option value="novo">Novo</option>
+                <option value="usado">Usado</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-12 m-2">
+            <div class="form-check">
+              <input class="form-check-input shadow-none" type="checkbox" id="activeProduct" name="activeProduct" value="true">
+              <label class="form-check-label" for="activeProduct">
+                Não exibir produto na pagina!
+              </label>
+            </div>
+            <small>Marcando indica que o produto não sera mostrado no site! mas ficará salvo na lista</small>
+          </div>
+          <button class="btn btn-primary w-50 p-2 m-auto">Salvar</button>
+        </form>
+
+      </div>
+    </main>
+
+    <script>
+      tinymce.init({
+        selector: 'textarea',
+        plugins: 'advlist autolink lists link image charmap preview anchor pagebreak',
+        toolbar_mode: 'floating',
+      });
+    </script>
+    <%- include('../../partials/footer') %>

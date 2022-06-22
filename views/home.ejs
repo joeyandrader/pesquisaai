@@ -1,0 +1,110 @@
+<%- include('partials/header') %>
+<%- include('partials/navbar') %>
+<%- include('partials/banner') %>
+
+<section class="section-container">
+  <div class="welcome-tab">
+    <div class="welcome-content">
+      <h2>Bem vindo ao Pesquisa Aí</h2>
+      <p>Site em parceria com a prefeitura que te ajuda a encontrar e apoiar os comerciantes de cabo frio.
+        Para saber mais sobre como usar nossa plataforma</p>
+      <a href="#">Saiba mais</a>
+    </div>
+    <img class="img-fluid welcome-img" src="/img/High five-pana.png" alt="" />
+  </div>
+</section>
+
+<section class="section-container">
+  <h1 class="section-container-title">Confira nossos produtos e serviços</h1>
+  <p class="section-container-p">Alguns produtos e serviços de nossos fornecedores!</p>
+  <div class="service-tab">
+    <div class="product-content">
+      <h2>Produtos</h2>
+      <div class="container-fluid px-4">
+        <div class="card-deck">
+          <div class="row gy-3">
+
+            <% product.forEach(product => { %>
+            <% if(product.notActive === true || product.approvedStatus === 'pending' || product.approvedStatus === 'refused') {%>
+
+            <% } else { %>
+            <div class="card-group col-lg-3">
+              <div class="card">
+                <img class="card-img-top" src="/img/imgUpload/<%= product.image %>" alt="Company logo">
+                <div class="card-body">
+                  <h5 class="card-title"><%= product.name%></h5>
+                  <ul class="list-group">
+                    <li class="list-group-item list-group-item-success bg-list-item"><i class="bi bi-briefcase" style="font-size:15px;"></i> <%= product.userId[0].fantasyName %> </li>
+                    <li class="list-group-item list-group-item-success bg-list-item"><i class="fa fa-map-marker" style="font-size:15px;"></i> <%= product.userId[0].district %></li>
+                    <li class="list-group-item list-group-item-success bg-list-item"><i class="fa fa-inr" style="font-size:20px;"></i> <%= product.userId[0].county %></li>
+                  </ul>
+                </div>
+                <div class="card-button">
+                  <button type="button" class="btn btn-primary" id="left-panel-link"><i class="bi bi-eye"> Detalhes</i></button>
+                  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal1" id="right-panel-link">
+                    Contato
+                  </button>
+                </div>
+              </div>
+            </div>
+            <% } %>
+            <% }) %>
+          </div>
+        </div>
+      </div>
+      <a href="#" id="details" class="btn btn-primary"><i class="bi bi-eye"></i> Ver mais</a>
+    </div>
+
+    <div class="service-content">
+      <h2>Serviços</h2>
+      <div class="container-fluid px-4">
+        <div class="card-deck">
+          <div class="row gy-3">
+
+            <% service.forEach(service => { %>
+            <% if(service.notActive === true || service.approvedStatus === 'pending' || service.approvedStatus === 'refused') {%>
+
+            <% } else { %>
+            <div class="card-group col-lg-3">
+              <div class="card">
+                <img class="card-img-top" src="/img/imgUpload/<%= service.image %>" alt="Company logo">
+                <div class="card-body">
+                  <h5 class="card-title"><%= service.name%></h5>
+                  <ul class="list-group">
+                    <li class="list-group-item list-group-item-success bg-list-item"><i class="bi bi-briefcase" style="font-size:15px;"></i> <%= service.userId[0].fantasyName %> </li>
+                    <li class="list-group-item list-group-item-success bg-list-item"><i class="fa fa-map-marker" style="font-size:15px;"></i> <%= service.userId[0].district %></li>
+                    <li class="list-group-item list-group-item-success bg-list-item"><i class="fa fa-inr" style="font-size:20px;"></i> <%= service.userId[0].county %></li>
+                  </ul>
+                </div>
+                <div class="card-button">
+                  <button type="button" class="btn btn-primary" id="left-panel-link"><i class="bi bi-eye"> Detalhes</i></button>
+                  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal1" id="right-panel-link">
+                    Contato
+                  </button>
+                </div>
+              </div>
+            </div>
+            <% } %>
+            <% }) %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a href="#" id="details" class="btn btn-primary"><i class="bi bi-eye"></i> Ver mais</a>
+  </div>
+  </div>
+</section>
+
+<section class="section-container">
+  <div class="suplier-tab">
+    <div class="supplier-content">
+      <h2>Mais do que comerciantes, parceiros.</h2>
+      <p>Cadastre seu negócio e comece sua jornada rumo a novas oportunidades</p>
+      <a class="btn" href="/cadastro.html">Cadastre-se</a>
+    </div>
+    <img class="img-fluid" src="/img/Working-rafiki.png" alt="" />
+
+  </div>
+</section>
+
+<%- include('partials/footer') %>

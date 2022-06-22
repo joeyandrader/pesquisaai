@@ -1,0 +1,68 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbar') %>
+<div class="container">
+  <div class="register-container">
+    <div class="register">
+      <p>Já possui conta? <a href="/login">Logue-se</a></p>
+      <form method="POST" action="/register/save" id="formRegister">
+
+        <% if(error_msg.length > 0) {%>
+        <div class="alert alert-danger"><%= error_msg %></div>
+        <% } %>
+        <div class="container-form">
+          <div class="input-row">
+            <p>Dados da empresa</p>
+            <div class="form-group">
+              <input class="form-control" type="text" id="cnpj" name="cnpj" placeholder="CNPJ" value="<%= cnpj %>">
+              <input class="form-control" type="text" id="stateRegistration" value="<%= stateRegistration %>" name="stateRegistration" placeholder="Inscrição Estadual">
+              <input class="form-control" type="text" id="socialReason" name="socialReason" value="<%= socialReason %>" placeholder="Razão social">
+              <input class="form-control" type="text" id="fantasyName" name="fantasyName" value="<%= fantasyName %>" placeholder="Nome Fantasia">
+              <p>Dados pessoais responsavel</p>
+              <div class="form-row">
+                <input class="form-control" type="email" id="email" name="email" value="<%= email %>" placeholder="E-mail">
+                <input class="form-control" type="text" id="webSite" name="webSite" value="<%= webSite %>" placeholder="Website Comercial">
+                <input class="form-control" type="text" id="cpf" name="cpf" value="<%= cpf %>" placeholder="CPF do Responsável">
+              </div>
+              <div class="form-row">
+                <input class="form-control" type="password" id="password" name="password" placeholder="Senha">
+                <input class="form-control" type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmar Senha">
+              </div>
+              <div class="form-row">
+                <input class="form-control" type="text" id="name" name="name" value="<%= name %>" placeholder="Nome">
+                <input class="form-control" type="text" id="surname" name="surname" value="<%= surname %>" placeholder="Sobrenome">
+              </div>
+            </div>
+            <p>Endereço e contato</p>
+            <div class="form-group">
+              <input class="form-control" type="text" id="cep" name="cep" value="<%= cep %>" maxlength="9" placeholder="CEP">
+              <div class="form-row">
+                <input class="form-control" type="text" id="localidade" name="county" value="<%= county %>" placeholder="Cidade">
+                <input class="form-control" type="text" id="uf" name="uf" value="<%= uf %>" placeholder="UF">
+              </div>
+              <input class="form-control" type="text" id="logradouro" name="address" value="<%= address %>" placeholder="Endereço, Rua, Av.">
+              <div class="form-row">
+                <input class="form-control" type="text" id="bairro" name="district" value="<%= district %>" placeholder="Bairro">
+                <input class="form-control" type="text" id="addressNumber" name="addressNumber" value="<%= addressNumber %>" placeholder="Nº">
+              </div>
+              <input class="form-control" type="text" id="complement" name="complement" value="<%= complement %>" placeholder="Complemento">
+              <div class="form-row">
+                <input class="form-control" type="text" id="celNumber" name="celNumber" value="<%= celNumber %>" placeholder="Telefone Celular">
+                <input class="form-control" type="text" id="phoneNumber" name="phoneNumber" value="<%= phoneNumber %>" placeholder="Telefone Fixo">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" id="confirmTerms" type="checkbox" name="confirmTerms">
+          <label class="form-check-label" for="confirmTerms">
+            <span class="checkbox-text">Estou de acordo com os <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Termos e condições</a></span>
+          </label>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-success">Cadastrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<%- include('../partials/footer') %>
