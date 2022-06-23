@@ -1,7 +1,7 @@
 const slugify = require('slugify')
 const passport = require('passport')
 const bcrypt = require('bcrypt');
-
+const { enviarEmail } = require('../helpers/nodemailer');
 
 //Model
 const Category = require('../models/CategoryModel');
@@ -169,6 +169,55 @@ class AdminController {
             user.phoneNumber = phoneNumber
             user.approvedStatus = approvedStatus
             user.accountType = accountType
+
+            if (user.approvedStatus === 'approved') {
+                enviarEmail(
+                    `Pesquisa Aí - Status da sua conta!`,
+                    `${email}`,
+                    `Parabens ${name} ${surname} sua conta foi aprovada!`,
+                    `Parabens ${name} ${surname} sua conta foi aprovada!`,
+                    `
+                    <h1>Parabéns!</h1>
+                    <h2>Olá ${name} ${surname}</h2>
+                    <h4>Sua conta CNPJ: ${user.cnpj} foi APROVADA!</h4>
+                    <h4>Você pode acessar esse <a href="${process.env.URL}/login" target="blank">link</a> e logar na sua conta</h4>
+                    <br />
+                    <p>Você pode cadastrar seus produtos e serviços! lembrando que os mesmo passa por um processo de analise para ser liberados!</p>
+                    `
+                )
+            }
+
+            if (user.approvedStatus === 'refused') {
+                enviarEmail(
+                    `Pesquisa Aí - Status da sua conta!`,
+                    `${email}`,
+                    `Ops ${name} ${surname} sua conta foi RECUSADA!`,
+                    `Lamentamos muito ${name} ${surname} mas sua conta foi recusada! 🙁`,
+                    `
+                    <h1>Lamento ${fantasyName}!</h1>
+                    <h2>Olá ${name} ${surname}</h2>
+                    <h4>Sua conta CNPJ: ${user.cnpj} foi recusada!</h4>
+                    <h4><strong>Motivo: </strong> Motivo tal e tal e tal, (criar dinamicamente)</h4>
+                    <br />
+                    <h3>Você pode acessar esse <a href="${process.env.URL}" target="blank">link</a> e corrigir os dados preenchidos!</h3>
+                    `
+                )
+            }
+
+            if (user.approvedStatus === 'pending') {
+                enviarEmail(
+                    `Pesquisa Aí - Status da sua conta!`,
+                    `${email}`,
+                    `Olá ${name} ${surname} sua conta está PENDENTE!`,
+                    `Sua conta está pendente para analise novamente!`,
+                    `
+                    <h1>Não se preocupe ${fantasyName}! sua conta está em analise novamente! 😊</h1>
+                    <h4><strong>Motivo: </strong> Motivo tal e tal e tal, (criar dinamicamente)</h4>
+                    <br />
+                    <h3>Você pode acessar esse <a href="${process.env.URL}" target="blank">link</a> e corrigir os dados preenchidos!</h3>
+                    `
+                )
+            }
 
             user.save().then(() => {
                 req.flash('success_msg', 'Fornecedor editado com sucesso!');
