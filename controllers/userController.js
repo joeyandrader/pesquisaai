@@ -1,6 +1,7 @@
 const res = require('express/lib/response');
 const passport = require('passport');
 const { generateCodeJwt } = require('../helpers/ConfirmAccount');
+const bcrypt = require('bcrypt');
 //Models
 const Product = require('../models/ProductModel');
 const Category = require('../models/CategoryModel');
@@ -533,6 +534,78 @@ class UserController {
             console.log(`Erro ao editar o perfil ID : ${id} : (ERROR INFO : ${error})`)
         }
 
+    }
+
+    static async resetPassword(req, res) {
+        res.render('dashboard/pages/resetPassword', {
+            error_msg: req.flash('error_msg'),
+            success_msg: req.flash('success_msg')
+        });
+    }
+
+    static async saveResetPassword(req, res) {
+        const id = req.user.id
+        const { currentPassword, password, confirmPassword } = req.body
+
+        const user = await User.findById(id)
+
+        //bcrypt
+        const checkPassword = await bcrypt.compare(currentPassword, user.password);
+
+        if (!currentPassword) {
+            req.flash('error_msg', 'A senha atual precisa ser preenchida')
+            res.redirect('/account/profile/resetPassword')
+            return
+        }
+
+        if (!password) {
+            req.flash('error_msg', 'A senha nao pode ser vazio!')
+            res.redirect('/account/profile/resetPassword')
+            return
+        }
+        if (!confirmPassword) {
+            req.flash('error_msg', 'A confirmação da senha nao pode ser vazio!')
+            res.redirect('/account/profile/resetPassword')
+            return
+        }
+
+        if (password !== confirmPassword) {
+            req.flash('error_msg', 'A senha e confirmação de senha não sao iguais!')
+            res.redirect('/account/profile/resetPassword')
+            return
+        }
+
+        if (!checkPassword) {
+            req.flash('error_msg', 'Senha atual nao confere!')
+            res.redirect('/account/profile/resetPassword')
+            return
+        }
+
+
+        //Create new hash password
+        const salt = await bcrypt.genSalt(12)
+        const passwordHash = await bcrypt.hash(password, salt)
+
+        try {
+            await User.findById(id).then((user) => {
+                user.password = passwordHash
+
+                user.save().then(() => {
+                    req.logout(() => {
+                        req.flash('success_msg', 'Senha alterada! por favor realize o login novamente!')
+                        res.redirect('/login')
+                    })
+                }).catch(error => {
+                    req.flash('error_msg', 'Erro ao alterar a senha!')
+                    console.log(error)
+                    res.redirect('/account/profile/resetPassword')
+                })
+            })
+        } catch (error) {
+            console.log(error)
+            req.flash('error_msg', 'Erro ao alterar a senha!')
+            res.redirect('/account/profile/resetPassword')
+        }
     }
 
     static async ticket(req, res) {

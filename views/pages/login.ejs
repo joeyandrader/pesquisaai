@@ -7,7 +7,9 @@
       <% if(error.length > 0) {%>
       <div class="alert alert-danger"><%= error %></div>
       <% } %>
-
+      <% if(success_msg.length > 0) {%>
+      <div class="alert alert-success"><%= success_msg %></div>
+      <% } %>
       <% if(error_alert.length > 0) {%>
       <div class="alert alert-danger"><%= error_alert %></div>
       <% } %>

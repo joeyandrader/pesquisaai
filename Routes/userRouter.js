@@ -26,7 +26,8 @@ router.post('/services/delete', isUser, UserController.deleteService);
 //Profile
 router.get('/profile', isUser, UserController.profile);
 router.post('/profile/save', isUser, imageUpload.single('image'), UserController.saveProfile);
-
+router.get('/profile/resetpassword', isUser, UserController.resetPassword);
+router.post('/profile/resetPassword/save', isUser, UserController.saveResetPassword);
 //Suport
 router.get('/ticket', isUser, UserController.ticket);
 router.get('/ticket/new', isUser, UserController.newTicket);
