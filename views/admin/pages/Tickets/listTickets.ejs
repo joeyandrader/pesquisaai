@@ -13,35 +13,32 @@
           <div class="alert alert-success"><%= success_msg %></div>
           <% } %>
           <div class="card">
-            <div class="card-header">Categorias
-              <div class="card-action">
-                <div class="dropdown">
-                  <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown">
-                    <i class="icon-options"></i>
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="/admin/categorys/new">Nova Categoria</a>
-                  </div>
-                </div>
-              </div>
+            <div class="card-header">
+              Tickets de suporte
             </div>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table my-table-custom" id="datatablesSimple">
                   <thead>
                     <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Titulo</th>
+                      <th scope="col">Fornecedor</th>
                       <th scope="col">Nome</th>
-                      <!-- <th scope="col">Slug</th> -->
+                      <th scope="col">Categoria</th>
                       <th scope="col">Status</th>
                       <th scope="col">Ações</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <% getAllCategory.forEach(item => { %>
+                    <% ticket.forEach(item => { %>
                     <tr>
-                      <td><%= item.name %></td>
-                      <!-- <td><%#= item.slugify %></td> -->
-                      <td>breve</td>
+                      <td><%= item.ticketId %></td>
+                      <td><a href="#"><%= item.title %></a></td>
+                      <td><%= item.userId[0].fantasyName %></td>
+                      <td><%= item.userId[0].name %></td>
+                      <td><%= item.categoryId[0].name %></td>
+                      <td><%= item.status %></td>
                       <td>
                         <div class="card-action">
                           <div class="dropdown">
@@ -49,8 +46,12 @@
                               <i class="icon-options"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                              <a class="dropdown-item" href="/admin/categorys/edit/id/<%= item.id %>"><i class="fa-solid fa-pen-to-square"></i> Editar</a>
-                              <a class="dropdown-item" href="javascript:void();"><i class="fa-solid fa-trash-can"></i> Excluir</a>
+                              <a class="dropdown-item" href="/admin/ticket/awsner/<%= item.id %>">Responder</a>
+
+                              <form action="/admin/categorys/ticket/delete/" method="POST" onsubmit="confirmDelete(event, this, `<%= item.name %>`)">
+                                <input type="hidden" name="id" value="<%= item.id %>">
+                                <button class="dropdown-item"><i class="fa-solid fa-lock"></i> Fechar Ticket</button>
+                              </form>
                             </div>
                           </div>
                         </div>
@@ -73,4 +74,29 @@
     </div>
     <!-- End container-fluid-->
   </div>
+
+  <script>
+    function confirmDelete(event, form, category) {
+      event.preventDefault();
+      Swal.fire({
+        title: 'Você tem certeza?',
+        text: "Você não poderá reverter isso!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim, delete isso!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Deletado!',
+            `Sua categoria ${category} foi deletado!`,
+            'success'
+          ).then((result) => {
+            form.submit();
+          })
+        }
+      })
+    }
+  </script>
   <%- include('../../partials/footer') %>

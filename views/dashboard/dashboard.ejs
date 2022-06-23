@@ -81,34 +81,51 @@
             <div class="col-xl-6 col-md-6">
               <div class="card">
                 <div class="card-header">
-                  <span>Produtos</span>
-                </div>
-                <div class="card-body">
-                  <div class="chart-container-2">
-                    <canvas id="myChart"></canvas>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <span>Produtos</span>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                          Graficos
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a class="dropdown-item" href="#">produtos</a></li>
+                          <li><a class="dropdown-item" href="#">Serviços</a></li>
+                        </ul>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div class="table-responsive">
-                  <table class="table align-items-center">
-                    <tbody>
-                      <tr>
-                        <td><i class="fa-solid fa-people-carry-box"></i> Produtos</td>
-                        <td id="countProduct"><%= countProduct %></td>
-                      </tr>
-                      <tr>
-                        <td><i class="fa-solid fa-circle-check"></i> Aprovados</td>
-                        <td id="countProductApproved"><%= approvedCount %></td>
-                      </tr>
-                      <tr>
-                        <td><i class="fa-solid fa-circle-exclamation"></i> Pendentes</td>
-                        <td id="countProductPending"><%= pendingCount %></td>
-                      </tr>
-                      <tr>
-                        <td><i class="fa-solid fa-circle-xmark"></i> Recusados</td>
-                        <td id="countProductRefused"><%= refusedCount %></td>
-                      </tr>
-                    </tbody>
-                  </table>
+                <div class="graph">
+                  <div class="card-body">
+                    <div class="chart-container-2">
+                      <canvas id="myChart"></canvas>
+                    </div>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table align-items-center">
+                      <tbody>
+                        <tr>
+                          <td><i class="fa-solid fa-people-carry-box"></i> Produtos</td>
+                          <td id="countProduct"><%= countProduct %></td>
+                        </tr>
+                        <tr>
+                          <td><i class="fa-solid fa-circle-check"></i> Aprovados</td>
+                          <td id="countProductApproved"><%= approvedCount %></td>
+                        </tr>
+                        <tr>
+                          <td><i class="fa-solid fa-circle-exclamation"></i> Pendentes</td>
+                          <td id="countProductPending"><%= pendingCount %></td>
+                        </tr>
+                        <tr>
+                          <td><i class="fa-solid fa-circle-xmark"></i> Recusados</td>
+                          <td id="countProductRefused"><%= refusedCount %></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>

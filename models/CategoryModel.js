@@ -14,6 +14,10 @@ const Category = mongoose.model(
         slugify: {
             type: String,
             required: true
+        },
+        visibility: {
+            type: Boolean,
+            default: 1
         }
     },
         {

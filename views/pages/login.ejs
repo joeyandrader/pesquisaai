@@ -7,6 +7,11 @@
       <% if(error.length > 0) {%>
       <div class="alert alert-danger"><%= error %></div>
       <% } %>
+
+      <% if(error_alert.length > 0) {%>
+      <div class="alert alert-danger"><%= error_alert %></div>
+      <% } %>
+
       <form method="POST" action="/login/authenticate">
         <div>
           <label for="email" class="form-label">E-mail</label>
@@ -24,4 +29,6 @@
     </div>
   </div>
 </div>
+
+
 <%- include('../partials/footer') %>

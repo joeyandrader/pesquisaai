@@ -45,12 +45,11 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="/user">Dashboard</a></li>
+            <li><a class="dropdown-item" href="/account">Dashboard</a></li>
             <% if(user.accountType === 1) {%>
             <li><a class="dropdown-item" href="/admin">Dashboard Admin</a></li>
             <% } %>
-            <li><a class="dropdown-item" href="/user/settigns">Configurações</a></li>
-            <li><a class="dropdown-item" href="/user/logout">Sair</a></li>
+            <li><a class="dropdown-item" href="/account/logout">Sair</a></li>
           </ul>
         </div>
         <%} else { %>

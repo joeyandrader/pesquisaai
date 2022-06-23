@@ -30,9 +30,10 @@ app.use(flash());
 app.use((req, res, next) => {
     // Comando 'locals' para criar variaveis globais
     res.locals.error = req.flash('error');
+    res.locals.error_alert = req.flash('error_alert');
     res.locals.user = req.user || null;
     res.locals.adminUser = req.user || null;
-    
+
     // Comando 'next();' para permitir que as rotas avancem apos passarem no mdidleware
     next();
 });
@@ -52,7 +53,7 @@ const indexRouter = require('./Routes/indexRouter');
 const AdminRouter = require('./Routes/AdminRouter');
 
 app.use('/', indexRouter);
-app.use('/user', userRouter);
+app.use('/account', userRouter);
 app.use('/admin', AdminRouter);
 
 

@@ -1,3 +1,5 @@
+const Swal = require('sweetalert2');
+
 module.exports = {
     isAdmin: function (req, res, next) {
         if (req.isAuthenticated() && req.user.accountType === 1 && req.user.approvedStatus === "approved") {
@@ -5,7 +7,7 @@ module.exports = {
         }
 
         req.logout(() => {
-            req.flash("error_msg", "Acesso Negado!");
+            req.flash('error_alert', 'Acesso Negado!')
             res.redirect('/login');
         });
 
@@ -14,9 +16,6 @@ module.exports = {
     isUser: function (req, res, next) {
 
         if (req.isAuthenticated() && req.user.approvedStatus === "approved") {
-            if (req.user.accountType === 1) {
-                res.redirect('/admin')
-            }
             return next();
         }
 

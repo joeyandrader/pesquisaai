@@ -8,7 +8,7 @@
       <div class="container-fluid px-4">
         <div class="title-products mt-4">
           <h1>Gerenciar serviços</h1>
-          <a class="btn btn-primary" href="/user/new/service"><i class="bi bi-plus-circle"></i> Novo Serviço</a>
+          <a class="btn btn-primary" href="/account/new/service"><i class="bi bi-plus-circle"></i> Novo Serviço</a>
         </div>
         <ol class="breadcrumb mb-4">
           <li class="breadcrumb-item">Lista de todos os seus serviços</li>
@@ -71,11 +71,11 @@
                   <i class="bi bi-eye-fill"></i>
                 </a>
                 <form style="display: inline-block;">
+                  <input type="hidden" name="id" value="<%= service.id %>">
                   <button type="submit" class="btn btn-danger">
                     <i class="bi bi-trash-fill"></i>
                   </button>
                 </form>
-
               </td>
             </tr>
             <% }) %>

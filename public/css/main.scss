@@ -692,7 +692,6 @@ ul {
 }
 
 .card-body p {
-    text-align: right;
     font-size: 18px;
 }
 
@@ -755,7 +754,13 @@ ul {
     background-image: linear-gradient(#7FDBFF, white);
 }
 
-
+.card-img {
+    max-width: 100% !important;
+    min-width: 100% !important;
+    max-height: 500px !important;
+    min-height: 500px !important;
+    object-fit: cover !important;
+}
 
 .card {
     padding: 0;

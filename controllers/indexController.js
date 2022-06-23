@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const passport = require('passport')
 const { enviarEmail } = require('../helpers/nodemailer');
+const Swal = require('sweetalert2');
 
 //Models
 const Category = require('../models/CategoryModel');
@@ -278,7 +279,7 @@ class IndexController {
     static async login(req, res) {
 
         if (req.user) {
-            res.redirect('/user')
+            res.redirect('/account')
             return
         }
 
@@ -294,7 +295,7 @@ class IndexController {
 
     static async userAuth(req, res, next) {
         passport.authenticate("local", {
-            successRedirect: '/user',
+            successRedirect: '/account',
             failureRedirect: "/login",
             failureFlash: true
         })(req, res, next)
@@ -320,20 +321,6 @@ class IndexController {
             offSet = parseInt(numPage) * limitPage;
         }
 
-        //Ordena os produtos de acordo com a URL passada no GET
-        const urlAsc = '/products?orderProduct=asc'
-        const urlDesc = '/products?orderProduct=desc'
-        const getUrl = req.url
-        let orderByString = ''
-        if (getUrl == urlAsc) {
-            orderByString = 'ASC'
-        } else if (getUrl == urlDesc) {
-            orderByString = 'DESC'
-        } else {
-            orderByString = 'DESC'
-        }
-
-        // FIM do OrderBy
         const reqSearch = new RegExp(req.query.search, 'i')
         // console.log(req.query.typeSearch)
 
@@ -343,59 +330,115 @@ class IndexController {
         var searchUrl = `?typeSearch=${req.query.typeSearch}&search=${req.query.search}`;
 
 
-        Product.find({
-            $and: [
-                { approvedStatus: 'approved' },
-                { notActive: false }
-            ],
-            $or: [
-                { name: reqSearch },
-                { brand: reqSearch },
-            ],
-        }).limit(limitPage).skip(offSet).sort({ createdAt: 'DESC' }).populate('userId').populate('categoryId').then(allProducts => {
-            Category.find().then(category => {
+        console.log(req.query.typeSearch)
+        if (req.query.typeSearch === 'products') {
+            Product.find({
+                $and: [
+                    { approvedStatus: 'approved' },
+                    { notActive: false }
+                ],
+                $or: [
+                    { name: reqSearch },
+                    { brand: reqSearch },
+                ],
+            }).limit(limitPage).skip(offSet).sort({ createdAt: 'DESC' }).populate('userId').populate('categoryId').then(allProducts => {
+                Category.find().then(category => {
 
-                Product.find({
-                    $and: [
-                        { approvedStatus: 'approved' },
-                        { notActive: false }
-                    ],
-                    $or: [
-                        { name: reqSearch },
-                        { brand: reqSearch },
-                    ],
-                }).count().then(countProduct => {
+                    Product.find({
+                        $and: [
+                            { approvedStatus: 'approved' },
+                            { notActive: false }
+                        ],
+                        $or: [
+                            { name: reqSearch },
+                            { brand: reqSearch },
+                        ],
+                    }).count().then(countProduct => {
 
-                    var next;
-                    if (offSet + limitPage >= countProduct) {
-                        next = false
-                    } else {
-                        next = true
-                    }
+                        var next;
+                        if (offSet + limitPage >= countProduct) {
+                            next = false
+                        } else {
+                            next = true
+                        }
 
-                    var resultPage = {
-                        page: parseInt(numPage),
-                        next: next,
-                        allProducts: allProducts,
-                    }
+                        var resultPage = {
+                            page: parseInt(numPage),
+                            next: next,
+                            allProducts: allProducts,
+                        }
 
-                    var pages = Math.ceil(countProduct / limitPage);
-                    var totalPage = Array.from({ length: pages }).map((item, index) => {
-                        return index
-                    });
+                        var pages = Math.ceil(countProduct / limitPage);
+                        var totalPage = Array.from({ length: pages }).map((item, index) => {
+                            return index
+                        });
 
-                    res.render('pages/viewsProducts', {
-                        category: category,
-                        error_msg: req.flash('error_msg'),
-                        resultPage: resultPage,
-                        searchUrl: searchUrl,
-                        totalPage: totalPage,
-                        countProduct: countProduct
+                        res.render('pages/viewsProducts', {
+                            category: category,
+                            error_msg: req.flash('error_msg'),
+                            resultPage: resultPage,
+                            searchUrl: searchUrl,
+                            totalPage: totalPage,
+                            countProduct: countProduct
+                        })
                     })
-                })
 
+                })
             })
-        })
+            
+        } else if (req.query.typeSearch === 'services') {
+            Service.find({
+                $and: [
+                    { approvedStatus: 'approved' },
+                    { notActive: false }
+                ],
+                $or: [
+                    { name: reqSearch }
+                ],
+            }).limit(limitPage).skip(offSet).sort({ createdAt: 'DESC' }).populate('userId').populate('categoryId').then(allProducts => {
+                Category.find().then(category => {
+
+                    Service.find({
+                        $and: [
+                            { approvedStatus: 'approved' },
+                            { notActive: false }
+                        ],
+                        $or: [
+                            { name: reqSearch }
+                        ],
+                    }).count().then(countProduct => {
+
+                        var next;
+                        if (offSet + limitPage >= countProduct) {
+                            next = false
+                        } else {
+                            next = true
+                        }
+
+                        var resultPage = {
+                            page: parseInt(numPage),
+                            next: next,
+                            allProducts: allProducts,
+                        }
+
+                        var pages = Math.ceil(countProduct / limitPage);
+                        var totalPage = Array.from({ length: pages }).map((item, index) => {
+                            return index
+                        });
+
+                        res.render('pages/viewsProducts', {
+                            category: category,
+                            error_msg: req.flash('error_msg'),
+                            resultPage: resultPage,
+                            searchUrl: searchUrl,
+                            totalPage: totalPage,
+                            countProduct: countProduct
+                        })
+                    })
+
+                })
+            })
+        }
     }
 
 

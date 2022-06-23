@@ -15,7 +15,7 @@
         <% } else if(success_msg.length > 0) {%>
         <div class="alert alert-success"><%= success_msg %></div>
         <% } %>
-        <form class="row g-3 m-3 m-auto forms" method="POST" action="/user/products/editproduct/save" enctype="multipart/form-data">
+        <form class="row g-3 m-3 m-auto forms" method="POST" action="/account/products/editproduct/save" enctype="multipart/form-data">
           <input type="hidden" name="id" value="<%= product.id %>">
           <div class="row mb-3">
             <div class="col-md-6">

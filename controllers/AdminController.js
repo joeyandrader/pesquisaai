@@ -8,6 +8,8 @@ const Category = require('../models/CategoryModel');
 const Product = require('../models/ProductModel');
 const User = require('../models/UserModel');
 const Service = require('../models/ServiceModel');
+const TicketCategory = require('../models/CategoryTicketModel');
+const Ticket = require('../models/TicketModel');
 
 
 class AdminController {
@@ -226,6 +228,43 @@ class AdminController {
         }
     }
 
+    static async editCategory(req, res) {
+        const id = req.params.id
+
+        const category = await Category.findById(id);
+
+        res.render('admin/pages/categorys/editCategory', {
+            category: category
+        })
+    }
+
+    static async saveEditCategory(req, res) {
+        const { id, name } = req.body
+
+        if (!name) {
+            req.flash('error_msg', 'O nome não pode ser vazio!')
+            res.redirect(`/admin/category/edit/id/${id}`)
+            return
+        }
+
+        let nameUpperCase = name.toUpperCase()
+
+        await Category.findById(id).then(category => {
+            category.name = nameUpperCase
+            category.slugify = slugify(nameUpperCase)
+
+            category.save().then(() => {
+                req.flash('success_msg', 'Categoria editada com sucesso!')
+                res.redirect('/admin/categorys')
+            }).catch(error => {
+                req.flash('error_msg', 'Erro Interno ERROR: ' + error)
+                res.redirect(`/admin/category/edit/id/${id}`)
+            })
+        }).catch(error => {
+            req.flash('error_msg', 'Erro ao editar a categoria ERROR: ' + error)
+            res.redirect(`/admin/category/edit/id/${id}`)
+        })
+    }
 
     static async approvedProduct(req, res) {
         const { id } = req.body
@@ -425,6 +464,112 @@ class AdminController {
             res.redirect(`/admin/services/edit/id/${id}`);
             return
         })
+    }
+
+
+    static async ticketCategory(req, res) {
+
+        const ticketCategory = await TicketCategory.find();
+
+        res.render('admin/pages/TicketCategorys/listCategory', {
+            error_msg: req.flash('error_msg'),
+            success_msg: req.flash('success_msg'),
+            ticketCategory: ticketCategory
+        })
+    }
+
+    static async newTicketCategory(req, res) {
+        res.render('admin/pages/TicketCategorys/addCategory', {
+            error_msg: req.flash('error_msg'),
+            success_msg: req.flash('success_msg')
+        });
+    }
+
+    static async saveNewTicketCategory(req, res) {
+        const { name } = req.body
+
+        if (!name) {
+            req.flash('error_msg', 'O nome não pode ser vazio')
+            res.redirect('/admin/categorys/ticket/new')
+            return
+        }
+
+        const nameUpper = name.toUpperCase();
+
+        const newCategory = new TicketCategory({
+            name: nameUpper,
+            slugify: slugify(nameUpper)
+        })
+
+        try {
+            const saveCategory = await newCategory.save()
+            req.flash('success_msg', 'Categoria criada com sucesso!')
+            res.redirect('/admin/categorys/ticket')
+        } catch (error) {
+            req.flash('error_msg', 'Erro ao criar a categoria ticket, ERROR : ' + error)
+            res.redirect('/admin/categorys/ticket')
+        }
+    }
+
+    static async editTicketCategory(req, res) {
+        const id = req.params.id
+        const ticketCategory = await TicketCategory.findById(id);
+
+        res.render('admin/pages/TicketCategorys/EditCategory', {
+            ticketCategory: ticketCategory
+        })
+    }
+
+    static async saveEditTicketCategory(req, res) {
+        const { id, name } = req.body
+
+        if (!name) {
+            req.flash('error_msg', 'O nome não pode ser vazio')
+            res.redirect('/admin/categorys/ticket/new')
+            return
+        }
+
+        const nameUpper = name.toUpperCase();
+
+        await TicketCategory.findById(id).then(ticketCategory => {
+            ticketCategory.name = nameUpper
+            ticketCategory.slugify = slugify(nameUpper)
+
+            ticketCategory.save().then(() => {
+                req.flash('success_msg', 'Categoria editada com sucesso!')
+                res.redirect('/admin/categorys/ticket')
+            }).catch(error => {
+                req.flash('error_msg', 'Erro interno, ERROR : ' + error)
+                res.redirect(`/admin/categorys/ticket/edit/id/${id}`)
+            })
+        }).catch(error => {
+            req.flash('error_msg', 'Erro ao editar a categoria ticket, ERROR : ' + error)
+            res.redirect(`/admin/categorys/ticket/edit/id/${id}`)
+        })
+    }
+
+    static async deleteTicketCategory(req, res) {
+        const { id } = req.body
+
+        try {
+            await TicketCategory.findByIdAndDelete(id);
+            req.flash('success_msg', 'Categoria Ticket deletada com sucesso!')
+            res.redirect('/admin/categorys/ticket')
+        } catch (error) {
+            req.flash('error_msg', 'Erro ao deletar a categoria!')
+            console.log(`Erro ao deletar categoria Ticket : error ( ${error} )`)
+            res.redirect('/admin/categorys/ticket')
+        }
+    }
+
+
+    static async ticket(req, res) {
+        const ticket = await Ticket.find().populate('userId').populate('categoryId');
+        res.render('admin/pages/tickets/listTickets', {
+            error_msg: req.flash('error_msg'),
+            success_msg: req.flash('success_msg'),
+            ticket: ticket
+        });
     }
 }
 

@@ -6,7 +6,7 @@ const imageStorage = multer.diskStorage({
     destination: function (req, file, cb) {
         let folder = ""
 
-        if (req.baseUrl.includes("user")) {
+        if (req.baseUrl.includes("account")) {
             folder = "imgUpload"
         }
 

@@ -735,7 +735,6 @@ ul {
 }
 
 .card-body p {
-  text-align: right;
   font-size: 18px;
 }
 
@@ -795,6 +794,15 @@ ul {
 .modal-header {
   background-image: -webkit-gradient(linear, left top, left bottom, from(#7FDBFF), to(white));
   background-image: linear-gradient(#7FDBFF, white);
+}
+
+.card-img {
+  max-width: 100% !important;
+  min-width: 100% !important;
+  max-height: 500px !important;
+  min-height: 500px !important;
+  -o-object-fit: cover !important;
+     object-fit: cover !important;
 }
 
 .card {

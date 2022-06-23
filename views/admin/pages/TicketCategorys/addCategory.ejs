@@ -1,0 +1,42 @@
+<%- include('../../partials/header') %>
+<div id="wrapper">
+  <%- include('../../partials/sidebar') %>
+  <%- include('../../partials/navbar') %>
+
+  <div class="clearfix"></div>
+
+  <div class="content-wrapper">
+    <div class="container-fluid">
+
+      <div class="row mt-3 d-flex align-items-center justify-content-center">
+        <div class="col-lg-8">
+          <div class="card">
+            <div class="card-body">
+              <% if(error_msg.length > 0) { %>
+              <div class="alert alert-danger"><%= error_msg %></div>
+              <% } %>
+              <div class="card-title">Categoria ticket</div>
+              <hr>
+              <form action="/admin/categorys/ticket/save" method="POST">
+                <div class="form-group">
+                  <label for="name">Nome</label>
+                  <input type="text" class="form-control" id="name" name="name" placeholder="Digite o nome da nova categoria">
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-light px-5"><i class="icon-lock"></i> Cadastrar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--End Row-->
+
+      <!--start overlay-->
+      <div class="overlay toggle-menu"></div>
+      <!--end overlay-->
+
+    </div>
+    <!-- End container-fluid-->
+  </div>
+  <%- include('../../partials/footer') %>

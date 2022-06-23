@@ -1,0 +1,40 @@
+<%- include('../../partials/header') %>
+<div id="wrapper">
+  <%- include('../../partials/sidebar') %>
+  <%- include('../../partials/navbar') %>
+
+  <div class="clearfix"></div>
+
+  <div class="content-wrapper">
+    <div class="container-fluid">
+
+      <div class="row mt-3 d-flex align-items-center justify-content-center">
+        <div class="col-lg-8">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-title">Categoria</div>
+              <hr>
+              <form action="/admin/categorys/edit/save" method="POST">
+                <input type="hidden" id="id" name="id" value="<%= category.id %>">
+                <div class="form-group">
+                  <label for="name">Nome</label>
+                  <input type="text" class="form-control" id="name" name="name" placeholder="Digite o nome da nova categoria" value="<%= category.name %>">
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-light px-5"><i class="icon-lock"></i> Cadastrar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--End Row-->
+
+      <!--start overlay-->
+      <div class="overlay toggle-menu"></div>
+      <!--end overlay-->
+
+    </div>
+    <!-- End container-fluid-->
+  </div>
+  <%- include('../../partials/footer') %>

@@ -73,37 +73,37 @@ class UserController {
 
         if (!name) {
             req.flash('error_msg', 'O nome do produto precisa ser preenchido!');
-            res.redirect("/user/new/product");
+            res.redirect("/account/new/product");
             return
         }
         if (!brand) {
             req.flash('error_msg', 'A marca do produto precisa ser preenchido!');
-            res.redirect("/user/new/product");
+            res.redirect("/account/new/product");
             return
         }
         if (!productOrigin) {
             req.flash('error_msg', 'A origem do produto precisa ser preenchido!');
-            res.redirect("/user/new/product");
+            res.redirect("/account/new/product");
             return
         }
         if (category === "") {
             req.flash('error_msg', 'O categoria do produto precisa ser preenchido!');
-            res.redirect("/user/new/product");
+            res.redirect("/account/new/product");
             return
         }
         if (!description) {
             req.flash('error_msg', 'A descrição precisa ser preenchido!');
-            res.redirect("/user/new/product");
+            res.redirect("/account/new/product");
             return
         }
         if (!req.file) {
             req.flash('error_msg', 'A foto do produto é obrigatorio');
-            res.redirect("/user/new/product");
+            res.redirect("/account/new/product");
             return
         }
         if (productStatus === "") {
             req.flash('error_msg', 'O status do produto precisa ser preenchido!');
-            res.redirect("/user/new/product");
+            res.redirect("/account/new/product");
             return
         }
 
@@ -126,7 +126,7 @@ class UserController {
         try {
             const saveProduct = await product.save();
             req.flash('success_msg', 'Produto cadastrado com sucesso!');
-            res.redirect('/user/new/product');
+            res.redirect('/account/new/product');
         } catch (error) {
             console.log('Erro ao cadastrar produto ' + error)
         }
@@ -170,7 +170,7 @@ class UserController {
 
         if (!name) {
             req.flash('error_msg', 'O campo nome está vazio')
-            res.redirect(`/user/products/editproduct/${id}`)
+            res.redirect(`/account/products/editproduct/${id}`)
             return
         } else if (product.name !== name) {
             product.name = name
@@ -179,7 +179,7 @@ class UserController {
 
         if (!brand) {
             req.flash('error_msg', 'O campo marca está vazio')
-            res.redirect(`/user/products/editproduct/${id}`)
+            res.redirect(`/account/products/editproduct/${id}`)
             return
         } else if (product.brand !== brand) {
             product.brand = brand
@@ -189,7 +189,7 @@ class UserController {
 
         if (!productOrigin) {
             req.flash('error_msg', 'O campo de origem está vazio')
-            res.redirect(`/user/products/editproduct/${id}`)
+            res.redirect(`/account/products/editproduct/${id}`)
             return
         } else if (product.productOrigin !== productOrigin) {
             product.productOrigin = productOrigin
@@ -198,7 +198,7 @@ class UserController {
 
         if (!description) {
             req.flash('error_msg', 'O campo de descrição está vazio')
-            res.redirect(`/user/products/editproduct/${id}`)
+            res.redirect(`/account/products/editproduct/${id}`)
             return
         } else if (product.description !== description) {
             product.description = description
@@ -208,7 +208,7 @@ class UserController {
 
         if (!category) {
             req.flash('error_msg', 'O campo de descrição está vazio')
-            res.redirect(`/user/products/editproduct/${id}`)
+            res.redirect(`/account/products/editproduct/${id}`)
             return
         } else if (product.categoryId[0].id !== category) {
             product.categoryId = category
@@ -228,26 +228,27 @@ class UserController {
             )
 
             req.flash('success_msg', 'Produto editado com sucesso!')
-            res.redirect('/user/products');
+            res.redirect('/account/products');
 
         } catch (error) {
             req.flash('error_msg', 'Erro ao editar o produto! o erro foi gravado!')
-            res.redirect(`/user/products/editproduct/${id}`)
+            res.redirect(`/account/products/editproduct/${id}`)
             console.log(`Erro ao editar o produto ID: ${id} : ${error}`)
-            res.redirect('/user/products');
+            res.redirect('/account/products');
         }
 
     }
 
     static async deleteProduct(req, res) {
         const { id } = req.body
+        
         try {
             await Product.findByIdAndDelete(id);
-            res.redirect('/user/products')
+            res.redirect('/account/products')
         } catch (error) {
             req.flash('error_msg', 'Erro ao deletar o produto!')
             console.log(`O usuario ${req.user.cnpj} tentou deletar o produto id: ${id} e deu erro: ${error}`);
-            res.redirect('/user/products')
+            res.redirect('/account/products')
         }
     }
 
@@ -274,25 +275,25 @@ class UserController {
 
         if (!name) {
             req.flash('error_msg', 'O nome do serviço precisa ser preenchido!');
-            res.redirect("/user/new/service");
+            res.redirect("/account/new/service");
             return
         }
 
         if (!description) {
             req.flash('error_msg', 'A descrição precisa ser preenchido!');
-            res.redirect("/user/new/service");
+            res.redirect("/account/new/service");
             return
         }
 
         if (!req.file) {
             req.flash('error_msg', 'A image precisa ser selecionada!');
-            res.redirect("/user/new/service");
+            res.redirect("/account/new/service");
             return
         }
 
         if (category === "") {
             req.flash('error_msg', 'O categoria do serviço precisa ser preenchido!');
-            res.redirect("/user/new/service");
+            res.redirect("/account/new/service");
             return
         }
 
@@ -310,7 +311,7 @@ class UserController {
             const newService = await service.save();
             req.flash('success_msg', 'Serviço cadastrado com sucesso!')
             req.flash('succes_msg', '*O serviço vai ser analisado em ate 2 dias você será notificado, caso aprovado o produto estará visivel no site!*')
-            res.redirect('/user/new/service')
+            res.redirect('/account/new/service')
         } catch (error) {
             console.log('Erro ao cadastrar serviço ' + error)
         }
@@ -347,91 +348,91 @@ class UserController {
 
         if (!name) {
             req.flash('error_msg', 'O campo nome não pode ser vazio!')
-            res.redirect('/user/profile');
+            res.redirect('/account/profile');
             return
         }
         user.name = name
 
         if (!surname) {
             req.flash('error_msg', 'O campo sobrenome não pode ser vazio!')
-            res.redirect('/user/profile');
+            res.redirect('/account/profile');
             return
         }
         user.surname = surname
 
         if (!stateRegistration) {
             req.flash('error_msg', 'O campo inscrição estadual não pode ser vazio!')
-            res.redirect('/user/profile');
+            res.redirect('/account/profile');
             return
         }
         user.stateRegistration = stateRegistration
 
         if (!socialReason) {
             req.flash('error_msg', 'O campo razão social não pode ser vazio!')
-            res.redirect('/user/profile');
+            res.redirect('/account/profile');
             return
         }
         user.socialReason = socialReason
 
         if (!fantasyName) {
             req.flash('error_msg', 'O campo nome fantasia não pode ser vazio!')
-            res.redirect('/user/profile');
+            res.redirect('/account/profile');
             return
         }
         user.fantasyName = fantasyName
 
         if (!cep) {
             req.flash('error_msg', 'O campo cep não pode ser vazio!')
-            res.redirect('/user/profile');
+            res.redirect('/account/profile');
             return
         }
         user.cep = cep
 
         if (!county) {
             req.flash('error_msg', 'O campo cidade não pode ser vazio!')
-            res.redirect('/user/profile');
+            res.redirect('/account/profile');
             return
         }
         user.county = county
 
         if (!address) {
             req.flash('error_msg', 'O campo endereço não pode ser vazio!')
-            res.redirect('/user/profile');
+            res.redirect('/account/profile');
             return
         }
         user.address = address
 
         if (!district) {
             req.flash('error_msg', 'O campo bairro não pode ser vazio!')
-            res.redirect('/user/profile');
+            res.redirect('/account/profile');
             return
         }
         user.district = district
 
         if (!complement) {
             req.flash('error_msg', 'O campo complemento não pode ser vazio!')
-            res.redirect('/user/profile');
+            res.redirect('/account/profile');
             return
         }
         user.complement = complement
 
         if (!addressNumber) {
             req.flash('error_msg', 'O campo numero não pode ser vazio!')
-            res.redirect('/user/profile');
+            res.redirect('/account/profile');
             return
         }
         user.addressNumber = addressNumber
 
         if (!celNumber) {
             req.flash('error_msg', 'O campo celular não pode ser vazio!')
-            res.redirect('/user/profile');
+            res.redirect('/account/profile');
             return
         }
         user.celNumber = celNumber
 
         if (!phoneNumber) {
             req.flash('error_msg', 'O campo celular não pode ser vazio!')
-            res.redirect('/user/profile');
+            res.redirect('/account/profile');
             return
         }
         user.phoneNumber = phoneNumber
@@ -449,7 +450,7 @@ class UserController {
             )
 
             req.flash('success_msg', 'Perfil atualizado com sucesso!');
-            res.redirect('/user/profile');
+            res.redirect('/account/profile');
         } catch (error) {
             req.flash('error_msg', 'Erro ao editar o perfil! essa ação foi gravada!')
             console.log(`Erro ao editar o perfil ID : ${id} : (ERROR INFO : ${error})`)
@@ -484,19 +485,19 @@ class UserController {
 
         if (!title) {
             req.flash('error_msg', 'O titulo precisa ser preenchido!')
-            res.redirect('/user/ticket/new')
+            res.redirect('/account/ticket/new')
             return
         }
 
         if (!category || category === '') {
             req.flash('error_msg', 'A categoria precisa ser selecionada!')
-            res.redirect('/user/ticket/new')
+            res.redirect('/account/ticket/new')
             return
         }
 
         if (!description) {
             req.flash('error_msg', 'A descrição precisa ser preenchido!')
-            res.redirect('/user/ticket/new')
+            res.redirect('/account/ticket/new')
             return
         }
 
@@ -523,7 +524,7 @@ class UserController {
         try {
             registerTicket.save();
             req.flash('success_msg', 'Ticket Criado com sucesso!');
-            res.redirect('/user/ticket');
+            res.redirect('/account/ticket');
         } catch (error) {
             console.log('Erro ao criar o ticket ' + error);
         }
