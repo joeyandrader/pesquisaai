@@ -75,7 +75,7 @@
                 <a class="btn btn-info" href="/products/details/<%= products.id %>" target="_blank">
                   <i class="bi bi-eye-fill"></i>
                 </a>
-                <form method="POST" action="/user/products/delete/<%= products.id %>" style="display: inline-block;">
+                <form method="POST" action="/user/products/delete/<%= products.id %>" style="display: inline-block;" onsubmit="confirmDelete(event, this, `<%= products.name %>`)">
                   <input type="hidden" name="id" value="<%= products.id %>">
                   <button type="submit" class="btn btn-danger">
                     <i class="bi bi-trash-fill"></i>
@@ -86,9 +86,31 @@
             <% }) %>
           </tbody>
         </table>
-
-
       </div>
     </main>
 
+    <script>
+      function confirmDelete(event, form, produto) {
+        event.preventDefault();
+        Swal.fire({
+          title: 'Você tem certeza?',
+          text: "Você não poderá reverter isso!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sim, delete isso!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire(
+              'Deletado!',
+              `Seu produto ${produto} foi deletado!`,
+              'success'
+            ).then((result) => {
+              form.submit();
+            })
+          }
+        })
+      }
+    </script>
     <%- include('../../partials/footer') %>

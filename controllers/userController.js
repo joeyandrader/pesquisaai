@@ -21,13 +21,13 @@ class UserController {
             Product.find({ userId: req.user.id }).count().then(countProduct => {
                 Product.find({ $and: [{ approvedStatus: 'approved', userId: req.user.id }] }).count().then(approvedCount => {
                     Product.find({ $and: [{ approvedStatus: 'refused', userId: req.user.id }] }).count().then(refusedCount => {
-                        Service.find().then(service => {
+                        Service.find({ userId: req.user.id }).count().then(countService => {
                             res.render('dashboard/dashboard', {
                                 countProduct: countProduct,
                                 pendingCount: pendingCount,
                                 approvedCount: approvedCount,
                                 refusedCount: refusedCount,
-                                service: service,
+                                countService: countService,
                                 getProductViews: getProductViews
                             });
                         })
@@ -172,6 +172,7 @@ class UserController {
 
         if (!name) {
             req.flash('error_msg', 'O campo nome está vazio')
+            res.redirect(`/user/products/editproduct/${id}`)
             return
         } else if (product.name !== name) {
             product.name = name
@@ -180,6 +181,7 @@ class UserController {
 
         if (!brand) {
             req.flash('error_msg', 'O campo marca está vazio')
+            res.redirect(`/user/products/editproduct/${id}`)
             return
         } else if (product.brand !== brand) {
             product.brand = brand
@@ -189,6 +191,7 @@ class UserController {
 
         if (!productOrigin) {
             req.flash('error_msg', 'O campo de origem está vazio')
+            res.redirect(`/user/products/editproduct/${id}`)
             return
         } else if (product.productOrigin !== productOrigin) {
             product.productOrigin = productOrigin
@@ -197,6 +200,7 @@ class UserController {
 
         if (!description) {
             req.flash('error_msg', 'O campo de descrição está vazio')
+            res.redirect(`/user/products/editproduct/${id}`)
             return
         } else if (product.description !== description) {
             product.description = description
@@ -206,6 +210,7 @@ class UserController {
 
         if (!category) {
             req.flash('error_msg', 'O campo de descrição está vazio')
+            res.redirect(`/user/products/editproduct/${id}`)
             return
         } else if (product.categoryId[0].id !== category) {
             product.categoryId = category
@@ -217,14 +222,6 @@ class UserController {
             product.image = req.file.filename
         }
 
-        if (activeProduct) {
-            product.notActive = true
-            product.approvedStatus
-        } else {
-            product.notActive = false
-            product.approvedStatus
-        }
-
         try {
             await Product.findOneAndUpdate(
                 { _id: product._id },
@@ -233,12 +230,13 @@ class UserController {
             )
 
             req.flash('success_msg', 'Produto editado com sucesso!')
-            res.redirect('/user/myproducts');
+            res.redirect('/user/products');
 
         } catch (error) {
             req.flash('error_msg', 'Erro ao editar o produto! o erro foi gravado!')
+            res.redirect(`/user/products/editproduct/${id}`)
             console.log(`Erro ao editar o produto ID: ${id} : ${error}`)
-            res.redirect('/user/myproducts');
+            res.redirect('/user/products');
         }
 
     }
@@ -247,7 +245,6 @@ class UserController {
         const { id } = req.body
         try {
             await Product.findByIdAndDelete(id);
-            req.flash('success_msg', 'Produto deletado com sucesso!')
             res.redirect('/user/products')
         } catch (error) {
             req.flash('error_msg', 'Erro ao deletar o produto!')
@@ -262,6 +259,8 @@ class UserController {
                 error_msg: req.flash('error_msg'),
                 success_msg: req.flash('success_msg'),
                 category: category,
+                name: req.flash('name'),
+                description: req.flash('description')
             })
         })
     }
@@ -269,6 +268,9 @@ class UserController {
     static async saveNewService(req, res) {
         const { name, description, category, activeProduct } = req.body
         const userId = req.user.id;
+
+        req.flash('name', name)
+        req.flash('description', description)
 
         let image = ''
 
@@ -280,6 +282,12 @@ class UserController {
 
         if (!description) {
             req.flash('error_msg', 'A descrição precisa ser preenchido!');
+            res.redirect("/user/new/service");
+            return
+        }
+
+        if (!req.file) {
+            req.flash('error_msg', 'A image precisa ser selecionada!');
             res.redirect("/user/new/service");
             return
         }
