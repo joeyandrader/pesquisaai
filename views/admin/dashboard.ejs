@@ -134,22 +134,22 @@
                   <tr>
                     <td><i class="fa fa-circle text-white mr-2"></i> Produtos</td>
                     <td id="countProduct"><%= countProducts %></td>
-                    <td><%= (countProducts / countProducts) * 100  %>%</td>
+                    <td><%= Math.ceil((countProducts / countProducts) * 100)  %>%</td>
                   </tr>
                   <tr>
                     <td><i class="fa fa-circle text-light-1 mr-2"></i>Aprovados</td>
                     <td id="countProductApproved"><%= countProductApproved %></td>
-                    <td><%= (countProductApproved / countProducts) * 100 %>%</td>
+                    <td><%= Math.ceil((countProductApproved / countProducts) * 100) %>%</td>
                   </tr>
                   <tr>
                     <td><i class="fa fa-circle text-light-2 mr-2"></i>Pendentes</td>
                     <td id="countProductPending"><%= countProductPending %></td>
-                    <td><%= (countProductPending / countProducts) * 100  %>%</td>
+                    <td><%= Math.ceil((countProductPending / countProducts) * 100)  %>%</td>
                   </tr>
                   <tr>
                     <td><i class="fa fa-circle text-light-3 mr-2"></i>Recusados</td>
                     <td id="countProductRefused"><%= countProductRefused %></td>
-                    <td><%= (countProductRefused / countProducts) * 100  %>%</td>
+                    <td><%= Math.ceil((countProductRefused / countProducts) * 100)  %>%</td>
                   </tr>
                 </tbody>
               </table>
