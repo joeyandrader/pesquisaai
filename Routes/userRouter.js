@@ -3,7 +3,7 @@ const router = express.Router();
 const { isUser } = require('../helpers/eUser')
 const { imageUpload } = require('../helpers/imageUpload');
 //Controllers
-const UserController = require('../controllers/userController')
+const UserController = require('../controllers/userController');
 
 router.get('/', isUser, UserController.index);
 router.get('/logout', isUser, UserController.logout);
@@ -20,7 +20,9 @@ router.post('/products/delete/:id', isUser, UserController.deleteProduct);
 router.get('/new/service', isUser, UserController.newService);
 router.post('/new/service/save', isUser, imageUpload.single('image'), UserController.saveNewService);
 router.get('/services', isUser, UserController.listService);
-
+router.get('/services/edit/id/:id', isUser, UserController.editService);
+router.post('/services/edit/save', isUser, imageUpload.single('image'), UserController.saveEditService);
+router.post('/services/delete', isUser, UserController.deleteService);
 //Profile
 router.get('/profile', isUser, UserController.profile);
 router.post('/profile/save', isUser, imageUpload.single('image'), UserController.saveProfile);

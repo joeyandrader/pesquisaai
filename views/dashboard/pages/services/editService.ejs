@@ -16,19 +16,20 @@
         <% if(success_msg.length > 0) { %>
         <div class="alert alert-success"><%= success_msg %></div>
         <% } %>
-        <form class="row g-3 m-3 m-auto forms" method="POST" action="/account/new/service/save" enctype="multipart/form-data">
+        <form class="row g-3 m-3 m-auto forms" method="POST" action="/account/services/edit/save" enctype="multipart/form-data">
+          <input type="hidden" name="id" value="<%= service.id %>">
           <div class="row mb-3">
             <div class="row mb-3">
               <div class="col-md-12">
                 <div class="form-floating mb-3 mb-md-0">
-                  <input class="form-control" id="name" name="name" type="text" placeholder="Nome do serviço" />
+                  <input class="form-control" id="name" name="name" value="<%= service.name %>" type="text" placeholder="Nome do serviço" />
                   <label for="name">Nome do serviço</label>
                 </div>
               </div>
             </div>
             <div class="row mb-3">
               <div class="col-md-12">
-                <textarea class="form-control" name="description" id="description" cols="30" rows="10" placeholder="Descrição do serviço"></textarea>
+                <textarea class="form-control" name="description" id="description" cols="30" rows="10" placeholder="Descrição do serviço"><%= service.description %></textarea>
               </div>
             </div>
             <div class="row mb-3">
@@ -41,6 +42,9 @@
                 <select id="category" name="category" class="form-select shadow-none">
                   <option value="" selected>Selecione uma categoria</option>
                   <% category.forEach((ct) => { %>
+                  <% if(ct.id === service.categoryId[0].id) { %>
+                  <option value="<%= ct.id %>" selected><%= ct.name %></option>
+                  <% } %>
                   <option value="<%= ct.id %>"><%= ct.name %></option>
                   <% }) %>
                 </select>
@@ -48,7 +52,11 @@
             </div>
             <div class="col-12 m-2">
               <div class="form-check">
+                <% if(service.notActive == true) { %>
+                <input class="form-check-input shadow-none" type="checkbox" id="activeProduct" name="activeProduct" value="true" checked>
+                <% } else {%>
                 <input class="form-check-input shadow-none" type="checkbox" id="activeProduct" name="activeProduct" value="true">
+                <% } %>
                 <label class="form-check-label" for="activeProduct">
                   Não exibir serviço na pagina!
                 </label>

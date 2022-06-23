@@ -241,7 +241,7 @@ class UserController {
 
     static async deleteProduct(req, res) {
         const { id } = req.body
-        
+
         try {
             await Product.findByIdAndDelete(id);
             res.redirect('/account/products')
@@ -326,6 +326,83 @@ class UserController {
             error_msg: req.flash('error_msg'),
             success_msg: req.flash('success_msg'),
             service: service
+        })
+    }
+
+    static async editService(req, res) {
+        const id = req.params.id
+
+        const category = await Category.find()
+        const service = await Service.findById(id).populate('userId').populate('categoryId');
+        res.render('dashboard/pages/services/editService', {
+            error_msg: req.flash('error_msg'),
+            success_msg: req.flash('success_msg'),
+            category: category,
+            service: service
+        })
+    }
+
+    static async saveEditService(req, res) {
+
+        const { id, name, description, category, activeProduct } = req.body
+
+        if (!name) {
+            req.flash('error_msg', 'O nome nao pode ser vazio!')
+            res.redirect(`/account/services/edit/id/${id}`)
+            return
+        }
+        if (!description) {
+            req.flash('error_msg', 'A descrição nao pode ser vazio!')
+            res.redirect(`/account/services/edit/id/${id}`)
+            return
+        }
+        if (category === '') {
+            req.flash('error_msg', 'A categoria nao pode ser vazio!')
+            res.redirect(`/account/services/edit/id/${id}`)
+            return
+        }
+
+        await Service.findById(id).then(service => {
+            service.name = name
+            service.description = description
+            service.categoryId = category
+            service.notActive = activeProduct
+
+            if (req.file) {
+                service.image = req.file.filename
+            }
+
+            service.save().then(() => {
+                req.flash('success_msg', 'Serviço editado com sucesso!');
+                res.redirect('/account/services')
+            }).catch(error => {
+                req.flash('error_msg', 'Erro interno! contate um administrador!');
+                console.log(`erro ao editar produto ${id} ERROR : ${error}`)
+                res.redirect('/account/services')
+            })
+        }).catch(error => {
+            req.flash('error_msg', 'Erro ao atualizar o serviço, contate um administrador!');
+            console.log(`erro ao editar produto ${id} ERROR : ${error}`)
+            res.redirect('/account/services')
+        })
+
+    }
+
+    static async deleteService(req, res) {
+        const id = req.body.id
+
+        if (!isNaN(id)) {
+            req.flash('error_msg', 'erro na requisição, essa ação foi gravada!')
+            res.redirect('/account/services')
+            return
+        }
+
+        await Service.findByIdAndDelete(id).then(() => {
+            req.flash('success_msg', 'Serviço Deletado com sucesso!')
+            res.redirect('/account/services')
+        }).catch(error => {
+            req.flash('error_msg', 'Erro ao deletar serviços!')
+            res.redirect('/account/services')
         })
     }
 

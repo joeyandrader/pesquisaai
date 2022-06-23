@@ -66,6 +66,7 @@ class AdminController {
     }
 
     static async saveUserEdit(req, res) {
+        
         const { id, name, surname, email, webSite, stateRegistration, fantasyName, socialReason, cep, county, address, uf, district, addressNumber, complement, celNumber, phoneNumber, approvedStatus, accountType } = req.body
 
         if (!name) {
