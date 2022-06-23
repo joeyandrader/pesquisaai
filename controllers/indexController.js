@@ -28,14 +28,14 @@ class IndexController {
 
     static async about(req, res) {
         const category = await Category.find();
-        res.render('pages/about', {
+        res.render('pages/About', {
             category: category
         })
     }
 
     static async contact(req, res) {
         const category = await Category.find();
-        res.render('pages/contact', {
+        res.render('pages/Contact', {
             category: category
         })
     }
@@ -385,7 +385,7 @@ class IndexController {
 
                 })
             })
-            
+
         } else if (req.query.typeSearch === 'services') {
             Service.find({
                 $and: [
