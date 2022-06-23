@@ -14,105 +14,133 @@
             <div class="card-body">
               <div class="card-title">Editar usuario <strong>"<%= user.name %>"</strong></div>
               <hr>
-              <form>
+              <% if(error_msg.length > 0) { %>
+              <div class="alert alert-danger"><%= error_msg %></div>
+              <% } else if(success_msg.length > 0) { %>
+              <div class="alert alert-success"><%= success_msg %></div>
+              <% } %>
+              <form method="POST" action="/admin/user/edit-user/save">
+                <input type="hidden" name="id" value="<%= user.id %>">
                 <h5>Dados pessoais</h5>
                 <div class="form-group">
-                  <label for="input-1">Nome</label>
-                  <input type="text" class="form-control" id="input-1" value="<%= user.name %>" placeholder="Enter Your Name">
+                  <label for="name">Nome</label>
+                  <input type="text" class="form-control" id="name" name="name" value="<%= user.name %>" placeholder="Enter Your Name">
                 </div>
                 <div class="form-group">
-                  <label for="input-2">Sobrenome</label>
-                  <input type="text" class="form-control" id="input-2" value="<%= user.surname %>" placeholder="Enter Your Email Address">
+                  <label for="surname">Sobrenome</label>
+                  <input type="text" class="form-control" id="surname" name="surname" value="<%= user.surname %>" placeholder="Enter Your Email Address">
                 </div>
                 <div class="form-group">
-                  <label for="input-3">Email</label>
-                  <input type="text" class="form-control" id="input-3" value="<%= user.email %>" placeholder="Enter Your Mobile Number">
+                  <label for="email">Email</label>
+                  <input type="text" class="form-control" id="email" name="email" value="<%= user.email %>" placeholder="Enter Your Mobile Number">
                 </div>
                 <div class="row">
                   <div class="form-group col-sm-6">
-                    <label for="input-4">CPF</label>
-                    <input type="text" class="form-control" value="<%= user.cpf %>" id="input-4" placeholder="Enter Password" disabled>
+                    <label for="cpf">CPF</label>
+                    <input type="text" class="form-control" name="cpf" value="<%= user.cpf %>" id="cpf" placeholder="Enter Password" disabled>
                   </div>
                   <div class="form-group col-sm-6">
-                    <label for="input-4">Website comercial</label>
-                    <input type="text" class="form-control" id="input-4" value="<%= user.webSite %>" placeholder="website">
+                    <label for="webSite">Website comercial</label>
+                    <input type="text" class="form-control" id="webSite" name="webSite" value="<%= user.webSite %>" placeholder="website">
                   </div>
                 </div>
                 <h5>Dados empresarial</h5>
                 <div class="row">
                   <div class="form-group col-sm-6">
-                    <label for="input-4">CNPJ</label>
-                    <input type="text" class="form-control" value="<%= user.cnpj %>" id="input-4" placeholder="Enter Password" disabled>
+                    <label for="cnpj">CNPJ</label>
+                    <input type="text" class="form-control" name="cnpj" value="<%= user.cnpj %>" id="cnpj" placeholder="Enter Password" disabled>
                   </div>
                   <div class="form-group col-sm-6">
-                    <label for="input-4">Inscrição estadual</label>
-                    <input type="text" class="form-control" id="input-4" value="<%= user.stateRegistration %>" placeholder="website">
+                    <label for="stateRegistration">Inscrição estadual</label>
+                    <input type="text" class="form-control" name="stateRegistration" id="stateRegistration" value="<%= user.stateRegistration %>" placeholder="website">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="input-4">Nome fantasia</label>
-                  <input type="text" class="form-control" id="input-4" value="<%= user.fantasyName %>" placeholder="website">
+                  <label for="fantasyName">Nome fantasia</label>
+                  <input type="text" class="form-control" id="fantasyName" name="fantasyName" value="<%= user.fantasyName %>" placeholder="website">
                 </div>
                 <div class="form-group">
-                  <label for="input-4">Razão social</label>
-                  <input type="text" class="form-control" id="input-4" value="<%= user.socialReason %>" placeholder="website">
+                  <label for="socialReason">Razão social</label>
+                  <input type="text" class="form-control" id="socialReason" name="socialReason" value="<%= user.socialReason %>" placeholder="website">
                 </div>
                 <h5>Endereço e contatos</h5>
                 <div class="row">
                   <div class="form-group col-sm-6">
-                    <label for="input-4">Cep</label>
-                    <input type="text" class="form-control" value="<%= user.cep %>" id="input-4" placeholder="Enter Password">
+                    <label for="cep">Cep</label>
+                    <input type="text" class="form-control" name="cep" value="<%= user.cep %>" id="cep" placeholder="Enter Password">
                   </div>
                   <div class="form-group col-sm-6">
-                    <label for="input-4">Cidade</label>
-                    <input type="text" class="form-control" id="input-4" value="<%= user.county %>" placeholder="website">
+                    <label for="county">Cidade</label>
+                    <input type="text" class="form-control" name="county" id="county" value="<%= user.county %>" placeholder="website">
                   </div>
                 </div>
                 <div class="row">
                   <div class="form-group col-sm-9">
-                    <label for="input-4">Endereço</label>
-                    <input type="text" class="form-control" value="<%= user.address %>" id="input-4" placeholder="Enter Password">
+                    <label for="address">Endereço</label>
+                    <input type="text" class="form-control" name="address" value="<%= user.address %>" id="address" placeholder="Enter Password">
                   </div>
                   <div class="form-group col-sm-3">
-                    <label for="input-4">UF</label>
-                    <input type="text" class="form-control" id="input-4" value="<%= user.uf %>" placeholder="website">
+                    <label for="uf">UF</label>
+                    <input type="text" class="form-control" name="uf" id="uf" value="<%= user.uf %>" placeholder="website">
                   </div>
                 </div>
                 <div class="row">
                   <div class="form-group col-sm-9">
-                    <label for="input-4">Bairro</label>
-                    <input type="text" class="form-control" value="<%= user.district %>" id="input-4" placeholder="Enter Password">
+                    <label for="district">Bairro</label>
+                    <input type="text" class="form-control" name="district" value="<%= user.district %>" id="district" placeholder="Enter Password">
                   </div>
                   <div class="form-group col-sm-3">
-                    <label for="input-4">Numero</label>
-                    <input type="text" class="form-control" id="input-4" value="<%= user.addressNumber %>" placeholder="website">
+                    <label for="addressNumber">Numero</label>
+                    <input type="text" class="form-control" name="addressNumber" id="addressNumber" value="<%= user.addressNumber %>" placeholder="website">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="input-4">Complemento</label>
-                  <input type="text" class="form-control" id="input-4" value="<%= user.complement %>" placeholder="website">
+                  <label for="complement">Complemento</label>
+                  <input type="text" class="form-control" name="complement" id="complement" value="<%= user.complement %>" placeholder="website">
                 </div>
                 <div class="row">
                   <div class="form-group col-sm-6">
-                    <label for="input-4">Numero de celular</label>
-                    <input type="text" class="form-control" value="<%= user.celNumber %>" id="input-4" placeholder="Enter Password">
+                    <label for="celNumber">Numero de celular</label>
+                    <input type="text" class="form-control" name="celNumber" value="<%= user.celNumber %>" id="celNumber" placeholder="Enter Password">
                   </div>
                   <div class="form-group col-sm-6">
-                    <label for="input-4">Numero de telefone</label>
-                    <input type="text" class="form-control" id="input-4" value="<%= user.phoneNumber %>" placeholder="website">
+                    <label for="phoneNumber">Numero de telefone</label>
+                    <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" value="<%= user.phoneNumber %>" placeholder="website">
                   </div>
                 </div>
                 <h5>Status de aprovação</h5>
                 <div class="form-group">
                   <label for="input-4">Status</label>
                   <select class="form-control" name="approvedStatus" id="approvedStatus">
-                    <option value="approved">Aprovar</option>
-                    <option value="pending" selected>Pendente</option>
+                    <% if(user.approvedStatus === 'approved') {%>
+                    <option value="approved" selected>Aprovar</option>
+                    <option value="pending">Pendente</option>
                     <option value="refused">Recusar</option>
+                    <% } else if(user.approvedStatus === 'pending') {%>
+                    <option value="pending" selected>Pendente</option>
+                    <option value="approved">Aprovar</option>
+                    <option value="refused">Recusar</option>
+                    <% } else if(user.approvedStatus === 'refused') { %>
+                    <option value="refused" selected>Recusar</option>
+                    <option value="approved">Aprovar</option>
+                    <option value="approved">Pending</option>
+                    <% } %>
                   </select>
                 </div>
                 <div class="form-group">
-                  <button type="submit" class="btn btn-light px-5"><i class="icon-lock"></i> Savlar</button>
+                  <label for="accountType">Tipo de conta</label>
+                  <select class="form-control" id="accountType" name="accountType" id="accountType">
+                    <% if(user.accountType === 0) {%>
+                    <option value="0" selected>Normal</option>
+                    <option value="1">Administrador</option>
+                    <% } else if(user.accountType === 1) { %>
+                    <option value="0">Normal</option>
+                    <option value="1" selected>Administrador</option>
+                    <% } %>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-light px-5"><i class="icon-lock"></i> Salvar</button>
                 </div>
               </form>
             </div>

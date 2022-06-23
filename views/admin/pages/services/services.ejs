@@ -1,0 +1,78 @@
+<%- include('../../partials/header') %>
+<div id="wrapper">
+  <%- include('../../partials/sidebar') %>
+  <%- include('../../partials/navbar') %>
+
+  <div class="clearfix"></div>
+
+  <div class="content-wrapper">
+    <div class="container-fluid">
+
+      <div class="row mt-3">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header">Todos os Serviços
+              <div class="card-action">
+                <div class="dropdown">
+                  <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown">
+                    <i class="icon-options"></i>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="javascript:void();">Novo</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table my-table-custom" id="datatablesSimple">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Nome</th>
+                      <th scope="col">Loja</th>
+                      <th scope="col">CNPJ</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% services.forEach(item => { %>
+                    <tr>
+                      <td><img src="/img/imgUpload/<%= item.image %>" class="product-img" alt="product img"></td>
+                      <td><%= item.name %></td>
+                      <td><%= item.userId[0].fantasyName %></td>
+                      <td><%= item.userId[0].cnpj %></td>
+                      <td><%= item.approvedStatus %></td>
+                      <td>
+                        <div class="card-action">
+                          <div class="dropdown">
+                            <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown">
+                              <i class="icon-options"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                              <a class="dropdown-item" href="/admin/services/edit/id/<%= item.id %>">Editar</a>
+                              <a class="dropdown-item" href="javascript:void();">Excluir</a>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <% }) %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--End Row-->
+
+      <!--start overlay-->
+      <div class="overlay toggle-menu"></div>
+      <!--end overlay-->
+
+    </div>
+    <!-- End container-fluid-->
+  </div>
+  <%- include('../../partials/footer') %>

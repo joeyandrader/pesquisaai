@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const passport = require('passport')
-
+const { enviarEmail } = require('../helpers/nodemailer');
 
 //Models
 const Category = require('../models/CategoryModel');
@@ -252,6 +252,20 @@ class IndexController {
             const newUser = await user.save()
             req.flash('success_msg', 'Cadastro realizado!')
             res.redirect('/login')
+
+            enviarEmail(
+                "Bem vindo ao Pesquisa Aí",
+                `${email}`,
+                `Bem vindo ao Pesquisa Aí ${name} ${surname}`,
+                `Olá ${name} ${surname}`,
+                `
+                <h2>Olá ${name} ${surname}</h2>, 
+                que bom ter você com a gente! sua conta atualmente está <strong>Pendente</strong>
+                <br>
+                <p>Daremos um prazo de ate 2 dias uteis para que sua conta seja analisada, caso for aprovado enviaremos um email informando!</p>
+                <p>Duvidas acesse nosso <a href="http://www.google.com.br" target="blank">FAQ</a></p>
+                `
+            );
         } catch (error) {
             console.log(error)
         }
@@ -297,7 +311,7 @@ class IndexController {
 
         const numPage = req.params.num;
 
-        var limitPage = 8;
+        var limitPage = 16;
         var offSet = 0;
 
         if (isNaN(numPage) || numPage === 1) {
@@ -418,7 +432,7 @@ class IndexController {
 
         let numPage = req.params.num;
 
-        var limitPage = 2;
+        var limitPage = 16;
         var offSet = 0;
 
         if (isNaN(numPage) || numPage === 1) {
@@ -431,11 +445,12 @@ class IndexController {
         var searchUrl
 
         console.log(getNameCategory.name)
-        await Product.find({ categoryId: categoryId }).limit(limitPage).skip(offSet).populate('categoryId').then(allProducts => {
+
+        await Product.find({ $and: [{ categoryId: categoryId, approvedStatus: "approved" }] }).limit(limitPage).skip(offSet).populate('categoryId').then(allProducts => {
             req.flash('success_msg', `Resultado da busca pela categoria:  ${getNameCategory.name}`);
             Category.find().then(category => {
                 Product.find({
-                    categoryId: categoryId
+                    $and: [{ categoryId: categoryId, approvedStatus: "approved" }]
                 }).count().then(countProduct => {
 
                     var next;

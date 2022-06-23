@@ -7,9 +7,12 @@
 
   <div class="content-wrapper">
     <div class="container-fluid">
-
       <!--Start Dashboard Content-->
-
+      <% if(error_msg.length > 0) { %>
+      <div class="alert alert-danger"><%= error_msg %></div>
+      <% } else if(success_msg.length > 0) { %>
+      <div class="alert alert-success"><%= success_msg %></div>
+      <% } %>
       <div class="card mt-3">
         <div class="card-content">
           <div class="row row-group m-0">
@@ -131,22 +134,22 @@
                   <tr>
                     <td><i class="fa fa-circle text-white mr-2"></i> Produtos</td>
                     <td id="countProduct"><%= countProducts %></td>
-                    <td>0%</td>
+                    <td><%= (countProducts / countProducts) * 100  %>%</td>
                   </tr>
                   <tr>
                     <td><i class="fa fa-circle text-light-1 mr-2"></i>Aprovados</td>
                     <td id="countProductApproved"><%= countProductApproved %></td>
-                    <td>0%</td>
+                    <td><%= (countProductApproved / countProducts) * 100 %>%</td>
                   </tr>
                   <tr>
                     <td><i class="fa fa-circle text-light-2 mr-2"></i>Pendentes</td>
                     <td id="countProductPending"><%= countProductPending %></td>
-                    <td>0</td>
+                    <td><%= (countProductPending / countProducts) * 100  %>%</td>
                   </tr>
                   <tr>
                     <td><i class="fa fa-circle text-light-3 mr-2"></i>Recusados</td>
                     <td id="countProductRefused"><%= countProductRefused %></td>
-                    <td>0/td>
+                    <td><%= (countProductRefused / countProducts) * 100  %>%</td>
                   </tr>
                 </tbody>
               </table>
@@ -172,7 +175,7 @@
               </div>
             </div>
             <div class="table-responsive">
-              <table class="table align-items-center table-flush table-borderless"  id="datatablesSimple2">
+              <table class="table align-items-center table-flush table-borderless" id="datatablesSimple2">
                 <thead>
                   <tr>
                     <th>Nome</th>
@@ -235,7 +238,6 @@
                   <tr>
                     <th>Produto</th>
                     <th>Image</th>
-                    <th>Produto ID</th>
                     <th>Loja</th>
                     <th>Data</th>
                     <th>Ações</th>
@@ -247,7 +249,6 @@
                   <tr>
                     <td><%= item.name %></td>
                     <td><img src="http://localhost:5000/img/imgUpload/<%= item.image %>" class="product-img" alt="product img"></td>
-                    <td>#<%= item.id %></td>
                     <td><%= item.userId[0].fantasyName %></td>
                     <td>BREVE</td>
                     <td>
@@ -257,11 +258,20 @@
                             <i class="icon-options"></i>
                           </a>
                           <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="javascript:void();"><i class="fa fa-eye" aria-hidden="true"></i> Ver</a>
+                            <a class="dropdown-item" href="/admin/products"><i class="fa fa-eye" aria-hidden="true"></i> Ver</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="javascript:void();"><i class="fa fa-check-circle-o" aria-hidden="true"></i> Aprovar</a>
-                            <a class="dropdown-item" href="javascript:void();"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Pendente</a>
-                            <a class="dropdown-item" href="javascript:void();"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Recusar</a>
+                            <form action="/admin/products/approved/" method="POST">
+                              <input type="hidden" name="id" value="<%= item.id %>">
+                              <button class="dropdown-item"><i class="fa fa-check-circle-o" aria-hidden="true"></i> Aprovar</button>
+                            </form>
+                            <form action="/admin/products/pending/" method="POST">
+                              <input type="hidden" name="id" value="<%= item.id %>">
+                              <button class="dropdown-item"><i class="fa fa-check-circle-o" aria-hidden="true"></i> Pendente</button>
+                            </form>
+                            <form action="/admin/products/refused/" method="POST">
+                              <input type="hidden" name="id" value="<%= item.id %>">
+                              <button class="dropdown-item"><i class="fa fa-check-circle-o" aria-hidden="true"></i> Recusar</button>
+                            </form>
                           </div>
                         </div>
                       </div>

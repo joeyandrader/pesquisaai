@@ -1,0 +1,113 @@
+<%- include('../../partials/header') %>
+<div id="wrapper">
+  <%- include('../../partials/sidebar') %>
+  <%- include('../../partials/navbar') %>
+
+  <div class="clearfix"></div>
+
+  <div class="content-wrapper">
+    <div class="container-fluid">
+
+      <div class="row mt-3">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-title">Editar produto</div>
+              <hr>
+              <% if(error_msg.length > 0) { %>
+              <div class="alert alert-danger"><%= error_msg %></div>
+              <% } else if(success_msg.length > 0) { %>
+              <div class="alert alert-success"><%= success_msg %></div>
+              <% } %>
+              <form method="POST" action="/admin/products/edit/save">
+                <input type="hidden" name="id" value="<%= product.id %>">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group col-md-12">
+                      <label for="name">Nome</label>
+                      <input type="text" class="form-control" id="name" name="name" value="<%= product.name %>" placeholder="Enter Your Name">
+                    </div>
+                    <div class="form-group col-md-12">
+                      <label for="brand">Marca</label>
+                      <input type="text" class="form-control" id="brand" name="brand" value="<%= product.brand %>" placeholder="Enter Your Email Address">
+                    </div>
+                    <div class="form-group col-md-12">
+                      <label for="productOrigin">Origem</label>
+                      <input type="text" class="form-control" id="productOrigin" name="productOrigin" value="<%= product.productOrigin %>" placeholder="Enter Your Mobile Number">
+                    </div>
+                    <div class="form-group col-sm-12">
+                      <label for="category">Categoria</label>
+                      <select class="form-control" name="category" id="category">
+                        <% category.forEach(item => { %>
+                        <% if(item.id === product.categoryId[0].id) { %>
+                        <option value="<%= item.id %>" selected><%= item.name %></option>
+                        <% } %>
+                        <option value="<%= item.id %>"><%= item.name %></option>
+                        <% }) %>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="img">
+                      <img class="img-fluid" src="/img/imgUpload/<%= product.image %>" alt="Image do produto <%= product.name %>">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-12 mt-3">
+                  <textarea class="form-control" name="description" id="description" cols="30" rows="10">
+                    <%= product.description %>
+                  </textarea>
+                </div>
+
+
+                <h5>Status de aprovação</h5>
+                <div class="form-group">
+                  <label for="input-4">Status</label>
+                  <select class="form-control" name="approvedStatus" id="approvedStatus">
+                    <% if(product.approvedStatus === 'approved') {%>
+                    <option value="approved" selected>Aprovar</option>
+                    <option value="pending">Pendente</option>
+                    <option value="refused">Recusar</option>
+                    <% } else if(product.approvedStatus === 'pending') {%>
+                    <option value="pending" selected>Pendente</option>
+                    <option value="approved">Aprovar</option>
+                    <option value="refused">Recusar</option>
+                    <% } else if(product.approvedStatus === 'refused') { %>
+                    <option value="refused" selected>Recusar</option>
+                    <option value="approved">Aprovar</option>
+                    <option value="approved">Pending</option>
+                    <% } %>
+                  </select>
+                </div>
+
+                <div class="form-group col-sm-12">
+                  <label for="motivo">Motivo de recusa</label>
+                  <textarea class="form-control" name="motivo" id="" cols="30" rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-light px-5"><i class="icon-lock"></i> Salvar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!--End Row-->
+
+        <!--start overlay-->
+        <div class="overlay toggle-menu"></div>
+        <!--end overlay-->
+
+      </div>
+      <!-- End container-fluid-->
+    </div>
+
+    <script>
+      tinymce.init({
+        selector: '#description',
+        plugins: 'advlist autolink lists link image charmap preview anchor pagebreak',
+        toolbar_mode: 'floating',
+      });
+    </script>
+    <%- include('../../partials/footer') %>

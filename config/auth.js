@@ -10,17 +10,17 @@ module.exports = function (passport) {
     passport.use(new localStrategy({ usernameField: 'email' }, (email, password, done) => {
         User.findOne({ email: email }).then((user) => {
             if (!user) {
-                done(null, false, { message: "Conta invalida!" })
+                done(null, false, { message: "dados invalidos ou conta nao existe!" })
                 return
             }
 
             if (user.approvedStatus === "pending") {
-                done(null, false, { message: "Não é possivel logar!" })
+                done(null, false, { message: "Não é possivel logar! Conta pendente" })
                 return
             }
 
             if (user.approvedStatus === "refused") {
-                done(null, false, { message: "Conta bloqueada!" })
+                done(null, false, { message: "Essa conta foi bloqueada! acesse nosso FAQ" })
                 return
             }
 

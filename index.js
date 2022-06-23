@@ -29,11 +29,10 @@ app.use(flash());
 
 app.use((req, res, next) => {
     // Comando 'locals' para criar variaveis globais
-    // res.locals.success_msg = req.flash('success_msg');
-    // res.locals.error_msg = req.flash('error_msg');
     res.locals.error = req.flash('error');
     res.locals.user = req.user || null;
     res.locals.adminUser = req.user || null;
+    
     // Comando 'next();' para permitir que as rotas avancem apos passarem no mdidleware
     next();
 });

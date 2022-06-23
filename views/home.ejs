@@ -8,7 +8,7 @@
       <h2>Bem vindo ao Pesquisa Aí</h2>
       <p>Site em parceria com a prefeitura que te ajuda a encontrar e apoiar os comerciantes de cabo frio.
         Para saber mais sobre como usar nossa plataforma</p>
-      <a href="#">Saiba mais</a>
+      <a href="/about">Saiba mais</a>
     </div>
     <img class="img-fluid welcome-img" src="/img/High five-pana.png" alt="" />
   </div>
@@ -40,10 +40,7 @@
                   </ul>
                 </div>
                 <div class="card-button">
-                  <button type="button" class="btn btn-primary" id="left-panel-link"><i class="bi bi-eye"> Detalhes</i></button>
-                  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal1" id="right-panel-link">
-                    Contato
-                  </button>
+                  <a type="button" href="/products/details/<%= product.id %>" class="btn btn-primary m-auto w-100" id="left-panel-link"><i class="bi bi-eye"> Detalhes</i></a>
                 </div>
               </div>
             </div>
@@ -52,7 +49,7 @@
           </div>
         </div>
       </div>
-      <a href="#" id="details" class="btn btn-primary"><i class="bi bi-eye"></i> Ver mais</a>
+      <a href="/products/page/0" id="details" class="btn btn-primary"><i class="bi bi-eye"></i> Ver mais</a>
     </div>
 
     <div class="service-content">
@@ -77,10 +74,7 @@
                   </ul>
                 </div>
                 <div class="card-button">
-                  <button type="button" class="btn btn-primary" id="left-panel-link"><i class="bi bi-eye"> Detalhes</i></button>
-                  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal1" id="right-panel-link">
-                    Contato
-                  </button>
+                  <a type="button" href="/services/details/<%= service.id %>" class="btn btn-primary m-auto w-100" id="left-panel-link"><i class="bi bi-eye"> Detalhes</i></a>
                 </div>
               </div>
             </div>
@@ -90,8 +84,7 @@
         </div>
       </div>
     </div>
-    <a href="#" id="details" class="btn btn-primary"><i class="bi bi-eye"></i> Ver mais</a>
-  </div>
+    <a href="/services/page/0" id="details" class="btn btn-primary"><i class="bi bi-eye"></i> Ver mais</a>
   </div>
 </section>
 
@@ -100,7 +93,7 @@
     <div class="supplier-content">
       <h2>Mais do que comerciantes, parceiros.</h2>
       <p>Cadastre seu negócio e comece sua jornada rumo a novas oportunidades</p>
-      <a class="btn" href="/cadastro.html">Cadastre-se</a>
+      <a class="btn" href="/register">Cadastre-se</a>
     </div>
     <img class="img-fluid" src="/img/Working-rafiki.png" alt="" />
 

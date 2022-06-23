@@ -14,7 +14,6 @@ class UserController {
 
         generateCodeJwt(req.user);
 
-
         const getProductViews = await Product.find({ $and: [{ userId: req.user.id, approvedStatus: 'approved' }] }).populate('categoryId').sort({ views: 'DESC' });
 
         Product.find({ $and: [{ approvedStatus: 'pending', userId: req.user.id }] }).count().then(pendingCount => {
@@ -42,7 +41,6 @@ class UserController {
             req.flash("success_msg", "Deslogado com sucesso!")
             res.redirect('/login')
         });
-
     }
 
     static async newProduct(req, res) {
