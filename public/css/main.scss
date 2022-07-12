@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
 
-$primaryColor: #13293D;
-$secondaryColor : #006494;
-$textColor: #E8F1F2;
+$primaryColor: #13293d;
+$secondaryColor: #006494;
+$textColor: #e8f1f2;
 $hoverColor: #247ba0;
 $btnColor: #1b98e0;
 
@@ -15,9 +15,8 @@ $colorBackground: #eeeeee;
     list-style: none;
     text-decoration: none;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
 }
-
 
 body,
 html {
@@ -57,14 +56,14 @@ ul {
     padding: 5px 50px;
     border: 0;
     border-radius: 0;
-    background: url(https://cdn-icons-png.flaticon.com/512/25/25623.png) no-repeat center right #FFF;
+    background: url(https://cdn-icons-png.flaticon.com/512/25/25623.png) no-repeat center right #fff;
     background-size: 15px;
     appearance: none;
     outline: none;
     color: $primaryColor;
 }
 
-.search-form input[type=search] {
+.search-form input[type="search"] {
     width: 100%;
     padding: 10px;
     border: 0;
@@ -114,7 +113,7 @@ ul {
 
 .navbar-toggler i {
     font-size: 40px;
-    color: $textColor  !important;
+    color: $textColor !important;
 }
 
 .navbar .navbar-nav li {
@@ -184,7 +183,6 @@ ul {
     padding: 0 !important;
 }
 
-
 .navbar .userDrop ul li {
     margin: 0 !important;
     padding: 0 !important;
@@ -240,12 +238,12 @@ ul {
 }
 
 .navbar .dropdown-menu li a {
-    color: $primaryColor  !important;
+    color: $primaryColor !important;
 }
 
 .navbar .dropdown-menu li a:hover {
     background-color: $hoverColor;
-    color: $textColor  !important;
+    color: $textColor !important;
 }
 
 .mobile-menu {
@@ -258,7 +256,7 @@ ul {
     width: 100%;
     height: calc(100vh - 100px);
 
-    background-image: url('/img/header_top_cabofrio.jpg');
+    background-image: url("/img/header_top_cabofrio.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -425,7 +423,6 @@ ul {
     margin: 20px 70px;
 }
 
-
 .cards .card-body {
     padding: 10px;
     margin: 0 10px;
@@ -456,7 +453,6 @@ ul {
     background-color: $hoverColor;
 }
 
-
 /* login system */
 
 .login-container {
@@ -484,12 +480,12 @@ ul {
     color: $secondaryColor;
 }
 
-.login form input[type=text],
-.login form input[type=password] {
+.login form input[type="text"],
+.login form input[type="password"] {
     padding: 15px;
     margin: 10px 0;
     outline-color: $primaryColor;
-    color: $primaryColor  !important;
+    color: $primaryColor !important;
     font-weight: bold;
 }
 
@@ -518,9 +514,9 @@ ul {
     font-weight: bold;
 }
 
-.register form input[type=text],
-.register form input[type=email],
-.register form input[type=password] {
+.register form input[type="text"],
+.register form input[type="email"],
+.register form input[type="password"] {
     padding: 15px;
     margin: 10px 0;
 }
@@ -547,7 +543,6 @@ ul {
     gap: 10px;
 }
 
-
 /* shop area */
 .area-container {
     width: 100%;
@@ -559,7 +554,6 @@ ul {
     border-radius: 20px;
     background-color: $colorBackground;
 }
-
 
 .pagination {
     padding: 20px;
@@ -585,8 +579,8 @@ ul {
 }
 
 .paginationActive {
-    background-color: $colorBackground  !important;
-    color: $primaryColor  !important;
+    background-color: $colorBackground !important;
+    color: $primaryColor !important;
 
     pointer-events: none;
 }
@@ -602,15 +596,13 @@ ul {
     margin: 20px 0;
 }
 .btn-area .btn-primary {
-    background-color: $btnColor  !important;
+    background-color: $btnColor !important;
     border-color: $btnColor;
 }
 
-
 .btn-area .btn-primary:hover {
-    background-color: $hoverColor  !important;
+    background-color: $hoverColor !important;
 }
-
 
 /* about area */
 
@@ -622,7 +614,7 @@ ul {
 .about-body {
     width: 100%;
     height: auto;
-    background-image: url('https://images.unsplash.com/photo-1518481612222-68bbe828ecd1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80');
+    background-image: url("https://images.unsplash.com/photo-1518481612222-68bbe828ecd1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -630,13 +622,12 @@ ul {
 .bg-blur {
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, .5);
+    background-color: rgba(255, 255, 255, 0.5);
     padding: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
 }
 
 .about-content {
@@ -709,7 +700,6 @@ ul {
     font-size: 18px;
 }
 
-
 /* contact area */
 
 .contact {
@@ -726,7 +716,6 @@ ul {
 }
 
 /* new card area */
-
 
 /* Responsive layout - makes a two column-layout instead of four columns */
 @media (max-width: 800px) {
@@ -751,7 +740,7 @@ ul {
 }
 
 .modal-header {
-    background-image: linear-gradient(#7FDBFF, white);
+    background-image: linear-gradient(#7fdbff, white);
 }
 
 .card-img {
@@ -780,13 +769,12 @@ ul {
 
 .bg-list-item {
     background-color: $colorBackground;
-    color: $primaryColor  !important;
+    color: $primaryColor !important;
 }
 
 .card-button button {
     display: block;
 }
-
 
 /* profile business */
 .suplier-container {
@@ -797,6 +785,17 @@ ul {
     width: 100%;
     height: 350px;
     position: relative;
+}
+
+.suplier-banner h2 {
+    position: absolute;
+    right: 20px;
+    color: $textColor;
+    bottom: 20px;
+    background: rgba($color: #333, $alpha: .8);
+    padding: 10px 30px;
+    border-radius: 10px;
+    border: 2px solid $primaryColor;
 }
 
 .suplier-banner img {
@@ -833,6 +832,12 @@ ul {
     justify-content: end;
 }
 
+.suplier-menu h2 {
+    color: $textColor;
+    font-size: 20px;
+    margin-right: 20px;
+}
+
 .suplier-menu .btn-whatsapp {
     display: inline-block;
     padding: 10px 30px;
@@ -848,8 +853,6 @@ ul {
     padding: 10px;
     background-color: $colorBackground;
 }
-
-
 
 /* footer */
 .footer-container {
@@ -902,9 +905,8 @@ ul {
     font-size: 2.5em;
     margin: 0 15px;
     color: $textColor;
-    transition: transform .7s ease-in-out;
+    transition: transform 0.7s ease-in-out;
 }
-
 
 .footer-address {
     display: flex;
@@ -923,7 +925,7 @@ ul {
 }
 
 .footer-social .bi-facebook:hover {
-    color: #0165E1;
+    color: #0165e1;
 }
 
 .footer-social .bi-linkedin:hover {
@@ -950,7 +952,7 @@ ul {
 
 .footer-content .footer-menu a::after {
     display: block;
-    content: '';
+    content: "";
     border-bottom: 2px solid $secondaryColor;
     transform: scale(0);
     transition: transform 250ms ease-in-out;
@@ -967,7 +969,6 @@ a.fromLeft::after {
 
 .footer-content .footer-menu a:hover {
     color: $hoverColor;
-
 }
 
 .footer-content .footer-address {
@@ -987,6 +988,5 @@ a.fromLeft::after {
 }
 
 .footer-address p {
-
     font-size: 18px;
 }

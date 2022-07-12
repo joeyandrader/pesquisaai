@@ -6,6 +6,7 @@
     <div class="suplier-image">
       <img src="/img/imgUpload/<%= getInfoProfile.image %>" alt="" class="img-fluid">
     </div>
+    <h2><%= getInfoProfile.fantasyName %></h2>
   </div>
   <div class="suplier-menu">
     <div class="dropdown">
@@ -70,7 +71,7 @@
 
                 <% product.forEach(product => { %>
                 <% if(product.notActive === true || product.approvedStatus === 'pending' || product.approvedStatus === 'refused') {%>
-
+                  
                 <% } else if(product.type === 'service') { %>
                 <div class="card-group col-lg-3">
                   <div class="card">
@@ -94,8 +95,8 @@
               </div>
             </div>
           </div>
+          <a href="/profile/<%= getInfoProfile.urlProfile %>/services/page/0" id="details" class="btn btn-primary"><i class="bi bi-eye"></i> Ver mais</a>
         </div>
-        <a href="/profile/<%= getInfoProfile.urlProfile %>/services/page/0" id="details" class="btn btn-primary"><i class="bi bi-eye"></i> Ver mais</a>
       </div>
     </div>
 

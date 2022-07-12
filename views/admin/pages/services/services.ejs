@@ -39,7 +39,7 @@
                   <tbody>
                     <% services.forEach(item => { %>
                     <tr>
-                      <td><img src="/img/imgUpload/<%= item.image %>" class="product-img" alt="product img"></td>
+                      <td><img src="/img/imgUpload/<%= item.image %>" class="product-img" alt="Image do produto <%= item.name %>"></td>
                       <td><%= item.name %></td>
                       <td><%= item.userId[0].fantasyName %></td>
                       <td><%= item.userId[0].cnpj %></td>

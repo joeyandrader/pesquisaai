@@ -23,23 +23,23 @@
       <div class="container-fluid px-4">
         <div class="card-deck">
           <div class="row gy-3">
-            <% product.forEach(product => { %>
-            <% if(product.notActive === true || product.approvedStatus === 'pending' || product.approvedStatus === 'refused') {%>
+            <% product.forEach(item => { %>
+            <% if(item.active === false || item.approvedStatus === 'pending' || item.approvedStatus === 'refused') {%>
 
-            <% } else if(product.type === 'product') { %>
+            <% } else { %>
             <div class="card-group col-lg-3">
               <div class="card">
-                <img class="card-img-top" src="/img/imgUpload/<%= product.image %>" alt="Company logo">
+                <img class="card-img-top" src="/img/imgUpload/<%= item.image %>" alt="Company logo">
                 <div class="card-body">
-                  <h5 class="card-title"><%= product.name%></h5>
+                  <h5 class="card-title"><%= item.name%></h5>
                   <ul class="list-group">
-                    <li class="list-group-item list-group-item-success bg-list-item"><i class="bi bi-briefcase" style="font-size:15px;"></i> <%= product.userId[0].fantasyName %> </li>
-                    <li class="list-group-item list-group-item-success bg-list-item"><i class="fa fa-map-marker" style="font-size:15px;"></i> <%= product.userId[0].district %></li>
-                    <li class="list-group-item list-group-item-success bg-list-item"><i class="fa fa-inr" style="font-size:20px;"></i> <%= product.userId[0].county %></li>
+                    <li class="list-group-item list-group-item-success bg-list-item"><i class="bi bi-briefcase" style="font-size:15px;"></i> <%= item.userId[0].fantasyName %> </li>
+                    <li class="list-group-item list-group-item-success bg-list-item"><i class="fa fa-map-marker" style="font-size:15px;"></i> <%= item.userId[0].district %></li>
+                    <li class="list-group-item list-group-item-success bg-list-item"><i class="fa fa-inr" style="font-size:20px;"></i> <%= item.userId[0].county %></li>
                   </ul>
                 </div>
                 <div class="card-button">
-                  <a type="button" href="/products/details/<%= product.id %>" class="btn btn-primary m-auto w-100" id="left-panel-link"><i class="bi bi-eye"> Detalhes</i></a>
+                  <a type="button" href="/products/details/<%= item.id %>" class="btn btn-primary m-auto w-100" id="left-panel-link"><i class="bi bi-eye"> Detalhes</i></a>
                 </div>
               </div>
             </div>
@@ -56,23 +56,23 @@
       <div class="container-fluid px-4">
         <div class="card-deck">
           <div class="row gy-3">
-            <% product.forEach(product => { %>
-            <% if(product.notActive === true || product.approvedStatus === 'pending' || product.approvedStatus === 'refused') {%>
+            <% service.forEach(item => { %>
+            <% if(item.active === false || item.approvedStatus === 'pending' || item.approvedStatus === 'refused') { %>
 
-            <% } else if(product.type === 'service') { %>
+            <% } else { %>
             <div class="card-group col-lg-3">
               <div class="card">
-                <img class="card-img-top" src="/img/imgUpload/<%= product.image %>" alt="Company logo">
+                <img class="card-img-top" src="/img/imgUpload/<%= item.image %>" alt="Company logo">
                 <div class="card-body">
-                  <h5 class="card-title"><%= product.name%></h5>
+                  <h5 class="card-title"><%= item.name%></h5>
                   <ul class="list-group">
-                    <li class="list-group-item list-group-item-success bg-list-item"><i class="bi bi-briefcase" style="font-size:15px;"></i> <%= product.userId[0].fantasyName %> </li>
-                    <li class="list-group-item list-group-item-success bg-list-item"><i class="fa fa-map-marker" style="font-size:15px;"></i> <%= product.userId[0].district %></li>
-                    <li class="list-group-item list-group-item-success bg-list-item"><i class="fa fa-inr" style="font-size:20px;"></i> <%= product.userId[0].county %></li>
+                    <li class="list-group-item list-group-item-success bg-list-item"><i class="bi bi-briefcase" style="font-size:15px;"></i> <%= item.userId[0].fantasyName %> </li>
+                    <li class="list-group-item list-group-item-success bg-list-item"><i class="fa fa-map-marker" style="font-size:15px;"></i> <%= item.userId[0].district %></li>
+                    <li class="list-group-item list-group-item-success bg-list-item"><i class="fa fa-inr" style="font-size:20px;"></i> <%= item.userId[0].county %></li>
                   </ul>
                 </div>
                 <div class="card-button">
-                  <a type="button" href="/products/details/<%= product.id %>" class="btn btn-primary m-auto w-100" id="left-panel-link"><i class="bi bi-eye"> Detalhes</i></a>
+                  <a type="button" href="/products/details/<%= item.id %>" class="btn btn-primary m-auto w-100" id="left-panel-link"><i class="bi bi-eye"> Detalhes</i></a>
                 </div>
               </div>
             </div>
