@@ -52,11 +52,11 @@
             </div>
             <div class="col-12 m-2">
               <div class="form-check">
-                <% if(service.notActive == true) { %>
-                <input class="form-check-input shadow-none" type="checkbox" id="activeProduct" name="activeProduct" value="true" checked>
-                <% } else {%>
-                <input class="form-check-input shadow-none" type="checkbox" id="activeProduct" name="activeProduct" value="true">
-                <% } %>
+                <% if(service.active === true) { %>
+                <input class="form-check-input shadow-none" type="checkbox" id="activeProduct" name="activeProduct" value="false">
+                <% } else { %>
+                <input class="form-check-input shadow-none" type="checkbox" id="activeProduct" name="activeProduct" value="false" checked>
+                <% }%>
                 <label class="form-check-label" for="activeProduct">
                   Não exibir serviço na pagina!
                 </label>

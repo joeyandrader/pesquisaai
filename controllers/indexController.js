@@ -1,19 +1,18 @@
 const bcrypt = require('bcrypt');
 const passport = require('passport')
 const { enviarEmail } = require('../helpers/nodemailer');
-const Swal = require('sweetalert2');
+
 
 //Models
 const Category = require('../models/CategoryModel');
 const Product = require('../models/ProductModel');
 const User = require('../models/UserModel');
-const Service = require('../models/ServiceModel');
 
 class IndexController {
     static async index(req, res) {
-        Product.find().limit(8).sort({ createdAt: 'DESC' }).populate('userId').then(product => {
+        Product.find({ type: "products" }).limit(8).sort({ createdAt: 'DESC' }).populate('userId').then(product => {
             Category.find().then(category => {
-                Service.find().then(service => {
+                Product.find({ type: "service" }).then(service => {
                     res.render('home',
                         {
                             category: category,
@@ -71,7 +70,6 @@ class IndexController {
                 category: category
             })
         })
-
     }
 
     static async saveRegister(req, res) {
@@ -105,7 +103,6 @@ class IndexController {
             res.redirect('/register')
             return
         }
-
 
         //Validations
         if (!cnpj) {
@@ -308,240 +305,22 @@ class IndexController {
         })
     }
 
-    static async viewProduct(req, res) {
 
-        const numPage = req.params.num;
+    //Suplier Profile
 
-        var limitPage = 16;
-        var offSet = 0;
-
-        if (isNaN(numPage) || numPage === 1) {
-            offSet = 0;
-        } else {
-            offSet = parseInt(numPage) * limitPage;
-        }
-
-        const reqSearch = new RegExp(req.query.search, 'i')
-        // console.log(req.query.typeSearch)
-
-
-
-        //Get URL params
-        var searchUrl = `?typeSearch=${req.query.typeSearch}&search=${req.query.search}`;
-
-
-        console.log(req.query.typeSearch)
-        if (req.query.typeSearch === 'products') {
-            Product.find({
-                $and: [
-                    { approvedStatus: 'approved' },
-                    { notActive: false }
-                ],
-                $or: [
-                    { name: reqSearch },
-                    { brand: reqSearch },
-                ],
-            }).limit(limitPage).skip(offSet).sort({ createdAt: 'DESC' }).populate('userId').populate('categoryId').then(allProducts => {
-                Category.find().then(category => {
-
-                    Product.find({
-                        $and: [
-                            { approvedStatus: 'approved' },
-                            { notActive: false }
-                        ],
-                        $or: [
-                            { name: reqSearch },
-                            { brand: reqSearch },
-                        ],
-                    }).count().then(countProduct => {
-
-                        var next;
-                        if (offSet + limitPage >= countProduct) {
-                            next = false
-                        } else {
-                            next = true
-                        }
-
-                        var resultPage = {
-                            page: parseInt(numPage),
-                            next: next,
-                            allProducts: allProducts,
-                        }
-
-                        var pages = Math.ceil(countProduct / limitPage);
-                        var totalPage = Array.from({ length: pages }).map((item, index) => {
-                            return index
-                        });
-
-                        res.render('pages/viewsProducts', {
-                            category: category,
-                            error_msg: req.flash('error_msg'),
-                            resultPage: resultPage,
-                            searchUrl: searchUrl,
-                            totalPage: totalPage,
-                            countProduct: countProduct
-                        })
-                    })
-
-                })
-            })
-
-        } else if (req.query.typeSearch === 'services') {
-            Service.find({
-                $and: [
-                    { approvedStatus: 'approved' },
-                    { notActive: false }
-                ],
-                $or: [
-                    { name: reqSearch }
-                ],
-            }).limit(limitPage).skip(offSet).sort({ createdAt: 'DESC' }).populate('userId').populate('categoryId').then(allProducts => {
-                Category.find().then(category => {
-
-                    Service.find({
-                        $and: [
-                            { approvedStatus: 'approved' },
-                            { notActive: false }
-                        ],
-                        $or: [
-                            { name: reqSearch }
-                        ],
-                    }).count().then(countProduct => {
-
-                        var next;
-                        if (offSet + limitPage >= countProduct) {
-                            next = false
-                        } else {
-                            next = true
-                        }
-
-                        var resultPage = {
-                            page: parseInt(numPage),
-                            next: next,
-                            allProducts: allProducts,
-                        }
-
-                        var pages = Math.ceil(countProduct / limitPage);
-                        var totalPage = Array.from({ length: pages }).map((item, index) => {
-                            return index
-                        });
-
-                        res.render('pages/viewsProducts', {
-                            category: category,
-                            error_msg: req.flash('error_msg'),
-                            resultPage: resultPage,
-                            searchUrl: searchUrl,
-                            totalPage: totalPage,
-                            countProduct: countProduct
-                        })
-                    })
-
-                })
-            })
-        }
-    }
-
-
-    static async productDetails(req, res) {
-        let idItem = req.params.id
-
-        const getProduct = await Product.findById(idItem)
-
-        if (getProduct) {
-            await Product.updateOne({ _id: idItem }, { $inc: { views: 1 } })
-        }
-
-
-        await Category.find().then(category => {
-            Product.findById(idItem).populate('userId').then(itemDetail => {
-                if (itemDetail.notActive === true || itemDetail.approvedStatus === 'refused' || itemDetail.approvedStatus === 'pending') {
-                    res.redirect('/')
-                } else {
-                    Product.find({ categoryId: itemDetail.categoryId }).then(relatedProduct => {
-                        res.render('pages/itemDetails', { category: category, itemDetail: itemDetail, relatedProduct: relatedProduct })
-                    })
-                }
-            }).catch(err => {
-                res.redirect('/')
-            })
-        })
-    }
-
-
-
-    static async getAllCategorys(req, res) {
-        let categoryId = req.params.id
-        let getNameCategory = await Category.findById(categoryId);
-
-        let numPage = req.params.num;
-
-        var limitPage = 16;
-        var offSet = 0;
-
-        if (isNaN(numPage) || numPage === 1) {
-            offSet = 0;
-        } else {
-            offSet = parseInt(numPage) * limitPage;
-        }
-
-        //Get URL params
-        var searchUrl
-
-        console.log(getNameCategory.name)
-
-        await Product.find({ $and: [{ categoryId: categoryId, approvedStatus: "approved" }] }).limit(limitPage).skip(offSet).populate('categoryId').then(allProducts => {
-            req.flash('success_msg', `Resultado da busca pela categoria:  ${getNameCategory.name}`);
-            Category.find().then(category => {
-                Product.find({
-                    $and: [{ categoryId: categoryId, approvedStatus: "approved" }]
-                }).count().then(countProduct => {
-
-                    var next;
-                    if (offSet + limitPage >= countProduct) {
-                        next = false
-                    } else {
-                        next = true
-                    }
-
-                    var resultPage = {
-                        page: parseInt(numPage),
-                        next: next,
-                        allProducts: allProducts,
-                    }
-
-                    var pages = Math.ceil(countProduct / limitPage);
-                    var totalPage = Array.from({ length: pages }).map((item, index) => {
-                        return index
-                    });
-
-                    res.render('pages/ViewsCategorys', {
-                        allProducts: allProducts,
-                        category: category,
-                        success_msg: req.flash('success_msg'),
-                        countProduct: countProduct,
-                        resultPage: resultPage,
-                        totalPage: totalPage,
-                        searchUrl: searchUrl,
-                        categoryId: categoryId
-                    })
-                })
-            })
-        })
-    }
-
-    static async providerProfile(req, res) {
+    static async suplierProfile(req, res) {
         const urlProfile = req.params.comercialProfile
-
         const getInfoProfile = await User.findOne({ urlProfile: urlProfile })
+        const category = await Category.find();
+        const product = await Product.find();
 
         if (getInfoProfile) {
             if (getInfoProfile.enableProfile) {
-                const category = await Category.find();
-                res.render('pages/profilePage',
-                    {
-                        category: category
-                    }
-                )
+                res.render('pages/profilePage', {
+                    category: category,
+                    getInfoProfile: getInfoProfile,
+                    product: product
+                })
             } else {
                 req.flash('error_msg', 'Fornecedor nao encontrado!');
                 res.redirect('/');

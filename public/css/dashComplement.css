@@ -159,3 +159,34 @@
     justify-content: space-between;
     align-items: center;
 }
+
+
+.ticketBody,
+.ticketTitle,
+.ticketCategory {
+    width: 100%;
+    padding: 10px;
+    background-color: whitesmoke;
+    border-radius: 5px;
+}
+
+.ticketBody img {
+    width: 100%;
+    object-fit: cover;
+}
+
+/* awsner content */
+.awsner-content {
+    width: 100%;
+    margin: auto;
+    padding: 10px;
+    background-color: #eee;
+}
+
+.awsnerBody {
+    width: 100%;
+    padding: 10px;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    margin: 20px 0;
+}

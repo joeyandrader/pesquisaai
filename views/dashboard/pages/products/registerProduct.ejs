@@ -33,10 +33,11 @@
           </div>
           <div class="row mb-3">
             <div class="col-md-6">
-              <div class="form-floating mb-3 mb-md-0">
-                <input class="form-control" id="productOrigin" name="productOrigin" type="text" placeholder="Origem do produto" value="<%= productOrigin %>" />
-                <label for="productOrigin">Origem</label>
-              </div>
+              <select id="productStatus" name="productStatus" class="form-select shadow-none">
+                <option value="" selected>Selecione o estado do produto</option>
+                <option value="novo">Novo</option>
+                <option value="usado">Usado</option>
+              </select>
             </div>
             <div class="col-md-6">
               <select id="category" name="category" class="form-select shadow-none">
@@ -53,17 +54,9 @@
             </div>
           </div>
           <div class="row mb-3">
-            <div class="col-md-8">
+            <div class="col-md-12">
               <label for="image" class="form-label">Imagem de capa do produto</label>
               <input type="file" name="image" id="image" class="form-control">
-            </div>
-            <div class="col-md-4">
-              <label for="productStatus" class="form-label">Estado do produto</label>
-              <select id="productStatus" name="productStatus" class="form-select shadow-none">
-                <option value="" selected>Selecione o estado do produto</option>
-                <option value="novo">Novo</option>
-                <option value="usado">Usado</option>
-              </select>
             </div>
           </div>
           <div class="col-12 m-2">

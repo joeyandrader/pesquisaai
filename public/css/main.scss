@@ -56,7 +56,7 @@ ul {
 .search-form form select {
     padding: 5px 50px;
     border: 0;
-    border-radius: 25px 0 0 25px;
+    border-radius: 0;
     background: url(https://cdn-icons-png.flaticon.com/512/25/25623.png) no-repeat center right #FFF;
     background-size: 15px;
     appearance: none;
@@ -69,6 +69,7 @@ ul {
     padding: 10px;
     border: 0;
     outline: none;
+    border-radius: 25px 0 0 25px;
     text-indent: 20px;
     font-weight: bold;
 }
@@ -785,6 +786,68 @@ ul {
 
 .card-button button {
     display: block;
+}
+
+
+/* profile suplier */
+.suplier-container {
+    width: 100%;
+}
+
+.suplier-banner {
+    width: 100%;
+    height: 350px;
+    position: relative;
+}
+
+.suplier-banner img {
+    width: 100%;
+    height: inherit;
+    object-fit: cover;
+}
+
+.suplier-image {
+    position: absolute;
+    bottom: -100px;
+    left: 10%;
+}
+
+.suplier-image img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 3px solid $primaryColor;
+    object-fit: cover;
+}
+
+.suplier-products {
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.suplier-menu {
+    width: 100%;
+    background-color: $primaryColor;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.suplier-menu .btn-whatsapp {
+    display: inline-block;
+    padding: 10px 30px;
+    margin: 10px;
+    text-decoration: none;
+    color: $textColor;
+    border-radius: 10px;
+    background-color: #25d366;
+}
+
+.suplier-info {
+    width: 100%;
+    padding: 10px;
+    background-color: $colorBackground;
 }
 
 /* footer */

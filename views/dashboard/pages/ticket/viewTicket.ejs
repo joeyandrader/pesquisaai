@@ -1,0 +1,101 @@
+<%- include('../../partials/header') %>
+<%- include('../../partials/navbar') %>
+
+<div id="layoutSidenav">
+  <%- include('../../partials/sidebar') %>
+  <div id="layoutSidenav_content">
+    <main>
+      <div class="container-fluid px-4">
+        <div class="d-flex justify-content-between align-items-center">
+          <h1 class="mt-4">Ticket</h1>
+          <% if(getTicket.status === 'open' || getTicket.status === 'answered') { %>
+          <button class="btn btn-danger">Fechar Ticket</button>
+          <% } %>
+        </div>
+        <hr>
+        <% if(getTicket.status === 'close') {%>
+        <div class="alert alert-danger">Esse ticket <%= getTicket.ticketId %> encontra-se fechado!</div>
+        <% } %>
+        <ol class="breadcrumb mb-4">
+          <li class="breadcrumb-item"><%= getTicket.ticketId %> - <%= getTicket.userId[0].fantasyName %></li>
+        </ol>
+        <% if(error_msg.length > 0) { %>
+        <div class="alert alert-danger"><%= error_msg %></div>
+        <% } %>
+        <% if(success_msg.length > 0) { %>
+        <div class="alert alert-success"><%= success_msg %></div>
+        <% } %>
+
+        <div class="row mb-3">
+          <div class="row mb-3">
+            <div class="col-md-12">
+              <p>Titulo</p>
+              <div class="ticketTitle">
+                <%= getTicket.title %>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-12">
+              <p>Categoria</p>
+              <div class="ticketCategory">
+                <%= getTicket.categoryId[0].name %>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-12 ticketBody">
+              <p><%- getTicket.description %></p>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <h3 class="display-6">Respostas</h3>
+            <% answerTicket.forEach(answer => { %>
+            <div class="awsner-content">
+              <div class="awsnerBody">
+                <p><%= answer.body %></p>
+                <small>Por : <i><%= answer.userId[0].name %></i></small>
+              </div>
+            </div>
+            <% }) %>
+            <!-- <p>Não há nenhuma resposta cadastrada!</p> -->
+          </div>
+
+          <div class="row">
+            <div id="awsnerTicket" style="display: none;">
+              <form action="/account/ticket/answer/" method="POST">
+                <input type="hidden" name="id" value="<%= getTicket.id %>">
+                <div class="mb-3">
+                  <label for="name" class="form-label">Nome</label>
+                  <input type="text" class="form-control" id="name" name="name" placeholder="<%= getTicket.userId[0].name %>" value="<%= getTicket.userId[0].name %>" disabled>
+                </div>
+                <div class="mb-3">
+                  <label for="body" class="form-label">Resposta</label>
+                  <textarea class="form-control" id="body" name="body" rows="3" placeholder="Digite sua resposta"></textarea>
+                </div>
+                <div class="mb-3">
+                  <button class="btn btn-primary">Responder</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="row p-5">
+            <div class="col text-center">
+              <% if(getTicket.status === 'open' || getTicket.status === 'answered') { %>
+              <button class="btn btn-success" onclick="btnAwsner()">Responder</button>
+              <% } %>
+            </div>
+          </div>
+        </div>
+    </main>
+
+
+    <script>
+      function btnAwsner() {
+        document.getElementById("awsnerTicket").style.display = "block"
+      }
+    </script>
+    <%- include('../../partials/footer') %>

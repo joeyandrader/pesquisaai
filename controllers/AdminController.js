@@ -7,7 +7,6 @@ const { enviarEmail } = require('../helpers/nodemailer');
 const Category = require('../models/CategoryModel');
 const Product = require('../models/ProductModel');
 const User = require('../models/UserModel');
-const Service = require('../models/ServiceModel');
 const TicketCategory = require('../models/CategoryTicketModel');
 const Ticket = require('../models/TicketModel');
 
@@ -23,8 +22,8 @@ class AdminController {
 
 
         let countFornecedores = await User.find().count();
-        let countProducts = await Product.find().count();
-        let countService = await Service.find().count();
+        let countProducts = await Product.find({ type: "product" }).count();
+        let countService = await Product.find({ type: "service" }).count();
 
         let countProductPending = await Product.find({ approvedStatus: 'pending' }).count();
         let countProductApproved = await Product.find({ approvedStatus: 'approved' }).count();
@@ -66,7 +65,7 @@ class AdminController {
     }
 
     static async saveUserEdit(req, res) {
-        
+
         const { id, name, surname, email, webSite, stateRegistration, fantasyName, socialReason, cep, county, address, uf, district, addressNumber, complement, celNumber, phoneNumber, approvedStatus, accountType } = req.body
 
         if (!name) {

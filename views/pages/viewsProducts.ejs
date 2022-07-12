@@ -6,27 +6,13 @@
       <div class="col-lg-3">
         <h1 class="h2 pb-4 m-2">Filtros</h1>
         <ul class="list-unstyled">
-          <li class="m-2">
-            <h5>Marcas</h5>
-            <ul>
-              <form id="formname" action="/products/page/<%= totalPage %><%= searchUrl %>" method="GET">
-                <% resultPage.allProducts.forEach(item => { %>
-                <div class="form-check">
-                  <input class="form-check-input" name="brand" onchange="this.form.submit()" type="checkbox" value="<%= item.name %>" id="<%= item.name %>">
-                  <label class="form-check-label" for=" <%= item.name %>">
-                    <%= item.name %>
-                  </label>
-                </div>
-                <% }) %>
-              </form>
-            </ul>
-          </li>
-
           <li>
             <h5>Categorias</h5>
             <ul>
-              <% category.forEach(item => { %>
-              <li><a href="/search/category/<%= item.id %>/page/0"><%= item.name %></a></li>
+              <% category.forEach(item=> { %>
+              <li><a href="/search/category/<%= item.id %>/page/0">
+                  <%= item.name %>
+                </a></li>
               <% }) %>
             </ul>
           </li>
@@ -35,12 +21,14 @@
 
       <div class="col-lg-9">
         <div>
-          <p>Total de resultados encontrados: <%= countProduct %></p>
+          <p>Total de resultados encontrados: <%= countProduct %>
+          </p>
         </div>
         <div class="row gy-3">
 
-          <% resultPage.allProducts.forEach(product => { %>
-          <% if(product.notActive === true || product.approvedStatus === 'pending' || product.approvedStatus === 'refused') {%>
+          <% resultPage.allProducts.forEach(product=> { %>
+          <% if(product.notActive===true || product.approvedStatus==='pending' ||
+                  product.approvedStatus==='refused' ) {%>
 
           <% } else { %>
 
@@ -48,10 +36,15 @@
             <div class="card" id="product">
               <img class="card-img-top" src="/img/imgUpload/<%= product.image %>" alt="<%= product.name %>">
               <div class="card-body">
-                <h5 id="nameProduct" class="card-title"><%= product.name %></h5>
-                <p><%= product.userId[0].fantasyName %></p>
+                <h5 id="nameProduct" class="card-title">
+                  <%= product.name %>
+                </h5>
+                <p>
+                  <%= product.userId[0].fantasyName %>
+                </p>
                 <p class="card-text">Loja</p>
-                <a class="btn" href="/products/details/<%= product.id %>"><i class="bi bi-eye"> Ver detalhes</i></a>
+                <a class="btn" href="/products/details/<%= product.id %>"><i class="bi bi-eye"> Ver
+                    detalhes</i></a>
               </div>
             </div>
           </div>
@@ -59,8 +52,10 @@
           <% }) %>
         </div>
         <div class="pagination" id="pagination">
-          <% totalPage.forEach(totalPage => { %>
-          <a href="/products/page/<%= totalPage %><%= searchUrl %>"><%=  totalPage +1 %></a>
+          <% totalPage.forEach(totalPage=> { %>
+          <a href="/products/page/<%= totalPage %><%= searchUrl %>">
+            <%= totalPage +1 %>
+          </a>
           <% }) %>
         </div>
       </div>

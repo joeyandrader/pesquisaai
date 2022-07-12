@@ -1,6 +1,108 @@
 <%- include('../partials/header') %>
 <%- include('../partials/navbar') %>
-<div class="container">
-    
+<div class="suplier-container">
+  <div class="suplier-banner">
+    <img src="https://assets.tramontina.com.br/upload/store/1616595408_tienda_jockey.png" alt="banner HellenStore">
+    <div class="suplier-image">
+      <img src="/img/imgUpload/<%= getInfoProfile.image %>" alt="" class="img-fluid">
+    </div>
+  </div>
+  <div class="suplier-menu">
+    <div class="dropdown">
+      <button class="btn btn-primary" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="bi bi-list"></i>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start" aria-labelledby="dropdownMenuButton1">
+        <li><a class="dropdown-item" href="/profile/<%= getInfoProfile.urlProfile %>/product">Produtos</a></li>
+        <li><a class="dropdown-item" href="/profile/<%= getInfoProfile.urlProfile %>/services">Serviços</a></li>
+        <li><a class="dropdown-item" href="/profile/<%= getInfoProfile.urlProfile %>/contact">Contatos</a></li>
+      </ul>
+    </div>
+    <!-- <ul>
+      <li><a href="#">Produtos</a></li>
+      <li><a href="#">Serviços</a></li>
+      <li><a href="#">Contatos</a></li>
+    </ul> -->
+    <a href="#" class="btn-whatsapp"><i class="bi bi-whatsapp"></i> Fale conosco!</a>
+  </div>
+  <div class="suplier-products">
+    <div class="container">
+      <div class="service-tab">
+        <div class="product-content">
+          <h2>Produtos</h2>
+          <div class="container-fluid px-4">
+            <div class="card-deck">
+              <div class="row gy-3">
+
+                <% product.forEach(product => { %>
+                <% if(product.notActive === true || product.approvedStatus === 'pending' || product.approvedStatus === 'refused') {%>
+
+                <% } else if(product.type === 'product') { %>
+                <div class="card-group col-lg-3">
+                  <div class="card">
+                    <img class="card-img-top" src="/img/imgUpload/<%= product.image %>" alt="Company logo">
+                    <div class="card-body">
+                      <h5 class="card-title"><%= product.name%></h5>
+                      <ul class="list-group">
+                        <li class="list-group-item list-group-item-success bg-list-item"><i class="bi bi-briefcase" style="font-size:15px;"></i> <%= product.userId[0].fantasyName %> </li>
+                        <li class="list-group-item list-group-item-success bg-list-item"><i class="fa fa-map-marker" style="font-size:15px;"></i> <%= product.userId[0].district %></li>
+                        <li class="list-group-item list-group-item-success bg-list-item"><i class="fa fa-inr" style="font-size:20px;"></i> <%= product.userId[0].county %></li>
+                      </ul>
+                    </div>
+                    <div class="card-button">
+                      <a type="button" href="/products/details/<%= product.id %>" class="btn btn-primary m-auto w-100" id="left-panel-link"><i class="bi bi-eye"> Detalhes</i></a>
+                    </div>
+                  </div>
+                </div>
+                <% } %>
+                <% }) %>
+              </div>
+            </div>
+          </div>
+          <a href="/profile/<%= getInfoProfile.urlProfile %>/product/page/0" id="details" class="btn btn-primary"><i class="bi bi-eye"></i> Ver mais</a>
+        </div>
+
+        <div class="service-content">
+          <h2>Serviços</h2>
+          <div class="container-fluid px-4">
+            <div class="card-deck">
+              <div class="row gy-3">
+
+                <% product.forEach(product => { %>
+                <% if(product.notActive === true || product.approvedStatus === 'pending' || product.approvedStatus === 'refused') {%>
+
+                <% } else if(product.type === 'service') { %>
+                <div class="card-group col-lg-3">
+                  <div class="card">
+                    <img class="card-img-top" src="/img/imgUpload/<%= product.image %>" alt="Company logo">
+                    <div class="card-body">
+                      <h5 class="card-title"><%= product.name%></h5>
+                      <ul class="list-group">
+                        <li class="list-group-item list-group-item-success bg-list-item"><i class="bi bi-briefcase" style="font-size:15px;"></i> <%= product.userId[0].fantasyName %> </li>
+                        <li class="list-group-item list-group-item-success bg-list-item"><i class="fa fa-map-marker" style="font-size:15px;"></i> <%= product.userId[0].district %></li>
+                        <li class="list-group-item list-group-item-success bg-list-item"><i class="fa fa-inr" style="font-size:20px;"></i> <%= product.userId[0].county %></li>
+                      </ul>
+                    </div>
+                    <div class="card-button">
+                      <a type="button" href="/products/details/<%= product.id %>" class="btn btn-primary m-auto w-100" id="left-panel-link"><i class="bi bi-eye"> Detalhes</i></a>
+                    </div>
+                  </div>
+                </div>
+                <% } %>
+                <% }) %>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="/profile/<%= getInfoProfile.urlProfile %>/services/page/0" id="details" class="btn btn-primary"><i class="bi bi-eye"></i> Ver mais</a>
+      </div>
+    </div>
+
+    <div class="suplier-info">
+      <h3>Sobre a <%= getInfoProfile.fantasyName %></h3>
+      <p>Somos uma empresa tal e tal</p>
+    </div>
+  </div>
 </div>
 <%- include('../partials/footer') %>

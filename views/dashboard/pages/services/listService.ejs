@@ -46,15 +46,15 @@
             <tr>
               <td class="align-middle"><img class="img-fluid" src="/img/imgUpload/<%= service.image %>" width="40px"></td>
               <td class="align-middle"><%= service.name %></td>
-              <td><%= service.servicetatus %></td>
-              <td>
-                <% if(service.notActive) { %>
+              <td class="align-middle"><%= service.servicetatus %></td>
+              <td class="align-middle">
+                <% if(service.active === false) { %>
                 <span class="status alert-danger"><i class="bi bi-eye-slash-fill"></i> Privado</span>
                 <% } else { %>
                 <span class="status alert-primary"><i class="bi bi-eye-fill"></i> Publico</span>
                 <% } %>
               </td>
-              <td>
+              <td class="align-middle">
                 <% if(service.approvedStatus == 'pending') { %>
                 <span class="status alert-warning"><i class="bi bi-exclamation-circle-fill"></i> Pendente</span>
                 <%} else if(service.approvedStatus == "refused") {%>
@@ -63,7 +63,7 @@
                 <span class="status alert-success"><i class="bi bi-check-circle-fill"></i> Aprovado</span>
                 <% } %>
               </td>
-              <td class="text-center">
+              <td class="text-center align-middle">
                 <a class="btn btn-warning" href="/account/services/edit/id/<%= service.id %>">
                   <i class="bi bi-pencil-fill"></i>
                 </a>

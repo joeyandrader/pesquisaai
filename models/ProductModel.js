@@ -7,33 +7,27 @@ const Category = require('./CategoryModel')
 const Product = mongoose.model(
     'Product',
     new Schema({
+        type: {
+            type: String
+        },
         name: {
-            type: String,
-            required: true
+            type: String
         },
         description: {
-            type: String,
-            required: true
-        },
-        productOrigin: {
-            type: String,
-            required: true
+            type: String
         },
         brand: {
-            type: String,
-            required: true
+            type: String
         },
         image: {
-            type: String,
-            required: false
+            type: String
         },
         productStatus: {
-            type: String,
-            required: true
+            type: String
         },
-        notActive: {
+        active: {
             type: Boolean,
-            default: false
+            default: true
         },
         approvedStatus: {
             type: String,

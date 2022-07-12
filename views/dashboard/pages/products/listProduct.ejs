@@ -50,7 +50,7 @@
               <td class="align-middle"><strong><%= products.name %></strong></td>
               <td class="align-middle"><%= products.productStatus %></td>
               <td class="align-middle">
-                <% if(products.notActive) { %>
+                <% if(products.active === false) { %>
                 <span class="status alert-danger"><i class="bi bi-eye-slash-fill"></i> Privado</span>
                 <% } else { %>
                 <span class="status alert-primary"><i class="bi bi-eye-fill"></i> Publico</span>
