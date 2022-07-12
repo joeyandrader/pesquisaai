@@ -46,5 +46,10 @@ router.get('/ticket/:id', isUser, UserController.myTicket);
 router.post('/ticket/answer/', isUser, UserController.answerTicket);
 
 
+//Business profile
+router.get('/businessProfile', isUser, UserController.editBusinessProfile);
+router.post('/businessProfile/save', isUser, imageUpload.single('image'), UserController.saveEditBusinessProfile);
+
+
 //export
 module.exports = router;

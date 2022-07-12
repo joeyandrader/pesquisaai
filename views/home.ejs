@@ -23,7 +23,6 @@
       <div class="container-fluid px-4">
         <div class="card-deck">
           <div class="row gy-3">
-
             <% product.forEach(product => { %>
             <% if(product.notActive === true || product.approvedStatus === 'pending' || product.approvedStatus === 'refused') {%>
 
@@ -57,7 +56,6 @@
       <div class="container-fluid px-4">
         <div class="card-deck">
           <div class="row gy-3">
-
             <% product.forEach(product => { %>
             <% if(product.notActive === true || product.approvedStatus === 'pending' || product.approvedStatus === 'refused') {%>
 
@@ -80,12 +78,11 @@
             </div>
             <% } %>
             <% }) %>
-
           </div>
         </div>
       </div>
+      <a href="/products/page/0" id="details" class="btn btn-primary"><i class="bi bi-eye"></i> Ver mais</a>
     </div>
-    <a href="/products/page/0" id="details" class="btn btn-primary"><i class="bi bi-eye"></i> Ver mais</a>
   </div>
 </section>
 
@@ -97,7 +94,6 @@
       <a class="btn" href="/register">Cadastre-se</a>
     </div>
     <img class="img-fluid" src="/img/Working-rafiki.png" alt="" />
-
   </div>
 </section>
 

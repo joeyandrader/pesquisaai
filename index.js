@@ -34,7 +34,6 @@ app.use((req, res, next) => {
     res.locals.error_alert = req.flash('error_alert');
     res.locals.user = req.user || null;
     res.locals.adminUser = req.user || null;
-
     // Comando 'next();' para permitir que as rotas avancem apos passarem no mdidleware
     next();
 });

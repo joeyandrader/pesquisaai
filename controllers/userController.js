@@ -55,7 +55,7 @@ class UserController {
 
     static async saveProfile(req, res) {
 
-        const { id, name, surname, stateRegistration, socialReason, fantasyName, cep, county, address, district, complement, addressNumber, celNumber, phoneNumber } = req.body
+        const { id, name, surname, stateRegistration, socialReason, website, fantasyName, cep, county, address, district, complement, addressNumber, celNumber, phoneNumber } = req.body
 
         const user = await User.findById(id);
 
@@ -95,6 +95,10 @@ class UserController {
             return
         }
         user.fantasyName = fantasyName
+
+        if (website) {
+            user.webSite = website
+        }
 
         if (!cep) {
             req.flash('error_msg', 'O campo cep não pode ser vazio!')
@@ -136,6 +140,7 @@ class UserController {
             res.redirect('/account/profile');
             return
         }
+
         user.addressNumber = addressNumber
 
         if (!celNumber) {
@@ -364,6 +369,52 @@ class UserController {
         } catch (error) {
             req.flash('error_msg', 'Erro ao enviar a resposta! Contate um administrador!');
             res.redirect(`/account/ticket/${id}`);
+        }
+    }
+
+    static async editBusinessProfile(req, res) {
+        const user = await User.findById(req.user.id);
+
+        res.render('dashboard/pages/businessProfile/businessProfile', {
+            error_msg: req.flash('error_msg'),
+            success_msg: req.flash('success_msg'),
+            user: user
+        })
+    }
+
+    static async saveEditBusinessProfile(req, res) {
+        const { urlprofile, activebusinessprofile } = req.body
+        const id = req.user.id;
+
+
+        console.log(activebusinessprofile)
+
+        try {
+            await User.findById(id).then((user) => {
+
+                user.urlProfile = urlprofile
+                user.enableProfile = activebusinessprofile
+
+                if (req.file) {
+                    user.bannerProfile = req.file.filename
+                }
+
+                if (activebusinessprofile == undefined) {
+                    user.enableProfile = false
+                }
+
+                user.save().then(() => {
+                    req.flash('success_msg', 'Perfil comercial salvo com sucesso!')
+                    res.redirect('/account/businessProfile')
+                }).catch((err) => {
+                    req.flash('error_msg', 'Erro ao salvar o perfil comercial!')
+                    res.redirect('/account/businessProfile')
+                })
+            })
+        } catch (error) {
+            req.flash('error_msg', 'Erro interno!')
+            console.log(`Erro ao salvar o perfil comercial do usuario ${req.user.id} ${req.user.name}, MSG do error: ${error}`)
+            res.redirect('/account/businessProfile')
         }
     }
 }

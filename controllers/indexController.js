@@ -292,10 +292,11 @@ class IndexController {
 
     static async userAuth(req, res, next) {
         passport.authenticate("local", {
-            successRedirect: '/account',
+            successRedirect: (req.session.returnTo || '/account'),
             failureRedirect: "/login",
             failureFlash: true
         })(req, res, next)
+        delete req.session.returnTo;
     }
 
     static async resetPassword(req, res) {
@@ -308,13 +309,15 @@ class IndexController {
 
     //Suplier Profile
 
-    static async suplierProfile(req, res) {
-        const urlProfile = req.params.comercialProfile
+    static async businessProfile(req, res) {
+
+        const urlProfile = req.params.businessProfile
         const getInfoProfile = await User.findOne({ urlProfile: urlProfile })
-        const category = await Category.find();
-        const product = await Product.find();
 
         if (getInfoProfile) {
+            const category = await Category.find({ userId: getInfoProfile.id });
+            const product = await Product.find({ userId: getInfoProfile.id });
+            
             if (getInfoProfile.enableProfile) {
                 res.render('pages/profilePage', {
                     category: category,

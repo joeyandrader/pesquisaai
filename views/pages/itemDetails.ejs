@@ -43,8 +43,14 @@
             <h6>Localização</h6>
             <div style="width: 100%; height: 300px" id="mapContainer"></div>
             <div class="btn-area">
-              <a href="#" class="btn btn-success">Visitar site</a>
-              <a href="#" class="btn btn-primary">Contato da loja</a>
+              <div class="row">
+                <div class="col-md-4">
+                  <a href="<%= itemDetail.userId[0].webSite %>" target="_blank" class="btn btn-success">Visitar site</a>
+                </div>
+                <div class="col-md-4">
+                  <a href="#" class="btn btn-primary">Contato da loja</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -57,37 +63,40 @@
 <section class="py-5">
   <div class="container">
     <div class="row text-left p-2 pb-3">
-      <h4>Related Products</h4>
+      <h4>Produtos Relacionados</h4>
     </div>
 
     <!--Start Carousel Wrapper-->
     <div id="carousel-related-product">
+      <div class="container">
+        <div class="row">
+          <% relatedProduct.forEach(relatedProduct => { %>
 
-      <% relatedProduct.forEach(relatedProduct => { %>
-
-      <% if(relatedProduct.id !== itemDetail.id) {%>
-      <div class="p-2 pb-3">
-        <div class="product-wap card rounded-0">
-          <div class="card rounded-0">
-            <img class="card-img rounded-0 img-fluid card-img-top" src="/img/imgUpload/<%= relatedProduct.image %>">
-            <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-              <ul class="list-unstyled">
-                <li><a class="btn btn-success text-white" href="shop-single.html"><i class="far fa-heart"></i></a></li>
-                <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="far fa-eye"></i></a></li>
-                <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="fas fa-cart-plus"></i></a></li>
-              </ul>
+          <% if(relatedProduct.id !== itemDetail.id) {%>
+          <% if(relatedProduct.approvedStatus == 'approved') {%>
+          <div class="card-group col-lg-3">
+            <div class="card">
+              <img class="card-img-top" src="/img/imgUpload/<%= relatedProduct.image %>" alt="Company logo">
+              <div class="card-body">
+                <h5 class="card-title"><%= relatedProduct.name%></h5>
+                <ul class="list-group">
+                  <li class="list-group-item list-group-item-success bg-list-item"><i class="bi bi-briefcase" style="font-size:15px;"></i> <%= relatedProduct.userId[0].fantasyName %> </li>
+                  <li class="list-group-item list-group-item-success bg-list-item"><i class="fa fa-map-marker" style="font-size:15px;"></i> <%= relatedProduct.userId[0].district %></li>
+                  <li class="list-group-item list-group-item-success bg-list-item"><i class="fa fa-inr" style="font-size:20px;"></i> <%= relatedProduct.userId[0].county %></li>
+                </ul>
+              </div>
+              <div class="card-button">
+                <a type="button" href="/products/details/<%= relatedProduct.id %>" class="btn btn-primary m-auto w-100" id="left-panel-link"><i class="bi bi-eye"> Detalhes</i></a>
+              </div>
             </div>
           </div>
-          <div class="card-body">
-            <a href="shop-single.html" class="h3 text-decoration-none"><%= relatedProduct.name %></a>
-          </div>
-          <a href="#" class="btn btn-success">Ver produto</a>
+          <% } %>
+          <% } else { %>
+
+          <% } %>
+          <% }) %>
         </div>
       </div>
-      <% } else { %>
-
-      <% } %>
-      <% }) %>
     </div>
 
   </div>

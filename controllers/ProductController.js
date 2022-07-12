@@ -99,14 +99,17 @@ module.exports = class ProductController {
             await Product.updateOne({ _id: idItem }, { $inc: { views: 1 } })
         }
 
-
         await Category.find().then(category => {
-            Product.findById(idItem).populate('userId').then(itemDetail => {
+            Product.findById(idItem).populate('userId').limit(8).then(itemDetail => {
                 if (itemDetail.notActive === true || itemDetail.approvedStatus === 'refused' || itemDetail.approvedStatus === 'pending') {
                     res.redirect('/')
                 } else {
-                    Product.find({ categoryId: itemDetail.categoryId }).then(relatedProduct => {
-                        res.render('pages/itemDetails', { category: category, itemDetail: itemDetail, relatedProduct: relatedProduct })
+                    Product.find({ categoryId: itemDetail.categoryId }).populate('userId').then(relatedProduct => {
+                        res.render('pages/itemDetails', {
+                            category: category,
+                            itemDetail: itemDetail,
+                            relatedProduct: relatedProduct
+                        })
                     })
                 }
             }).catch(err => {

@@ -113,6 +113,10 @@ const User = mongoose.model(
         },
         urlProfile: {
             type: String
+        },
+        bannerProfile: {
+            type: String,
+            default: 'defaultBanner.jpg'
         }
     },
         {

@@ -1,0 +1,63 @@
+<%- include('../../partials/header') %>
+<%- include('../../partials/navbar') %>
+
+<div id="layoutSidenav">
+  <%- include('../../partials/sidebar') %>
+  <div id="layoutSidenav_content">
+    <main>
+      <div class="container-fluid px-4">
+        <h1 class="mt-4">Perfil comercial</h1>
+        <ol class="breadcrumb mb-4">
+          <li class="breadcrumb-item">Bem vindo ao seu perfil comercial!</li>
+        </ol>
+        <% if(error_msg.length > 0) { %>
+        <div class="alert alert-danger"><%= error_msg %></div>
+        <% } else if(success_msg.length > 0) {%>
+        <div class="alert alert-success"><%= success_msg %></div>
+        <% } %>
+        <form class="row g-3 m-3 m-auto forms" method="POST" action="/account/businessProfile/save" enctype="multipart/form-data">
+          <!-- <input type="hidden" name="id" value=""> -->
+          <div class="row mb-3">
+            <div class="col-md-12 m-2">
+              <div class="form-check">
+                <% if(user.enableProfile == true) { %>
+                <input class="form-check-input" type="checkbox" value="true" name="activebusinessprofile" id="activebusinessprofile" checked>
+                <%} else { %>
+                <input class="form-check-input" type="checkbox" value="true" name="activebusinessprofile" id="activebusinessprofile">
+                <% } %>
+                <label class="form-check-label" for="activebusinessprofile">
+                  Perfil comercial ativo
+                </label>
+              </div>
+            </div>
+            <div class="col-md-6 m-2">
+              <label for="urlprofile">URL do perfil!</label>
+              <div class="input-group">
+                <div class="input-group-text">http://localhost:5000/profile/</div>
+                <input type="text" class="form-control" id="urlprofile" name="urlprofile" value="<%= user.urlProfile %>" placeholder="hellenstore">
+              </div>
+              <small>OBS: O nome precisa ser minusculo e tudo junto!</small>
+            </div>
+            <div class="bannerPreview">
+              <img class="img-fluid" src="/img/imgUpload/<%= user.bannerProfile %>" alt="#">
+            </div>
+            <div class="col-md-6 m-2">
+              <div class="mb-3">
+                <label for="image" class="form-label">Banner da loja</label>
+                <input class="form-control" type="file" id="image" name="image">
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary w-50 p-2 m-auto">Salvar</button>
+        </form>
+      </div>
+    </main>
+
+    <script>
+      tinymce.init({
+        selector: 'textarea',
+        plugins: 'advlist autolink lists link image charmap preview anchor pagebreak',
+        toolbar_mode: 'floating',
+      });
+    </script>
+    <%- include('../../partials/footer') %>

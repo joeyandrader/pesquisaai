@@ -29,7 +29,7 @@ router.get('/search/category/:id/page/:num', ProductController.getAllCategorys);
 
 
 //Profile comercial
-router.get('/profile/:comercialProfile', IndexController.suplierProfile);
+router.get('/profile/:businessProfile', IndexController.businessProfile);
 
 
 
