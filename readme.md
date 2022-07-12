@@ -28,13 +28,9 @@
 
 - Banco de dados MongoDB
 - NodeJS no Back-end
--- Express
--- bcrypt
--- nodemailer
--- connect-flash
--- mongoose
--- Passport para login
---- Entre outras, consulte o package.json!
+- Express
+- mongoose
+- Consulte o package.json!
 - EJS
 - Bootstrap
 - CSS/SCSS
