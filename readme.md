@@ -9,7 +9,7 @@
 - Caso tenha interesse no projeto ou saber mais sobre, entre em contato!
 
 ### Resumo simples!
--- Esse projeto foi desenvolvido para fins de apoiar o comerciante local em cabo frio, é um site no estilo marktplace, onde são mostrado todos os produtos e serviço de um determinado fornecedor que se cadastra no site! Por regra de negocio, produtos e serviços não pode ser mostrado os preços, os usuarios quem obtem interesse no produto/serviço, entra em contato com o fornecedor para mais detalhes!
+- Esse projeto foi desenvolvido para fins de apoiar o comerciante local em cabo frio, é um site no estilo marktplace, onde são mostrado todos os produtos e serviço de um determinado fornecedor que se cadastra no site! Por regra de negocio, produtos e serviços não pode ser mostrado os preços, os usuarios quem obtem interesse no produto/serviço, entra em contato com o fornecedor para mais detalhes!
 
 ### Funcionalidades
 - Sistema de cadastro de fornecedor.
