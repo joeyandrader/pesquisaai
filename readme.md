@@ -4,7 +4,7 @@
 - Projeto criado como trabalho na faculdade!
 - Caso tenha interesse em vizualizar o projeto, basta clonar o repositorio e instalar as dependencia!
 - Utilize - npm install
-- Proibido o uso desse projeto para uso comercial!
+- Proibido o uso comercial desse projeto!
 - Use apenas para vizualizar e testar o codigo escrito por mim!
 - Caso tenha interesse no projeto ou saber mais sobre, entre em contato!
 
