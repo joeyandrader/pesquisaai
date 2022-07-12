@@ -10,9 +10,9 @@ const User = require('../models/UserModel');
 
 class IndexController {
     static async index(req, res) {
-        Product.find({ type: "products" }).limit(8).sort({ createdAt: 'DESC' }).populate('userId').then(product => {
+        Product.find({ type: 'product' }).limit(8).sort({ createdAt: 'DESC' }).populate('userId').then(product => {
             Category.find().then(category => {
-                Product.find({ type: "service" }).then(service => {
+                Product.find({ type: 'service' }).then(service => {
                     res.render('home',
                         {
                             category: category,
@@ -317,7 +317,7 @@ class IndexController {
         if (getInfoProfile) {
             const category = await Category.find({ userId: getInfoProfile.id });
             const product = await Product.find({ userId: getInfoProfile.id });
-            
+
             if (getInfoProfile.enableProfile) {
                 res.render('pages/profilePage', {
                     category: category,

@@ -451,7 +451,7 @@ class AdminController {
 
     static async services(req, res) {
 
-        const services = await Service.find().populate('userId').populate('categoryId');
+        const services = await Product.find({ type: 'service' }).populate('userId').populate('categoryId');
 
         res.render('admin/pages/services/services',
             {
@@ -464,7 +464,7 @@ class AdminController {
 
     static async editServices(req, res) {
         const id = req.params.id
-        const service = await Service.findById(id).populate('categoryId').populate('userId');
+        const service = await Product.findById(id).populate('categoryId').populate('userId');
         const category = await Category.find();
 
         res.render('admin/pages/services/editService', {
@@ -494,7 +494,7 @@ class AdminController {
             return
         }
 
-        await Service.findById(id).then(service => {
+        await Product.findById(id).then(service => {
             service.name = name
             service.categoryId = category
             service.description = description
